@@ -4,65 +4,518 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>DAIMARUYU INBOUND BOARD — 認証</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>DAIMARUYU INBOUND BOARD</title>
 <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0F1B2E;--panel:#16263D;--line:#22334E;--tx:#E8EEF7;--sub:#A9B7CC;--cy:#00C2FF;--bad:#FF5C7A}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--tx);font-family:'BIZ UDGothic',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;
-background-image:linear-gradient(rgba(0,194,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.05) 1px,transparent 1px);background-size:42px 42px}
-.card{width:min(420px,92vw);background:linear-gradient(180deg,#182A44,#121F35);border:1px solid var(--line);border-radius:16px;padding:36px 34px 30px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.logo{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.logo .m{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#00C2FF,#7C5CFF);color:#04101F;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px}
-.logo b{font-size:16px;letter-spacing:.07em}
-.sub{color:var(--sub);font-size:11px;letter-spacing:.14em;margin-bottom:24px}
-label{display:block;font-size:11px;color:var(--sub);letter-spacing:.12em;margin:13px 0 6px}
-input{width:100%;background:#0B1526;border:1px solid var(--line);border-radius:9px;color:var(--tx);font-family:inherit;font-size:14px;padding:11px 13px;outline:none;transition:border .15s}
-input:focus{border-color:var(--cy)}
-button{width:100%;margin-top:20px;background:linear-gradient(90deg,#0091CC,#00C2FF);border:none;border-radius:9px;color:#04101F;font-family:inherit;font-weight:700;font-size:14px;letter-spacing:.2em;padding:12px;cursor:pointer}
-button:hover{filter:brightness(1.12)}
-button:disabled{opacity:.55;cursor:wait}
-.err{color:var(--bad);font-size:12px;margin-top:12px;min-height:16px;text-align:center}
-.note{color:var(--sub);font-size:10.5px;margin-top:16px;text-align:center;line-height:1.7;letter-spacing:.05em}
-.shake{animation:shk .4s}
-@keyframes shk{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+:root{
+ --bg:#0F1B2E; --panel:#16263D; --border:#22334E; --head:#081222;
+ --tx:#E8EEF7; --sub:#A9B7CC;
+ --c1:#00C2FF; --c2:#7C5CFF; --c3:#00E5A0; --c4:#FFB020; --c5:#FF5C7A; --c6:#8FA3BF;
+ --up:#00E5A0; --down:#FF5C7A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--tx);font-family:'BIZ UDGothic',Meiryo,sans-serif;font-size:14px;line-height:1.6;}
+.hd{background:var(--head);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:50;}
+.hd .logo{font-size:17px;font-weight:700;letter-spacing:.06em;}
+.hd .logo span{color:var(--c1);}
+.hd .meta{margin-left:auto;font-size:11px;color:var(--sub);}
+.tabs{display:flex;gap:6px;padding:12px 20px 0;flex-wrap:wrap;background:var(--bg);position:sticky;top:53px;z-index:49;border-bottom:1px solid var(--border);}
+.tab{background:none;border:1px solid var(--border);border-bottom:none;color:var(--sub);font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px 8px 0 0;cursor:pointer;}
+.tab.on{background:var(--panel);color:var(--c1);border-color:#2c4166;}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 20px 70px;}
+.page{display:none;}
+.page.on{display:block;}
+.grid{display:grid;gap:14px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g2{grid-template-columns:1fr 1fr;}
+.g3{grid-template-columns:repeat(3,1fr);}
+@media(max-width:900px){.g4{grid-template-columns:1fr 1fr;}.g2,.g3{grid-template-columns:1fr;}}
+@media(max-width:430px){.g4{grid-template-columns:1fr 1fr;}}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;position:relative;}
+.pt{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:700;padding:1px 8px;border-radius:9px;border:1px solid;white-space:nowrap;}
+.b-real{color:#00E5A0;border-color:#00E5A0;background:rgba(0,229,160,.08);}
+.b-dmy{color:#FFB020;border-color:#FFB020;background:rgba(255,176,32,.08);}
+.b-mix{color:#00C2FF;border-color:#FFB020;background:rgba(0,194,255,.06);}
+.kpi .v{font-size:31px;font-weight:700;line-height:1.15;letter-spacing:.01em;}
+.kpi .v small{font-size:16px;color:var(--sub);}
+.kpi .l{font-size:11px;color:var(--sub);margin-top:2px;}
+.kpi .cmp{font-size:11px;font-weight:700;margin-top:6px;}
+.up{color:var(--up);} .down{color:var(--down);}
+.ch{position:relative;height:280px;}
+.ch.tall{height:340px;} .ch.short{height:230px;}
+canvas{max-width:100%;}
+select{background:var(--head);color:var(--tx);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:12.5px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:#0c1830;color:var(--sub);font-weight:700;padding:7px 8px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:6px 8px;border-bottom:1px solid #1c2c46;white-space:nowrap;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;}
+.tsc{overflow-x:auto;}
+.note{font-size:10.5px;color:var(--sub);margin-top:8px;}
+.hm td{text-align:right;font-variant-numeric:tabular-nums;color:#dbe6f5;}
+.hot{color:var(--c4);font-weight:700;}
+.pill{display:inline-block;font-size:10px;border:1px solid var(--c4);color:var(--c4);border-radius:8px;padding:0 7px;margin-left:6px;}
+.flowbox{background:#0c1830;border:1px solid var(--border);border-radius:10px;padding:8px;}
+.leg{font-size:10.5px;color:var(--sub);display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px;}
+.foot{font-size:10.5px;color:var(--sub);border-top:1px solid var(--border);margin-top:26px;padding-top:12px;line-height:1.9;}
+h2.sec{font-size:15px;color:var(--c1);margin:4px 0 12px;}
+.aiplan{font-size:12.5px;color:var(--tx);line-height:1.9;}
+.aiplan b{color:var(--c1);}
 </style>
 </head>
 <body>
-<div class="card" id="card">
-  <div class="logo"><div class="m">大</div><b>DAIMARUYU INBOUND BOARD</b></div>
-  <div class="sub">— 認証 —</div>
-  <form id="f">
-    <label>ID</label><input id="u" autocomplete="username" autocapitalize="none" autofocus>
-    <label>PASSWORD</label><input id="p" type="password" autocomplete="current-password">
-    <button id="b" type="submit">UNLOCK</button>
-  </form>
-  <div class="err" id="e"></div>
-  <div class="note">RESTRICTED · AES-256 ENCRYPTED<br>本ボードは暗号化されています。正しい ID / PASSWORD なしにはデータを復号できません。</div>
+<div class="hd">
+ <div class="logo">DAIMARUYU <span>INBOUND</span> BOARD</div>
+ <div class="meta">最終更新 2026-08 ｜ 月次更新 ｜ 社内限定（noindex） ｜ サンプル: 2026-05実測＋生成ダミー</div>
+</div>
+<div class="tabs" id="tabs">
+ <button class="tab on" data-p="p1">KPI月次</button>
+ <button class="tab" data-p="p2">国別</button>
+ <button class="tab" data-p="p3">施設・店舗</button>
+ <button class="tab" data-p="p4">買い回り</button>
+ <button class="tab" data-p="p5">リピート・定着</button>
+ <button class="tab" data-p="p6">滞在・単価</button>
+ <button class="tab" data-p="p7">AI・SNS(構想)</button>
+</div>
+<div class="wrap">
+
+<!-- ============ TAB1 KPI月次 ============ -->
+<div class="page on" id="p1">
+ <div class="grid g4">
+  <div class="panel kpi"><div class="pt">当月取扱高 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k1"></div><div class="cmp" id="k1c"></div><div class="l">海外発行カード決済（CAFIS端末）</div></div>
+  <div class="panel kpi"><div class="pt">利用人数 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k2"></div><div class="cmp" id="k2c"></div><div class="l">件数 47,087件</div></div>
+  <div class="panel kpi"><div class="pt">客単価 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k3"></div><div class="cmp" id="k3c"></div><div class="l">取扱高 ÷ 利用人数</div></div>
+  <div class="panel kpi"><div class="pt">KPI進捗 <span class="badge b-dmy">ダミー</span></div><div class="v" id="k4" title="計算式(暫定): 月次取扱高×DCC比率8.6%×12ヶ月(季節調整) ÷ 年度目標44.3億円。本データ受領後にロジック確定">103<small>%</small></div><div class="cmp up">対 月割り目標</div><div class="l">2026年度 DCC売上目標 44.3億円</div></div>
+ </div>
+ <div class="panel">
+  <div class="pt">月次取扱高の推移（24ヶ月）＋前年同月比 <span class="badge b-mix">実データ×ダミー</span></div>
+  <div class="ch tall"><canvas id="c_month"></canvas></div>
+  <div class="note">2026-05のみ実測値。他は 実測基準×季節係数×年成長(25年度+18%/26年度+8%)×±5%乱数（シード固定）。右軸=前年同月比。</div>
+ </div>
+ <div class="grid g2">
+  <div class="panel">
+   <div class="pt">顧客区分別 構成の推移（100%積み上げ） <span class="badge b-mix">実データ×ダミー</span></div>
+   <div class="ch"><canvas id="c_kubun"></canvas></div>
+   <div class="note">実測構成比（観光74.6%・中間15.6%・居住9.8%）を基準に±2pt変動。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">日別取扱高（直近60日・土日帯つき） <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_daily"></canvas></div>
+   <div class="note">月次÷30×曜日係数（土1.35・日1.25・金1.1・平日0.9）×±10%。薄帯=土日。</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ TAB2 国別 ============ -->
+<div class="page" id="p2">
+ <div class="panel">
+  <div class="pt">国別取扱高 TOP15（百万円） <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch tall"><canvas id="c_kuni"></canvas></div>
+ </div>
+ <div class="grid g2">
+  <div class="panel">
+   <div class="pt">国別 月次推移 <select id="selKuni"></select> <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_kuniTrend"></canvas></div>
+   <div class="note">総額×実測国シェア×±8%乱数。中国のみ2月に旧正月ブースト1.4。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">選択国の顧客区分内訳 <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_kuniKubun"></canvas></div>
+   <div class="note">全体構成比を基準に国特性で微調整した推定値。</div>
+  </div>
+ </div>
+ <div class="panel">
+  <div class="pt">利用人数 × 客単価 × 取扱高（バブル） <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch tall"><canvas id="c_scatter"></canvas></div>
+  <div class="note">X=利用人数、Y=客単価（取扱高÷人数）、バブル面積=取扱高。右上=人数も単価も高い国。</div>
+ </div>
+</div>
+
+<!-- ============ TAB3 施設・店舗 ============ -->
+<div class="page" id="p3">
+ <div class="panel">
+  <div class="pt">施設別取扱高 TOP12（百万円） <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch tall"><canvas id="c_shisetsu"></canvas></div>
+  <div class="note">高単価施設: <span class="hot">新大手町ビル</span>（415件・2,609万円＝件単価6.3万円）<span class="pill">高単価施設</span>／<span class="hot">丸の内仲通りビル</span>（373件・2,011万円＝件単価5.4万円）<span class="pill">高単価施設</span></div>
+ </div>
+ <div class="panel">
+  <div class="pt">施設 × 国TOP6 ヒートマップ（取扱高・万円） <span class="badge b-mix">実データ×ダミー配分</span></div>
+  <div class="tsc"><table class="hm" id="t_heat"></table></div>
+  <div class="note">行合計=施設実測、列配分=施設シェア×国シェア×±20%乱数。セル濃淡=金額。</div>
+ </div>
+</div>
+
+<!-- ============ TAB4 買い回り ============ -->
+<div class="page" id="p4">
+ <div class="panel">
+  <div class="pt">買い回りペア（起点店舗 → 併用先） <span class="badge b-mix">実データ3行×ダミー20行</span></div>
+  <div class="tsc"><table id="t_pair"></table></div>
+  <div class="note">実データ行はサンプル受領形式そのまま。ダミー行の店名は匿名化ラベル。</div>
+ </div>
+ <div class="grid g2">
+  <div class="panel">
+   <div class="pt">施設間フロー（二重橋スクエア起点） <span class="badge b-dmy">ダミー</span></div>
+   <div class="flowbox"><svg id="svgFlow" viewBox="0 0 560 300" width="100%" height="300"></svg></div>
+   <div class="note">矢印の太さ=併用人数（推定）。本データ受領後に全施設ペアへ拡張。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">利用施設数の分布（国別・100%積み上げ） <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_facN"></canvas></div>
+   <div class="note">ID代替集計I「利用施設数分布」の受け皿。数値は想定イメージ。</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ TAB5 リピート・定着 ============ -->
+<div class="page" id="p5">
+ <div class="grid g2">
+  <div class="panel">
+   <div class="pt">リピート率（国別） <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_repeat"></canvas></div>
+   <div class="tsc" style="margin-top:10px;"><table id="t_repeat"></table></div>
+  </div>
+  <div class="panel">
+   <div class="pt">利用回数分布（国別・100%積み上げ） <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch"><canvas id="c_freq"></canvas></div>
+   <div class="note">1回/2回/3〜5回/6回以上。ID代替集計B の受け皿。</div>
+  </div>
+ </div>
+ <div class="panel">
+  <div class="pt">コホート残存率（初回利用月別・+1〜+3ヶ月） <span class="badge b-dmy">ダミー</span></div>
+  <div class="tsc"><table class="hm" id="t_cohort"></table></div>
+  <div class="note">+1M≈8%・+2M≈5%・+3M≈4%を基準に±乱数。セル濃淡=残存率。ID代替集計G の受け皿。</div>
+ </div>
+ <div class="panel">
+  <div class="pt">推定再訪率（90日以上あけて再出現したカード比率） <span class="badge b-dmy">ダミー</span></div>
+  <div class="ch short"><canvas id="c_revisit"></canvas></div>
+  <div class="note">ID代替集計H の受け皿。訪日リピートの proxy。</div>
+ </div>
+</div>
+
+<!-- ============ TAB6 滞在・単価 ============ -->
+<div class="page" id="p6">
+ <div class="panel">
+  <div class="pt">継続利用月数（施設別・最大連続2ヶ月の人数） <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch short"><canvas id="c_keizoku"></canvas></div>
+  <div class="note">サンプル集計「継続利用」より（最大連続2ヶ月パターンの上位施設）。</div>
+ </div>
+ <div class="grid g3">
+  <div class="panel">
+   <div class="pt">同月内利用間隔 <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch short"><canvas id="c_interval"></canvas></div>
+   <div class="note">同日のみ/2〜6日/7日+。集計E の受け皿（滞在期間の目安）。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">累計購買額レンジ <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch short"><canvas id="c_range"></canvas></div>
+   <div class="note">〜1万/〜5万/〜20万/20万+。集計F（高単価層の規模）。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">同月内利用日数 <span class="badge b-dmy">ダミー</span></div>
+   <div class="ch short"><canvas id="c_days"></canvas></div>
+   <div class="note">1日のみ/2〜3日/4日+。集計J の受け皿。</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ TAB7 AI・SNS構想 ============ -->
+<div class="page" id="p7">
+ <h2 class="sec">AI可視性・SNSウォッチ（グローバル）— 拡張構想デモ</h2>
+ <div class="grid g2">
+  <div class="panel">
+   <div class="pt">AI回答でのエリア言及シェア（英語圏想定デモ） <span class="badge b-dmy">構想ダミー</span></div>
+   <div class="ch"><canvas id="c_aiShare"></canvas></div>
+   <div class="note">例：「Where to shop in Tokyo」「Tokyo luxury shopping district」等 30クエリ×5言語(英/中/韓/泰/仏)をChatGPT・Gemini・Google AI概要に毎日投げ、丸の内/大丸有 vs 銀座・表参道・新宿の言及率を実測する構想（トヨタGEOボードと同方式）。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">SNS言及ウォッチ（プラットフォーム別・月間） <span class="badge b-dmy">構想ダミー</span></div>
+   <div class="ch"><canvas id="c_sns"></canvas></div>
+   <div class="note">取得可能性: YouTube(公式API・無料枠)◎ / Reddit(公式API)◎ / Instagramハッシュタグ件数(取得制限あり)△ / X(有料API)△ / 小紅書・微博(公式APIなし)×→手動定点。</div>
+  </div>
+ </div>
+ <div class="panel aiplan">
+  <div class="pt">実装可否の整理</div>
+  ・<b>AIウォッチ：可能（即日）。</b>トヨタGEOボードのパイプライン（クエリ→AI回答取得→言及/引用判定→日次スコア）を多言語クエリに差し替えるだけで動く。指標例：エリア出現率／同伴言及（銀座と並記される率）／引用元（marunouchi.com・公式が引かれているか）／言語別スコア。<br>
+  ・<b>SNSウォッチ：部分的に可能。</b>YouTube・Redditは公式APIで定量化できる（例：marunouchi 言及動画数・視聴数、r/JapanTravelでの言及数）。Instagram・TikTokはAPI制限が強く定点観測は近似値、小紅書は公式手段がないため手動サンプリング運用になる。<br>
+  ・<b>費用目安：</b>AIウォッチはAPI従量（規模により月数千〜数万円）、YouTube/Redditは無料枠内。ダッシュボードへは本ボードにタブ追加で統合可能。
+ </div>
+</div>
+
+<div class="foot">
+ DAIMARUYU INBOUND BOARD ｜ データ: 三菱UFJニコス提供サンプル（2026-05実測の統計値）＋生成ダミー（乱数シード固定）。実データ受領後にDATA定数を差し替えて全ウィジェットが実数化される設計。<br>
+ 顧客区分=観光客候補(短期滞在)/中間(長期滞在・反復利用)/居住者候補 ｜ KPI: 2026年度DCC売上44.3億円(商業全体の3.6%)・2030年度58億円 ｜ カードIDは受領せず、リピート・買い回り等はID代替の統計集計10本で受領。
+</div>
 </div>
 <script>
-const SALT=Uint8Array.from(atob('YUx80VcHJqJ1v2t9Pwm5ZQ=='),c=>c.charCodeAt(0));
-const IV=Uint8Array.from(atob('r5rtwRvXGBrZZjpP'),c=>c.charCodeAt(0));
-const CT=Uint8Array.from(atob('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'),c=>c.charCodeAt(0));
-async function unlock(uid,pw){
-  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(uid+':'+pw),'PBKDF2',false,['deriveKey']);
-  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:SALT,iterations:310000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
-  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:IV},key,CT);   // 失敗なら throw
-  const html=await new Response(new Response(pt).body.pipeThrough(new DecompressionStream('gzip'))).text();
-  document.open();document.write(html);document.close();
+/* ================= データ（実測 2026-05 サンプル） ================= */
+const REAL = {"month":"2026-05","total":{"count":47087,"users":44285,"amount":574676997},
+"kubun":[["観光客候補(短期滞在)",36077,34250,428850175],["中間(長期滞在/反復利用)",6766,6270,89592935],["居住者候補",4244,3765,56233887]],
+"brand":[["VISA",26510,25101,321807257],["MASTER",20076,18717,234779101],["銀聯",501,467,18090639]],
+"kuni":[["アメリカ",11695,10874,125535106],["韓国",6331,6087,58946046],["台湾",2204,2120,43495917],["香港",2363,2220,41918237],["中国",1524,1437,40930482],["シンガポール",2663,2507,36397151],["オーストラリア",2187,2016,20987041],["イギリス",2173,1998,18369200],["フランス",1377,1304,13867264],["カナダ",1280,1223,13030589],["タイ",921,866,12855558],["ドイツ",1280,1204,11110268],["インドネシア",470,444,9642458],["スイス",590,561,8251512],["インド",737,687,8051219]],
+"shisetsu":[["新丸の内ビルディング",12655,11805,147826665],["丸の内ビルディング",9654,9060,101588076],["ブリックスクエア",4629,4486,48458874],["三菱ビル",3693,3465,42503215],["新大手町ビル",415,413,26094016],["有楽町電気ビル",933,928,24204835],["二重橋スクエア",807,786,23162044],["丸の内仲通りビル",373,345,20112737],["新東京ビル",1068,1008,15417649],["丸の内オアゾ",3558,3251,15142018],["新丸ビル(DCC)",877,878,14776190],["丸の内二丁目ビル",818,743,13641343]]};
+
+/* ================= 乱数（シード固定） ================= */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+const rnd = mulberry32(20260521);
+const R = (lo,hi)=>lo+(hi-lo)*rnd();
+
+/* ================= 整形 ================= */
+const cm = n=>Math.round(n).toLocaleString('ja-JP');
+function yen(n){ // 億円/万円表記
+ if(n>=1e8) return (n/1e8).toFixed(2)+'億円';
+ if(n>=1e4) return cm(n/1e4)+'万円';
+ return cm(n)+'円';
 }
-document.getElementById('f').addEventListener('submit',async ev=>{
-  ev.preventDefault();
-  const b=document.getElementById('b'),e=document.getElementById('e'),card=document.getElementById('card');
-  b.disabled=true;b.textContent='DECRYPTING…';e.textContent='';
-  try{ await unlock(document.getElementById('u').value.trim(),document.getElementById('p').value); }
-  catch(err){
-    b.disabled=false;b.textContent='UNLOCK';
-    e.textContent='IDまたはPASSWORDが違います';
-    card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
-  }
+const pct = (n,d=1)=>n.toFixed(d)+'%';
+
+/* ================= 月次24ヶ月生成 ================= */
+const MONTHS=[];{let y=2024,m=9;for(let i=0;i<24;i++){MONTHS.push(y+'-'+String(m).padStart(2,'0'));m++;if(m>12){m=1;y++;}}}
+const seas={1:1.0,2:0.85,3:1.25,4:1.25,5:1.0,6:0.9,7:1.0,8:1.0,9:1.0,10:1.1,11:1.2,12:1.0};
+function fy(ym){const[y,m]=ym.split('-').map(Number);return m>=4?y:y-1;}
+const yf={2024:1.0,2025:1.18,2026:1.2744};
+const BASE = REAL.total.amount/1.2744; // 2026-05(季節1.0)から逆算
+const M_AMT={}, M_USERS={};
+MONTHS.forEach(ym=>{
+ const m=Number(ym.split('-')[1]);
+ let a = BASE*yf[fy(ym)]*seas[m]*R(0.95,1.05);
+ if(ym==='2026-05') a=REAL.total.amount;
+ M_AMT[ym]=a;
+ let unit = 12980*R(0.96,1.04);
+ M_USERS[ym]= ym==='2026-05'? REAL.total.users : Math.round(a/unit);
+});
+/* 前年同月比 */
+const YOY = MONTHS.map((ym,i)=>{
+ if(i<12) return null;
+ return (M_AMT[ym]/M_AMT[MONTHS[i-12]]-1)*100;
+});
+
+/* ================= Chart.js 既定 ================= */
+Chart.defaults.font.family="'BIZ UDGothic',Meiryo,sans-serif";
+Chart.defaults.font.size=11;
+Chart.defaults.color='#A9B7CC';
+Chart.defaults.borderColor='#22334E';
+Chart.defaults.plugins.legend.labels.boxWidth=10;
+Chart.defaults.plugins.legend.labels.boxHeight=10;
+Chart.defaults.maintainAspectRatio=false;
+const C1='#00C2FF',C2='#7C5CFF',C3='#00E5A0',C4='#FFB020',C5='#FF5C7A',C6='#8FA3BF';
+const SERIES=[C1,C2,C3,C4,C5,C6];
+const gridY={grid:{color:'#22334E'},beginAtZero:true};
+
+/* ================= TAB1 ================= */
+const t=REAL.total;
+document.getElementById('k1').innerHTML=(t.amount/1e8).toFixed(2)+'<small>億円</small>';
+const prev=M_AMT['2026-04'];
+const mom=(t.amount/prev-1)*100;
+document.getElementById('k1c').innerHTML=(mom>=0?'<span class="up">▲ +':'<span class="down">▼ ')+Math.abs(mom).toFixed(1)+'%</span> <span style="color:var(--sub);font-weight:400;">前月比(前月はダミー)</span>';
+document.getElementById('k2').innerHTML=cm(t.users)+'<small>人</small>';
+document.getElementById('k2c').innerHTML='<span style="color:var(--sub);font-weight:400;">1人あたり '+(t.count/t.users).toFixed(2)+'件</span>';
+document.getElementById('k3').innerHTML=cm(Math.round(t.amount/t.users))+'<small>円</small>';
+document.getElementById('k3c').innerHTML='<span style="color:var(--sub);font-weight:400;">件単価 '+cm(Math.round(t.amount/t.count))+'円</span>';
+
+new Chart(c_month,{data:{labels:MONTHS,datasets:[
+ {type:'bar',label:'取扱高',data:MONTHS.map(m=>M_AMT[m]/1e8),backgroundColor:MONTHS.map(m=>m==='2026-05'?C3:C1+'CC'),borderRadius:3,yAxisID:'y'},
+ {type:'line',label:'前年同月比',data:YOY,borderColor:C4,backgroundColor:C4,yAxisID:'y2',spanGaps:false,pointRadius:2,borderWidth:2,tension:.3}
+]},options:{scales:{
+ y:{...gridY,title:{display:true,text:'億円'}},
+ y2:{position:'right',grid:{display:false},title:{display:true,text:'前年比%'},ticks:{callback:v=>'+'+v+'%'}},
+ x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:24}}},
+ plugins:{tooltip:{callbacks:{label:c=>c.dataset.type==='line'? '前年同月比 +'+c.parsed.y.toFixed(1)+'%' : '取扱高 '+yen(c.parsed.y*1e8)+(c.label==='2026-05'?'（実測）':'（ダミー）')}},legend:{position:'bottom'}}}});
+
+/* 顧客区分推移 */
+const kbBase=REAL.kubun.map(k=>k[3]/t.amount);
+const kbSeries=[[],[],[]];
+MONTHS.forEach(ym=>{
+ let s0=kbBase[0]+R(-0.02,0.02), s1=kbBase[1]+R(-0.012,0.012);
+ if(ym==='2026-05'){s0=kbBase[0];s1=kbBase[1];}
+ const s2=1-s0-s1;
+ kbSeries[0].push(s0*100);kbSeries[1].push(s1*100);kbSeries[2].push(s2*100);
+});
+new Chart(c_kubun,{type:'bar',data:{labels:MONTHS,datasets:[
+ {label:'観光客候補',data:kbSeries[0],backgroundColor:C1},
+ {label:'中間(長期滞在)',data:kbSeries[1],backgroundColor:C2},
+ {label:'居住者候補',data:kbSeries[2],backgroundColor:C6}
+]},options:{scales:{x:{stacked:true,grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}},y:{...gridY,stacked:true,max:100,ticks:{callback:v=>v+'%'}}},
+ plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y.toFixed(1)+'%'}},legend:{position:'bottom'}}}});
+
+/* 日別60日 + 土日帯 */
+const DAYS=[],DAMT=[];
+{const end=new Date(2026,7,20);// 2026-08-20
+ for(let i=59;i>=0;i--){const d=new Date(end);d.setDate(end.getDate()-i);DAYS.push(d);}
+ const dowC={0:1.25,1:0.9,2:0.9,3:0.9,4:0.9,5:1.1,6:1.35};
+ DAYS.forEach(d=>{const ym=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+  DAMT.push(M_AMT[ym]/30*dowC[d.getDay()]*R(0.9,1.1));});}
+const wkndPlugin={id:'wknd',beforeDraw(ch){const{ctx,chartArea:ar,scales:{x}}=ch;if(!ar)return;ctx.save();ctx.fillStyle='rgba(140,163,191,0.10)';
+ DAYS.forEach((d,i)=>{if(d.getDay()===0||d.getDay()===6){const c=x.getPixelForValue(i);const w=(ar.right-ar.left)/DAYS.length;ctx.fillRect(c-w/2,ar.top,w,ar.bottom-ar.top);}});ctx.restore();}};
+new Chart(c_daily,{type:'line',data:{labels:DAYS.map(d=>(d.getMonth()+1)+'/'+d.getDate()),datasets:[{label:'日別取扱高',data:DAMT.map(v=>v/1e6),borderColor:C1,backgroundColor:'rgba(0,194,255,.15)',fill:true,pointRadius:0,borderWidth:2,tension:.35}]},
+ options:{scales:{y:{...gridY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}},plugins:[wkndPlugin]});
+
+/* ================= TAB2 国別 ================= */
+new Chart(c_kuni,{type:'bar',data:{labels:REAL.kuni.map(k=>k[0]),datasets:[{label:'取扱高',data:REAL.kuni.map(k=>k[3]/1e6),backgroundColor:C1,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.dataIndex];return ['取扱高 '+yen(k[3])+'（構成比 '+pct(k[3]/REAL.total.amount*100)+'）','利用人数 '+cm(k[2])+'人 / 客単価 '+cm(Math.round(k[3]/k[2]))+'円'];}}}}}});
+
+/* 国セレクタ月次 */
+const sel=document.getElementById('selKuni');
+REAL.kuni.forEach((k,i)=>{const o=document.createElement('option');o.value=i;o.textContent=k[0];sel.appendChild(o);});
+const kuniSeed={}; REAL.kuni.forEach(k=>{kuniSeed[k[0]]=MONTHS.map(ym=>{
+ const m=Number(ym.split('-')[1]);
+ let v=M_AMT[ym]*(k[3]/REAL.total.amount)*R(0.92,1.08);
+ if(k[0]==='中国'&&m===2)v*=1.4;
+ return v;});});
+let chTrend=null,chKubun=null;
+function drawKuni(i){
+ const k=REAL.kuni[i];
+ if(chTrend)chTrend.destroy();
+ chTrend=new Chart(c_kuniTrend,{type:'bar',data:{labels:MONTHS,datasets:[{label:k[0],data:kuniSeed[k[0]].map(v=>v/1e6),backgroundColor:C2,borderRadius:2}]},
+  options:{scales:{y:{...gridY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}}},
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}}});
+ /* 顧客区分内訳: 国特性で微調整 */
+ const tourist=({'アメリカ':.82,'韓国':.78,'台湾':.80,'香港':.77,'中国':.75,'シンガポール':.76,'オーストラリア':.83,'イギリス':.81,'フランス':.82,'カナダ':.82,'タイ':.74,'ドイツ':.80,'インドネシア':.72,'スイス':.81,'インド':.70})[k[0]]||.76;
+ const mid=(1-tourist)*.62, res=1-tourist-mid;
+ if(chKubun)chKubun.destroy();
+ chKubun=new Chart(c_kuniKubun,{type:'doughnut',data:{labels:['観光客候補','中間(長期滞在)','居住者候補'],datasets:[{data:[tourist*100,mid*100,res*100],backgroundColor:[C1,C2,C6],borderColor:'#16263D',borderWidth:2}]},
+  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+' '+c.parsed.toFixed(1)+'%（推定）'}}},cutout:'55%'}});
+}
+sel.addEventListener('change',e=>drawKuni(Number(e.target.value)));
+drawKuni(0);
+
+/* 散布図 */
+new Chart(c_scatter,{type:'bubble',data:{datasets:REAL.kuni.map((k,i)=>({label:k[0],
+ data:[{x:k[2],y:Math.round(k[3]/k[2]),r:Math.sqrt(k[3]/1e6)*1.35}],backgroundColor:SERIES[i%6]+'B3',borderColor:SERIES[i%6]}))},
+ options:{scales:{x:{...gridY,title:{display:true,text:'利用人数（人）'}},y:{...gridY,title:{display:true,text:'客単価（円）'}}},
+ plugins:{legend:{position:'bottom',labels:{boxWidth:8}},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.datasetIndex];return k[0]+'：人数 '+cm(k[2])+'人 / 単価 '+cm(Math.round(k[3]/k[2]))+'円 / 取扱高 '+yen(k[3]);}}}}}});
+
+/* ================= TAB3 施設 ================= */
+new Chart(c_shisetsu,{type:'bar',data:{labels:REAL.shisetsu.map(s=>s[0]),datasets:[{data:REAL.shisetsu.map(s=>s[3]/1e6),backgroundColor:REAL.shisetsu.map(s=>(s[0]==='新大手町ビル'||s[0]==='丸の内仲通りビル')?C4:C1),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const s=REAL.shisetsu[c.dataIndex];return ['取扱高 '+yen(s[3])+'（構成比 '+pct(s[3]/REAL.total.amount*100)+'）','件数 '+cm(s[1])+'件 / 件単価 '+cm(Math.round(s[3]/s[1]))+'円'];}}}}}});
+
+/* ヒートマップ */
+{const kuni6=REAL.kuni.slice(0,6);
+ const tbl=document.getElementById('t_heat');
+ let html='<tr><th>施設＼国</th>'+kuni6.map(k=>'<th style="text-align:right;">'+k[0]+'</th>').join('')+'</tr>';
+ const cells=[];
+ REAL.shisetsu.forEach(s=>{
+  const row=kuni6.map(k=> s[3]*(k[3]/REAL.total.amount)*R(0.8,1.2));
+  const rs=row.reduce((a,b)=>a+b,0);
+  cells.push(row.map(v=>v/rs*s[3])); // 正規化して行合計=施設実測
+ });
+ const flat=cells.flat(); const mx=Math.max(...flat);
+ REAL.shisetsu.forEach((s,ri)=>{
+  html+='<tr><td>'+s[0]+'</td>'+cells[ri].map(v=>{
+   const al=Math.min(0.85,v/mx*0.85+0.04);
+   return '<td style="background:rgba(0,194,255,'+al.toFixed(2)+');">'+cm(v/1e4)+'</td>';
+  }).join('')+'</tr>';
+ });
+ tbl.innerHTML=html;}
+
+/* ================= TAB4 買い回り ================= */
+{const tbl=document.getElementById('t_pair');
+ let rows=[
+  ['ADRIFT by David Myers(二重橋)','エシレ・メゾン デュ ブール',141,2,'1.42%','real'],
+  ['ADRIFT by David Myers(二重橋)','スターバックス新東京ビル',141,2,'1.42%','real'],
+  ['ADRIFT by David Myers(二重橋)','HOUSE OF DIOR',141,2,'1.42%','real']];
+ const org=['新丸ビル・物販A','新丸ビル・飲食B','丸ビル・物販C','丸ビル・飲食D','ブリックスクエア・物販E','二重橋スクエア・飲食F','三菱ビル・物販G','オアゾ・物販H','新東京ビル・飲食I','丸の内仲通り・物販J'];
+ const dst=['丸ビル・カフェK','新丸ビル・物販L','ブリックスクエア・雑貨M','丸の内仲通り・アパレルN','オアゾ・書店O','二重橋スクエア・物販P','有楽町電気ビル・飲食Q','三菱ビル・カフェR'];
+ for(let i=0;i<20;i++){
+  const a=org[Math.floor(rnd()*org.length)], b=dst[Math.floor(rnd()*dst.length)];
+  const base=Math.round(R(60,900)); const g=Math.max(1,Math.round(base*R(0.008,0.05)));
+  rows.push([a,b,base,g,(g/base*100).toFixed(2)+'%','dmy']);
+ }
+ tbl.innerHTML='<tr><th>起点店舗</th><th>併用先</th><th style="text-align:right;">起点人数</th><th style="text-align:right;">併用人数</th><th style="text-align:right;">併用率</th><th></th></tr>'+
+  rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="n">'+cm(r[2])+'</td><td class="n">'+cm(r[3])+'</td><td class="n">'+r[4]+'</td><td>'+(r[5]==='real'?'<span class="badge b-real">実</span>':'<span class="badge b-dmy">ダ</span>')+'</td></tr>').join('');}
+
+/* SVGフロー */
+{const svg=document.getElementById('svgFlow');
+ const flows=[['ブリックスクエア',68],['新東京ビル',44],['新国際ビル',39],['丸ビル',31]];
+ const mx=Math.max(...flows.map(f=>f[1]));
+ let s='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#00C2FF"/></marker></defs>';
+ s+='<rect x="14" y="118" rx="9" width="150" height="56" fill="#0F1B2E" stroke="#00C2FF" stroke-width="1.5"/><text x="89" y="142" fill="#E8EEF7" font-size="13" font-weight="bold" text-anchor="middle">二重橋スクエア</text><text x="89" y="161" fill="#A9B7CC" font-size="10" text-anchor="middle">起点 786人(実測)</text>';
+ flows.forEach((f,i)=>{
+  const y=40+i*70; const w=1.5+f[1]/mx*9;
+  s+='<path d="M164 146 C 300 146, 300 '+(y+26)+', 388 '+(y+26)+'" fill="none" stroke="#00C2FF" stroke-opacity="0.75" stroke-width="'+w.toFixed(1)+'" marker-end="url(#ah)"/>';
+  s+='<rect x="392" y="'+y+'" rx="8" width="152" height="52" fill="#0F1B2E" stroke="#22334E"/><text x="468" y="'+(y+22)+'" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">'+f[0]+'</text><text x="468" y="'+(y+40)+'" fill="#FFB020" font-size="10" text-anchor="middle">併用 '+f[1]+'人(ダミー)</text>';
+ });
+ svg.innerHTML=s;}
+
+/* 利用施設数分布 */
+function stack100(el,labels,names,data,colors){
+ return new Chart(el,{type:'bar',data:{labels:labels,datasets:names.map((n,i)=>({label:n,data:data.map(d=>d[i]),backgroundColor:colors[i]}))},
+ options:{indexAxis:'y',scales:{x:{...gridY,stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true,grid:{display:false}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.x+'%（ダミー）'}}}}});}
+stack100(c_facN,['アメリカ','中国','韓国','香港','シンガポール'],['1施設','2施設','3施設+'],
+ [[83,12,5],[71,19,10],[76,16,8],[74,18,8],[78,15,7]],[C1,C2,C4]);
+
+/* ================= TAB5 リピート・定着 ================= */
+{const nations=['アメリカ','韓国','台湾','香港','中国','シンガポール'];
+ const rep=[[5.8,8.9],[12.4,18.2],[9.1,14.0],[8.2,12.6],[6.9,10.8],[7.6,11.9]];
+ new Chart(c_repeat,{type:'bar',data:{labels:nations,datasets:[
+  {label:'翌月再利用率',data:rep.map(r=>r[0]),backgroundColor:C1,borderRadius:3},
+  {label:'3ヶ月以内再利用率',data:rep.map(r=>r[1]),backgroundColor:C2,borderRadius:3}]},
+  options:{scales:{y:{...gridY,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
+  plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y+'%（ダミー）'}}}}});
+ const cards=[10874,6087,2120,2220,1437,2507];
+ document.getElementById('t_repeat').innerHTML='<tr><th>国</th><th style="text-align:right;">当月カード数</th><th style="text-align:right;">翌月再利用</th><th style="text-align:right;">3ヶ月内</th></tr>'+
+  nations.map((n,i)=>'<tr><td>'+n+'</td><td class="n">'+cm(cards[i])+'</td><td class="n">'+rep[i][0]+'%</td><td class="n">'+rep[i][1]+'%</td></tr>').join('');}
+
+stack100(c_freq,['アメリカ','韓国','シンガポール','台湾','香港'],['1回','2回','3〜5回','6回+'],
+ [[81,12,5,2],[66,18,11,5],[74,15,8,3],[70,17,9,4],[72,16,8,4]],[C1,C2,C4,C5]);
+
+/* コホート */
+{const tbl=document.getElementById('t_cohort');
+ const rows=MONTHS.slice(0,23);
+ let html='<tr><th>初回利用月</th><th style="text-align:right;">カード数</th><th style="text-align:right;">+1ヶ月</th><th style="text-align:right;">+2ヶ月</th><th style="text-align:right;">+3ヶ月</th></tr>';
+ rows.forEach((ym,ri)=>{
+  const n=Math.round(M_USERS[ym]*R(0.58,0.68));
+  const base=[8,5,4];
+  html+='<tr><td>'+ym+'</td><td class="n">'+cm(n)+'</td>';
+  base.forEach((b,k)=>{
+   if(ri+k+1>=24){html+='<td class="n" style="color:#3d4f6b;">—</td>';return;}
+   const v=b*R(0.8,1.25);
+   const al=Math.min(0.8,v/10*0.8+0.03);
+   html+='<td class="n" style="background:rgba(124,92,255,'+al.toFixed(2)+');">'+v.toFixed(1)+'%</td>';
+  });
+  html+='</tr>';
+ });
+ tbl.innerHTML=html;}
+
+new Chart(c_revisit,{type:'bar',data:{labels:['韓国','香港','台湾','シンガポール','中国','アメリカ','オーストラリア'],datasets:[{data:[9.8,7.1,6.4,5.9,5.2,4.2,3.6],backgroundColor:C3,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gridY,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'推定再訪率 '+c.parsed.x+'%（90日以上あけて再出現・ダミー）'}}}}});
+
+/* ================= TAB6 滞在・単価 ================= */
+new Chart(c_keizoku,{type:'bar',data:{labels:['新丸の内ビルディング','丸の内ビルディング','ブリックスクエア','丸の内オアゾ','三菱ビル'],datasets:[{data:[1734,1386,747,534,466],backgroundColor:C1,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'人'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'最大連続2ヶ月利用 '+cm(c.parsed.x)+'人（実測）'}}}}});
+
+stack100(c_interval,['アメリカ','オーストラリア','中国','韓国'],['同日のみ','2〜6日','7日+'],
+ [[58,31,11],[49,36,15],[62,29,9],[55,32,13]],[C1,C2,C4]);
+stack100(c_range,['アメリカ','中国','香港','台湾'],['〜1万','〜5万','〜20万','20万+'],
+ [[52,33,12,3],[38,34,19,9],[41,35,17,7],[44,34,16,6]],[C6,C1,C2,C5]);
+stack100(c_days,['アメリカ','シンガポール','台湾','韓国'],['1日のみ','2〜3日','4日+'],
+ [[72,22,6],[64,27,9],[68,25,7],[61,29,10]],[C1,C2,C4]);
+
+/* ================= TAB7 AI・SNS構想 ================= */
+new Chart(c_aiShare,{type:'bar',data:{labels:['丸の内・大丸有','銀座','表参道・青山','新宿','渋谷'],datasets:[
+ {label:'英語',data:[34,78,52,61,58],backgroundColor:C1},
+ {label:'中国語(簡体)',data:[22,84,41,66,49],backgroundColor:C5},
+ {label:'韓国語',data:[27,71,48,63,72],backgroundColor:C2}]},
+ options:{scales:{y:{...gridY,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'AI回答での言及率(想定)'}},x:{grid:{display:false}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y+'%（構想ダミー）'}}}}});
+new Chart(c_sns,{type:'bar',data:{labels:['YouTube','Reddit','Instagram','TikTok','小紅書'],datasets:[
+ {label:'月間言及(件)',data:[420,180,2600,930,510],backgroundColor:[C3,C3,C4,C4,C5],borderRadius:3}]},
+ options:{scales:{y:{...gridY},x:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'月間言及 '+cm(c.parsed.y)+'件（構想ダミー）。緑=API取得可 / 黄=制限あり / 赤=公式API無'}}}}});
+
+/* ================= タブ切替 ================= */
+document.getElementById('tabs').addEventListener('click',e=>{
+ const b=e.target.closest('.tab'); if(!b)return;
+ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p));
+ window.dispatchEvent(new Event('resize'));
 });
 </script>
 </body>
