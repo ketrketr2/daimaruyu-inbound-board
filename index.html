@@ -10,288 +10,570 @@
 <style>
 :root{
  --bg:#0F1B2E; --panel:#16263D; --border:#22334E; --head:#081222;
- --tx:#E8EEF7; --sub:#A9B7CC;
+ --tx:#E8EEF7; --sub:#A9B7CC; --dim:#5d6f8a;
  --c1:#00C2FF; --c2:#7C5CFF; --c3:#00E5A0; --c4:#FFB020; --c5:#FF5C7A; --c6:#8FA3BF;
  --up:#00E5A0; --down:#FF5C7A;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--tx);font-family:'BIZ UDGothic',Meiryo,sans-serif;font-size:14px;line-height:1.6;}
-.hd{background:var(--head);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:50;}
-.hd .logo{font-size:17px;font-weight:700;letter-spacing:.06em;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'BIZ UDGothic',Meiryo,sans-serif;font-size:14px;line-height:1.65;}
+a{color:var(--c1);text-decoration:none;} a:hover{text-decoration:underline;}
+/* ===== header ===== */
+.hd{background:var(--head);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:90;}
+.hd .burger{display:none;background:none;border:1px solid var(--border);color:var(--tx);border-radius:8px;font-size:16px;padding:4px 10px;cursor:pointer;}
+.hd .logo{font-size:16.5px;font-weight:700;letter-spacing:.05em;white-space:nowrap;}
 .hd .logo span{color:var(--c1);}
-.hd .meta{margin-left:auto;font-size:11px;color:var(--sub);}
-.tabs{display:flex;gap:6px;padding:12px 20px 0;flex-wrap:wrap;background:var(--bg);position:sticky;top:53px;z-index:49;border-bottom:1px solid var(--border);}
-.tab{background:none;border:1px solid var(--border);border-bottom:none;color:var(--sub);font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px 8px 0 0;cursor:pointer;}
-.tab.on{background:var(--panel);color:var(--c1);border-color:#2c4166;}
-.wrap{max-width:1240px;margin:0 auto;padding:18px 20px 70px;}
-.page{display:none;}
-.page.on{display:block;}
-.grid{display:grid;gap:14px;}
+.hd .meta{margin-left:auto;font-size:10.5px;color:var(--sub);text-align:right;line-height:1.5;}
+/* ===== layout ===== */
+.layout{display:flex;min-height:100vh;}
+aside{width:214px;flex-shrink:0;background:var(--head);border-right:1px solid var(--border);padding:14px 10px 40px;position:sticky;top:53px;height:calc(100vh - 53px);overflow-y:auto;}
+aside .cap{font-size:9.5px;color:var(--dim);letter-spacing:.15em;margin:14px 8px 4px;}
+.mi{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;color:var(--sub);font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 10px;border-radius:8px;cursor:pointer;text-align:left;line-height:1.4;}
+.mi:hover{background:#0f2038;color:var(--tx);}
+.mi.on{background:var(--panel);color:var(--c1);border:1px solid #2c4166;}
+.mi .no{font-size:9.5px;color:var(--dim);width:16px;flex-shrink:0;}
+.mi.on .no{color:var(--c1);}
+main{flex:1;min-width:0;padding:18px 22px 80px;max-width:1180px;}
+.sec{display:none;}
+.sec.on{display:block;}
+.sech{border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:16px;}
+.sech h2{font-size:18px;color:var(--tx);}
+.sech h2 b{color:var(--c1);margin-right:8px;font-family:Georgia,serif;}
+.sech .en{font-size:10px;color:var(--dim);letter-spacing:.18em;}
+.sech .desc{font-size:12px;color:var(--sub);margin-top:4px;}
+/* ===== panels ===== */
+.grid{display:grid;gap:13px;}
+.grid>*{min-width:0;}
+.flowbox svg{display:block;width:100%;height:auto;max-width:100%;}
 .g4{grid-template-columns:repeat(4,1fr);}
-.g2{grid-template-columns:1fr 1fr;}
 .g3{grid-template-columns:repeat(3,1fr);}
-@media(max-width:900px){.g4{grid-template-columns:1fr 1fr;}.g2,.g3{grid-template-columns:1fr;}}
-@media(max-width:430px){.g4{grid-template-columns:1fr 1fr;}}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;position:relative;}
-.pt{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.badge{font-size:10px;font-weight:700;padding:1px 8px;border-radius:9px;border:1px solid;white-space:nowrap;}
+.g2{grid-template-columns:1fr 1fr;}
+.g21{grid-template-columns:2fr 1fr;}
+@media(max-width:1000px){.g4{grid-template-columns:1fr 1fr;}.g3,.g2,.g21{grid-template-columns:1fr;}}
+@media(max-width:480px){.g4{grid-template-columns:1fr 1fr;}}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:15px 17px;margin-bottom:13px;}
+.pt{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.badge{font-size:9.5px;font-weight:700;padding:1px 8px;border-radius:9px;border:1px solid;white-space:nowrap;}
 .b-real{color:#00E5A0;border-color:#00E5A0;background:rgba(0,229,160,.08);}
 .b-dmy{color:#FFB020;border-color:#FFB020;background:rgba(255,176,32,.08);}
 .b-mix{color:#00C2FF;border-color:#FFB020;background:rgba(0,194,255,.06);}
-.kpi .v{font-size:31px;font-weight:700;line-height:1.15;letter-spacing:.01em;}
-.kpi .v small{font-size:16px;color:var(--sub);}
-.kpi .l{font-size:11px;color:var(--sub);margin-top:2px;}
-.kpi .cmp{font-size:11px;font-weight:700;margin-top:6px;}
+.b-open{color:#7C5CFF;border-color:#7C5CFF;background:rgba(124,92,255,.1);}
+.kpi{cursor:help;}
+.kpi .v{font-size:29px;font-weight:700;line-height:1.15;}
+.kpi .v small{font-size:15px;color:var(--sub);}
+.kpi .l{font-size:10.5px;color:var(--sub);margin-top:3px;line-height:1.5;}
+.kpi .cmp{font-size:11px;font-weight:700;margin-top:5px;}
 .up{color:var(--up);} .down{color:var(--down);}
-.ch{position:relative;height:280px;}
-.ch.tall{height:340px;} .ch.short{height:230px;}
-canvas{max-width:100%;}
-select{background:var(--head);color:var(--tx);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:12.5px;}
-table{width:100%;border-collapse:collapse;font-size:12px;}
-th{background:#0c1830;color:var(--sub);font-weight:700;padding:7px 8px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
-td{padding:6px 8px;border-bottom:1px solid #1c2c46;white-space:nowrap;}
-td.n{text-align:right;font-variant-numeric:tabular-nums;}
+.ch{position:relative;height:270px;}
+.ch.tall{height:330px;} .ch.short{height:220px;} .ch.mini{height:190px;}
+select{background:var(--head);color:var(--tx);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:12px;}
+label.sl{font-size:11px;color:var(--sub);margin-right:4px;}
+table{width:100%;border-collapse:collapse;font-size:11.5px;}
+th{background:#0c1830;color:var(--sub);font-weight:700;padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:5px 8px;border-bottom:1px solid #1c2c46;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .tsc{overflow-x:auto;}
-.note{font-size:10.5px;color:var(--sub);margin-top:8px;}
-.hm td{text-align:right;font-variant-numeric:tabular-nums;color:#dbe6f5;}
+.note{font-size:10px;color:var(--sub);margin-top:7px;line-height:1.7;}
+.note a{color:#6f87ad;}
+.hm td{text-align:right;font-variant-numeric:tabular-nums;color:#dbe6f5;white-space:nowrap;}
 .hot{color:var(--c4);font-weight:700;}
-.pill{display:inline-block;font-size:10px;border:1px solid var(--c4);color:var(--c4);border-radius:8px;padding:0 7px;margin-left:6px;}
-.flowbox{background:#0c1830;border:1px solid var(--border);border-radius:10px;padding:8px;}
-.leg{font-size:10.5px;color:var(--sub);display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
-.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px;}
-.foot{font-size:10.5px;color:var(--sub);border-top:1px solid var(--border);margin-top:26px;padding-top:12px;line-height:1.9;}
-h2.sec{font-size:15px;color:var(--c1);margin:4px 0 12px;}
-.aiplan{font-size:12.5px;color:var(--tx);line-height:1.9;}
-.aiplan b{color:var(--c1);}
+.pill{display:inline-block;font-size:9.5px;border:1px solid var(--c4);color:var(--c4);border-radius:8px;padding:0 6px;margin-left:5px;}
+.flowbox{background:#0c1830;border:1px solid var(--border);border-radius:10px;padding:6px;}
+/* ===== 示唆・アラート ===== */
+.sisa{background:rgba(255,176,32,.07);border:1px solid rgba(255,176,32,.45);border-left:4px solid var(--c4);border-radius:10px;padding:12px 16px;margin:12px 0;}
+.sisa .lb{font-size:10px;font-weight:700;color:var(--c4);letter-spacing:.2em;margin-bottom:4px;}
+.sisa p{font-size:12.5px;line-height:1.85;}
+.sisa b{color:var(--c4);}
+.alert{border-radius:10px;padding:11px 15px;margin-bottom:9px;font-size:12.5px;line-height:1.75;border:1px solid;display:flex;gap:10px;align-items:flex-start;}
+.alert .ic{font-weight:700;font-size:14px;flex-shrink:0;}
+.a-red{border-color:rgba(255,92,122,.5);background:rgba(255,92,122,.07);}
+.a-red .ic{color:var(--c5);}
+.a-amb{border-color:rgba(255,176,32,.5);background:rgba(255,176,32,.06);}
+.a-amb .ic{color:var(--c4);}
+.a-grn{border-color:rgba(0,229,160,.45);background:rgba(0,229,160,.06);}
+.a-grn .ic{color:var(--c3);}
+.alert b{color:var(--tx);}
+.scorebar{display:flex;align-items:center;gap:10px;margin:6px 0;}
+.scorebar .nm{width:110px;font-size:12px;text-align:right;flex-shrink:0;}
+.scorebar .tr{flex:1;background:#0c1830;border-radius:5px;height:20px;position:relative;overflow:hidden;}
+.scorebar .fl{height:100%;border-radius:5px;background:linear-gradient(90deg,#00C2FF,#7C5CFF);display:flex;align-items:center;justify-content:flex-end;padding-right:7px;font-size:10.5px;font-weight:700;color:#04121f;}
+.scorebar .rk{width:30px;font-size:11px;color:var(--sub);flex-shrink:0;}
+.gd dt{color:var(--c1);font-weight:700;font-size:12.5px;margin-top:12px;}
+.gd dd{font-size:12px;color:var(--sub);margin:2px 0 0 0;line-height:1.8;}
+.foot{font-size:10px;color:var(--sub);border-top:1px solid var(--border);margin-top:26px;padding-top:12px;line-height:1.9;}
+@media(max-width:860px){
+ .hd .burger{display:block;}
+ .hd .meta{display:none;}
+ aside{position:fixed;left:0;top:53px;z-index:80;transform:translateX(-105%);transition:transform .25s;box-shadow:6px 0 24px rgba(0,0,0,.5);}
+ aside.open{transform:translateX(0);}
+ .mask{display:none;position:fixed;inset:53px 0 0 0;background:rgba(4,10,20,.6);z-index:70;}
+ .mask.on{display:block;}
+ main{padding:14px 12px 70px;}
+}
 </style>
 </head>
 <body>
 <div class="hd">
+ <button class="burger" id="burger">☰</button>
  <div class="logo">DAIMARUYU <span>INBOUND</span> BOARD</div>
- <div class="meta">最終更新 2026-08 ｜ 月次更新 ｜ 社内限定（noindex） ｜ サンプル: 2026-05実測＋生成ダミー</div>
+ <div class="meta">最終更新 2026-08-21 ｜ 月次更新 ｜ 社内限定(noindex)<br>実測: ニコス2026-05サンプル + JNTO/観光庁 + 検索面106件</div>
 </div>
-<div class="tabs" id="tabs">
- <button class="tab on" data-p="p1">KPI月次</button>
- <button class="tab" data-p="p2">国別</button>
- <button class="tab" data-p="p3">施設・店舗</button>
- <button class="tab" data-p="p4">買い回り</button>
- <button class="tab" data-p="p5">リピート・定着</button>
- <button class="tab" data-p="p6">滞在・単価</button>
- <button class="tab" data-p="p7">AI・SNS(構想)</button>
-</div>
-<div class="wrap">
-
-<!-- ============ TAB1 KPI月次 ============ -->
-<div class="page on" id="p1">
+<div class="mask" id="mask"></div>
+<div class="layout">
+<aside id="menu">
+ <div class="cap">GUIDE</div>
+ <button class="mi" data-s="s0"><span class="no">?</span>読み方ガイド</button>
+ <div class="cap">MONITOR</div>
+ <button class="mi on" data-s="s1"><span class="no">1</span>概要・示唆</button>
+ <button class="mi" data-s="s2"><span class="no">2</span>KPI月次</button>
+ <button class="mi" data-s="s3"><span class="no">3</span>国別</button>
+ <button class="mi" data-s="s4"><span class="no">4</span>クロス分析</button>
+ <button class="mi" data-s="s5"><span class="no">5</span>施設・店舗</button>
+ <div class="cap">CUSTOMER</div>
+ <button class="mi" data-s="s6"><span class="no">6</span>買い回り</button>
+ <button class="mi" data-s="s7"><span class="no">7</span>リピート・定着</button>
+ <button class="mi" data-s="s8"><span class="no">8</span>滞在・単価</button>
+ <div class="cap">STRATEGY</div>
+ <button class="mi" data-s="s9"><span class="no">9</span>市場・オープンデータ</button>
+ <button class="mi" data-s="s10"><span class="no">10</span>ターゲットスコア</button>
+ <button class="mi" data-s="s11"><span class="no">11</span>AI・検索可視性</button>
+</aside>
+<main>
+<!-- ========== 1 概要 ========== -->
+<section class="sec on" id="s1">
+ <div class="sech"><span class="en">EXECUTIVE OVERVIEW</span><h2><b>1</b>概要・示唆</h2><div class="desc">2026年5月実測サンプル（海外発行カード決済・CAFIS端末）を軸に、市場データ・検索実測とクロスした現在地。</div></div>
  <div class="grid g4">
-  <div class="panel kpi"><div class="pt">当月取扱高 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k1"></div><div class="cmp" id="k1c"></div><div class="l">海外発行カード決済（CAFIS端末）</div></div>
-  <div class="panel kpi"><div class="pt">利用人数 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k2"></div><div class="cmp" id="k2c"></div><div class="l">件数 47,087件</div></div>
-  <div class="panel kpi"><div class="pt">客単価 <span class="badge b-real">実データ 2026-05</span></div><div class="v" id="k3"></div><div class="cmp" id="k3c"></div><div class="l">取扱高 ÷ 利用人数</div></div>
-  <div class="panel kpi"><div class="pt">KPI進捗 <span class="badge b-dmy">ダミー</span></div><div class="v" id="k4" title="計算式(暫定): 月次取扱高×DCC比率8.6%×12ヶ月(季節調整) ÷ 年度目標44.3億円。本データ受領後にロジック確定">103<small>%</small></div><div class="cmp up">対 月割り目標</div><div class="l">2026年度 DCC売上目標 44.3億円</div></div>
+  <div class="panel kpi" title="実測: 2026年5月の海外発行カード取扱高 574,676,997円"><div class="pt">当月取扱高 <span class="badge b-real">実データ 2026-05</span></div><div class="v">5.75<small>億円</small></div><div class="cmp up">年換算 約69.0億円ペース</div><div class="l">件数 47,087件・海外発行カード決済</div></div>
+  <div class="panel kpi" title="実測 44,285人。年換算 531,420人 = KPI想定客数160,412人の3.3倍"><div class="pt">利用人数 <span class="badge b-real">実データ 2026-05</span></div><div class="v">44,285<small>人</small></div><div class="cmp">年換算 53.1万人</div><div class="l">KPI想定客数16.0万人/年の<b class="up">3.3倍</b></div></div>
+  <div class="panel kpi" title="取扱高÷利用人数。KPI想定単価27,643円に対して47%"><div class="pt">客単価 <span class="badge b-real">実データ 2026-05</span></div><div class="v">12,977<small>円</small></div><div class="cmp down">KPI想定 27,643円の47%</div><div class="l">最高は中国 28,483円／台湾 20,517円</div></div>
+  <div class="panel kpi" title="ニコス実測ベース年換算69.0億円 ÷ 2026年度KPI 44.3億円 = 156%。ただしKPIは現行DCC+pay系計測で設定されており定義が異なる"><div class="pt">KPI対比 <span class="badge b-mix">実測×定義差あり</span></div><div class="v">156<small>%</small></div><div class="cmp up">年換算69.0億 vs 目標44.3億</div><div class="l">計測定義の再設計が必要（下のKPIツリー参照）</div></div>
  </div>
+
+ <div class="panel">
+  <div class="pt">アラート（意思決定に直結する変化・リスク）</div>
+  <div class="alert a-red"><span class="ic">▼</span><div><b>中国リスク：訪日中国人が2026年1-7月 前年比−56.3%</b>（JNTO実測）。大丸有の中国比率は取扱高7.1%・単価は最高28,483円。買物市場最大（買物代7,619億円/年）の国が急減しており、韓国+20.3%・台湾+21.8%への<b>ポートフォリオ転換の巧拙が今年度の分かれ目</b>。</div></div>
+  <div class="alert a-amb"><span class="ic">!</span><div><b>KPIの計測定義が実態とズレている</b>。現行KPI（44.3億円）はDCC+pay系計測で設定されているが、ニコス実測の海外カード決済は年換算約69.0億円＝<b>商業全体売上（推計1,231億円）の5.6%相当で、2030年目標シェア5%を計測上は既に超える水準</b>。目標・計測の再定義をニコスデータ受領と同時に行うべき。</div></div>
+  <div class="alert a-amb"><span class="ic">!</span><div><b>「東京で買い物」の検索面で丸の内はほぼ不可視</b>（実測106件）。非指名13クエリでタイトル出現0回、定番ガイド10本の本文掲載も1本のみ（銀座・原宿は9本）。<b>来街ポテンシャルの手前、認知の入口で負けている</b> → セクション11。</div></div>
+  <div class="alert a-grn"><span class="ic">▲</span><div><b>欧米豪・SGは既に「目的地化」に成功している</b>。訪日客数に対する大丸有決済者の比率は 英4.3%・SG4.3%・米3.6%・仏3.3% と高く、韓0.6%・台0.3%・中0.4%と対照的（セクション9）。<b>単価の高い欧米豪・SGで勝てるエリアという実証</b>が既にデータに出ている。</div></div>
+ </div>
+
+ <div class="grid g2">
+ <div class="panel">
+  <div class="pt">KPIツリー：目標の構造と実測のギャップ <span class="badge b-mix">実データ×KPI設定値</span></div>
+  <div class="flowbox"><svg viewBox="0 0 560 330" width="100%" style="height:auto;">
+   <defs><marker id="ar1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#5d6f8a"/></marker></defs>
+   <rect x="10" y="10" rx="8" width="250" height="64" fill="#0F1B2E" stroke="#7C5CFF" stroke-width="1.4"/>
+   <text x="135" y="32" fill="#A9B7CC" font-size="10" text-anchor="middle">2026年度 インバウンド売上KPI（設定値）</text>
+   <text x="135" y="52" fill="#E8EEF7" font-size="16" font-weight="bold" text-anchor="middle">44.3億円 <tspan font-size="10" fill="#A9B7CC">= 商業全体の3.6%</tspan></text>
+   <text x="135" y="67" fill="#5d6f8a" font-size="9" text-anchor="middle">2030年度目標 58億円（5%）</text>
+   <rect x="300" y="10" rx="8" width="250" height="64" fill="#0F1B2E" stroke="#00E5A0" stroke-width="1.4"/>
+   <text x="425" y="32" fill="#A9B7CC" font-size="10" text-anchor="middle">ニコス実測 年換算（2026-05×12）</text>
+   <text x="425" y="52" fill="#00E5A0" font-size="16" font-weight="bold" text-anchor="middle">約69.0億円 <tspan font-size="10" fill="#A9B7CC">= 推計の5.6%</tspan></text>
+   <text x="425" y="67" fill="#5d6f8a" font-size="9" text-anchor="middle">現行DCC計測はこの約9%しか見えていない</text>
+   <line x1="135" y1="74" x2="135" y2="106" stroke="#5d6f8a" marker-end="url(#ar1)"/>
+   <line x1="425" y1="74" x2="425" y2="106" stroke="#5d6f8a" marker-end="url(#ar1)"/>
+   <rect x="10" y="110" rx="7" width="120" height="52" fill="#0F1B2E" stroke="#22334E"/>
+   <text x="70" y="130" fill="#A9B7CC" font-size="9.5" text-anchor="middle">想定客数</text>
+   <text x="70" y="148" fill="#E8EEF7" font-size="13" font-weight="bold" text-anchor="middle">16.0万人/年</text>
+   <rect x="140" y="110" rx="7" width="120" height="52" fill="#0F1B2E" stroke="#22334E"/>
+   <text x="200" y="130" fill="#A9B7CC" font-size="9.5" text-anchor="middle">想定客単価</text>
+   <text x="200" y="148" fill="#E8EEF7" font-size="13" font-weight="bold" text-anchor="middle">27,643円</text>
+   <rect x="300" y="110" rx="7" width="120" height="52" fill="#0F1B2E" stroke="#22334E"/>
+   <text x="360" y="130" fill="#A9B7CC" font-size="9.5" text-anchor="middle">実測 人数（年換算）</text>
+   <text x="360" y="148" fill="#00E5A0" font-size="13" font-weight="bold" text-anchor="middle">53.1万人</text>
+   <rect x="430" y="110" rx="7" width="120" height="52" fill="#0F1B2E" stroke="#22334E"/>
+   <text x="490" y="130" fill="#A9B7CC" font-size="9.5" text-anchor="middle">実測 客単価</text>
+   <text x="490" y="148" fill="#FF5C7A" font-size="13" font-weight="bold" text-anchor="middle">12,977円</text>
+   <rect x="10" y="185" rx="8" width="540" height="60" fill="rgba(255,176,32,.06)" stroke="rgba(255,176,32,.5)"/>
+   <text x="24" y="207" fill="#FFB020" font-size="11" font-weight="bold">GAP① 客数は想定の3.3倍来ているが、単価が想定の47%しかない</text>
+   <text x="24" y="226" fill="#A9B7CC" font-size="10">→「量」は既に足りている。勝負は単価：高単価国ミックス（中28,483円）×高単価施設（新大手町 件単価6.3万円）×買い回り数の引き上げ</text>
+   <rect x="10" y="255" rx="8" width="540" height="60" fill="rgba(0,194,255,.05)" stroke="rgba(0,194,255,.4)"/>
+   <text x="24" y="277" fill="#00C2FF" font-size="11" font-weight="bold">GAP② KPIの計測範囲（DCC≒9%）と実態（カード全量）の乖離が11倍</text>
+   <text x="24" y="296" fill="#A9B7CC" font-size="10">→ ニコス定常受領の開始と同時に、目標値・進捗率の定義をカード全量ベースへ引き直す（旧DCC系列も並走保持）</text>
+  </svg></div>
+ </div>
+ <div class="panel">
+  <div class="pt">今月の構成スナップショット <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch"><canvas id="c_snap"></canvas></div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p>取扱高の上位2施設（新丸ビル＋丸ビル）で<b>43.4%</b>、上位5ヶ国で<b>53.8%</b>。集中度が高く、<b>「どの国×どの施設」を動かすかを特定しやすい構造</b>。国別・施設別の掛け算はセクション4のクロス分析で。</p></div>
+ </div>
+ </div>
+
+ <div class="panel">
+  <div class="pt">主要示唆（5本・各セクションへのインデックス）</div>
+  <div class="tsc"><table>
+   <tr><th style="width:30px;">#</th><th>示唆</th><th style="width:110px;">根拠データ</th><th style="width:60px;">詳細</th></tr>
+   <tr><td>1</td><td><b>KPIは「達成できない」のではなく「測れていない」</b>。実測年換算69.0億は目標44.3億の156%。計測定義の刷新が最初の意思決定。</td><td>実測×KPI設定値</td><td>本頁ツリー</td></tr>
+   <tr><td>2</td><td><b>単価×国ミックスが最大のレバー</b>。客単価は想定の47%。単価最高の中国が訪日−56%の逆風のいま、米(単価17,600円・訪日+6.5%)・SG(14,519円・+10.3%)の比重引き上げが現実解。</td><td>実測×JNTO</td><td>3・9・10</td></tr>
+   <tr><td>3</td><td><b>欧米豪・SGでは既に「勝ちパターン」が存在する</b>。訪日客の3〜4%が大丸有で決済（英4.3%・SG4.3%・米3.6%）。この再現条件を韓台に移植できれば量が跳ねる。</td><td>実測×JNTO</td><td>9</td></tr>
+   <tr><td>4</td><td><b>買い回り率1.4%はまだ「点」の消費</b>。起点→併用の実測ペア（ADRIFT→エシレ等）は存在するが希薄。仲通り軸の回遊設計とID代替集計（全ペア化）で面の消費へ。</td><td>実測サンプル</td><td>6</td></tr>
+   <tr><td>5</td><td><b>認知の入口（検索・AI）で「買い物の街」として語られていない</b>。定番ガイド10本中、丸の内掲載1本。GO TOKYO・JNTO公式のショッピング特集からも脱落。掲載交渉＋多言語コンテンツが最短ルート。</td><td>検索面実測106件</td><td>11</td></tr>
+  </table></div>
+ </div>
+</section>
+<!-- ========== 2 KPI月次 ========== -->
+<section class="sec" id="s2">
+ <div class="sech"><span class="en">MONTHLY KPI</span><h2><b>2</b>KPI月次</h2><div class="desc">月次・日次・曜日の推移。実測は2026-05のみ、他月はシード固定の生成値（受領後に実数へ差し替え）。</div></div>
  <div class="panel">
   <div class="pt">月次取扱高の推移（24ヶ月）＋前年同月比 <span class="badge b-mix">実データ×ダミー</span></div>
   <div class="ch tall"><canvas id="c_month"></canvas></div>
-  <div class="note">2026-05のみ実測値。他は 実測基準×季節係数×年成長(25年度+18%/26年度+8%)×±5%乱数（シード固定）。右軸=前年同月比。</div>
+  <div class="note">緑=実測月。生成規則: 実測基準×季節係数(3-4月1.25/11月1.2/10月1.1/2月0.85/6月0.9)×年成長(25年度+18%/26年度+8%)×±5%（シード固定）。</div>
  </div>
  <div class="grid g2">
-  <div class="panel">
-   <div class="pt">顧客区分別 構成の推移（100%積み上げ） <span class="badge b-mix">実データ×ダミー</span></div>
-   <div class="ch"><canvas id="c_kubun"></canvas></div>
-   <div class="note">実測構成比（観光74.6%・中間15.6%・居住9.8%）を基準に±2pt変動。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">日別取扱高（直近60日・土日帯つき） <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_daily"></canvas></div>
-   <div class="note">月次÷30×曜日係数（土1.35・日1.25・金1.1・平日0.9）×±10%。薄帯=土日。</div>
-  </div>
+  <div class="panel"><div class="pt">顧客区分別 構成推移 <span class="badge b-mix">実データ×ダミー</span></div><div class="ch"><canvas id="c_kubun"></canvas></div><div class="note">実測構成: 観光客候補74.6%／中間15.6%／居住者候補9.8%（2026-05）。</div></div>
+  <div class="panel"><div class="pt">日別取扱高（直近60日・土日帯） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_daily"></canvas></div><div class="note">月次÷30×曜日係数（土1.35/日1.25/金1.1/平日0.9）×±10%。薄帯=土日。</div></div>
  </div>
-</div>
+ <div class="grid g2">
+  <div class="panel"><div class="pt">曜日別 平均取扱高（クロス） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_dow"></canvas></div><div class="note">直近60日の生成値を曜日平均化。受領後は「施策・イベント前後比較」の基礎グラフになる。</div></div>
+  <div class="panel"><div class="pt">ブランド別構成 <span class="badge b-real">実データ 2026-05</span></div><div class="ch short"><canvas id="c_brand"></canvas></div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p>銀聯は件数1.1%だが<b>件単価36,109円と全体平均(12,205円)の3.0倍</b>。中国本土の高額消費はカード枚数でなく単価で効いている——中国訪日−56%局面でも単価層の維持が優先。</p></div></div>
+ </div>
+</section>
 
-<!-- ============ TAB2 国別 ============ -->
-<div class="page" id="p2">
- <div class="panel">
-  <div class="pt">国別取扱高 TOP15（百万円） <span class="badge b-real">実データ 2026-05</span></div>
-  <div class="ch tall"><canvas id="c_kuni"></canvas></div>
+<!-- ========== 3 国別 ========== -->
+<section class="sec" id="s3">
+ <div class="sech"><span class="en">BY COUNTRY</span><h2><b>3</b>国別</h2><div class="desc">国×取扱高・人数・単価。市場（訪日客数・訪日消費）との対比はセクション9・10へ接続。</div></div>
+ <div class="grid g21">
+  <div class="panel"><div class="pt">国別取扱高 TOP15 <span class="badge b-real">実データ 2026-05</span></div><div class="ch tall"><canvas id="c_kuni"></canvas></div></div>
+  <div class="panel"><div class="pt">客単価 TOP10（円/人） <span class="badge b-real">実データ 2026-05</span></div><div class="ch tall"><canvas id="c_kuniTanka"></canvas></div></div>
  </div>
  <div class="grid g2">
-  <div class="panel">
-   <div class="pt">国別 月次推移 <select id="selKuni"></select> <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_kuniTrend"></canvas></div>
-   <div class="note">総額×実測国シェア×±8%乱数。中国のみ2月に旧正月ブースト1.4。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">選択国の顧客区分内訳 <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_kuniKubun"></canvas></div>
-   <div class="note">全体構成比を基準に国特性で微調整した推定値。</div>
-  </div>
+  <div class="panel"><div class="pt"><label class="sl">国:</label><select id="selKuni"></select> 月次推移＋区分内訳 <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_kuniTrend"></canvas></div><div class="note">総額×実測国シェア×±8%。中国のみ2月に旧正月ブースト1.4。</div></div>
+  <div class="panel"><div class="pt">選択国のプロファイル <span class="badge b-mix">実データ×オープンデータ</span></div><div id="kuniProf" style="font-size:12px;line-height:2;"></div></div>
  </div>
  <div class="panel">
   <div class="pt">利用人数 × 客単価 × 取扱高（バブル） <span class="badge b-real">実データ 2026-05</span></div>
   <div class="ch tall"><canvas id="c_scatter"></canvas></div>
-  <div class="note">X=利用人数、Y=客単価（取扱高÷人数）、バブル面積=取扱高。右上=人数も単価も高い国。</div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p>右上（人数も単価も高い）が不在なのが大丸有の現在地。<b>米国は人数首位だが単価11,545円と平均以下</b>、単価上位の中国(28,483円)・台湾(20,517円)は人数が細い。「米国の単価を上げる」か「中華圏の人数を戻す」かで打ち手が全く異なる——スコアリング（セクション10）で優先順位を判定。</p></div>
  </div>
-</div>
+</section>
 
-<!-- ============ TAB3 施設・店舗 ============ -->
-<div class="page" id="p3">
+<!-- ========== 4 クロス分析 ========== -->
+<section class="sec" id="s4">
+ <div class="sech"><span class="en">CROSS ANALYSIS</span><h2><b>4</b>クロス分析</h2><div class="desc">軸×指標を自由に切り替える分析ツール。国×施設・区分×ブランドの掛け算で「どこを動かすか」を特定する。</div></div>
  <div class="panel">
-  <div class="pt">施設別取扱高 TOP12（百万円） <span class="badge b-real">実データ 2026-05</span></div>
-  <div class="ch tall"><canvas id="c_shisetsu"></canvas></div>
-  <div class="note">高単価施設: <span class="hot">新大手町ビル</span>（415件・2,609万円＝件単価6.3万円）<span class="pill">高単価施設</span>／<span class="hot">丸の内仲通りビル</span>（373件・2,011万円＝件単価5.4万円）<span class="pill">高単価施設</span></div>
+  <div class="pt"><label class="sl">軸:</label><select id="xAxis"><option value="kuni">国別</option><option value="shisetsu">施設別</option><option value="kubun">顧客区分別</option><option value="brand">ブランド別</option></select>
+  <label class="sl">指標:</label><select id="xMetric"><option value="amount">取扱高</option><option value="users">利用人数</option><option value="count">件数</option><option value="tanka">客単価(円/人)</option><option value="kentanka">件単価(円/件)</option></select>
+  <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="ch tall"><canvas id="c_cross"></canvas></div>
+  <div class="note" id="crossNote"></div>
+ </div>
+ <div class="grid g2">
+  <div class="panel"><div class="pt"><label class="sl">施設:</label><select id="selFacCross"></select> → 国別構成 <span class="badge b-mix">実データ×ダミー配分</span></div><div class="ch"><canvas id="c_facKuni"></canvas></div><div class="note">行合計=施設実測。国別配分は施設シェア×国シェア×±20%（ID紐付け受領後に実数化）。</div></div>
+  <div class="panel"><div class="pt">顧客区分 × ブランド クロス <span class="badge b-mix">実データ×ダミー配分</span></div><div class="ch"><canvas id="c_kubunBrand"></canvas></div><div class="note">区分計・ブランド計は実測。クロスセルは比例配分±15%。</div></div>
  </div>
  <div class="panel">
   <div class="pt">施設 × 国TOP6 ヒートマップ（取扱高・万円） <span class="badge b-mix">実データ×ダミー配分</span></div>
   <div class="tsc"><table class="hm" id="t_heat"></table></div>
-  <div class="note">行合計=施設実測、列配分=施設シェア×国シェア×±20%乱数。セル濃淡=金額。</div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p>このマトリクスが定常受領後の<b>主戦場</b>。例えば「新大手町ビル（件単価6.3万円）×中国・SG」のセルが立てば高単価戦略の検証になり、「オアゾ×韓国」が立てば量販導線の検証になる。<b>毎月このセルの増減で施策の当たり外れを判定する運用</b>を推奨。</p></div>
  </div>
-</div>
+</section>
 
-<!-- ============ TAB4 買い回り ============ -->
-<div class="page" id="p4">
+<!-- ========== 5 施設・店舗 ========== -->
+<section class="sec" id="s5">
+ <div class="sech"><span class="en">FACILITIES</span><h2><b>5</b>施設・店舗</h2><div class="desc">施設別の規模と単価。TID（店舗）粒度は定常受領後に展開。</div></div>
+ <div class="grid g21">
+  <div class="panel"><div class="pt">施設別取扱高 TOP12 <span class="badge b-real">実データ 2026-05</span></div><div class="ch tall"><canvas id="c_shisetsu"></canvas></div></div>
+  <div class="panel"><div class="pt">件単価 × 件数（施設の性格） <span class="badge b-real">実データ 2026-05</span></div><div class="ch tall"><canvas id="c_facScatter"></canvas></div></div>
+ </div>
  <div class="panel">
-  <div class="pt">買い回りペア（起点店舗 → 併用先） <span class="badge b-mix">実データ3行×ダミー20行</span></div>
+  <div class="pt">施設別 明細 <span class="badge b-real">実データ 2026-05</span></div>
+  <div class="tsc"><table id="t_fac"></table></div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p><span class="hot">新大手町ビル（件単価62,877円）</span>と<span class="hot">丸の内仲通りビル（53,921円）</span>は件数が少なく単価が桁違い＝<b>ラグジュアリー枠</b>。一方オアゾは人数3,251人で件単価4,256円の<b>量販枠</b>。同じ「施設」でも役割が3類型（ラグジュアリー/基幹/量販）に分かれており、KPIも施策も類型別に設計すべき。</p></div>
+ </div>
+</section>
+<!-- ========== 6 買い回り ========== -->
+<section class="sec" id="s6">
+ <div class="sech"><span class="en">CROSS-SHOPPING</span><h2><b>6</b>買い回り</h2><div class="desc">起点→併用の回遊。実測サンプル3ペア＋生成値。ニコスへの相談②（全組み合わせ化）が通れば全ペア実数化。</div></div>
+ <div class="grid g21">
+  <div class="panel">
+   <div class="pt"><label class="sl">起点施設:</label><select id="selFlow"></select> 施設間フロー <span class="badge b-mix">実測1系統×ダミー</span></div>
+   <div class="flowbox"><svg id="svgFlow" viewBox="0 0 560 320" width="100%" style="height:auto;"></svg></div>
+   <div class="note">矢印太さ=併用人数。二重橋スクエアのみ実測ペアあり（ADRIFT起点141人）。他起点は生成値。</div>
+  </div>
+  <div class="panel">
+   <div class="pt">施設間 併用率マトリクス <span class="badge b-dmy">ダミー</span></div>
+   <div class="tsc"><table class="hm" id="t_flowMx"></table></div>
+   <div class="note">行=起点、列=併用先。全組み合わせ受領後に実数化。</div>
+  </div>
+ </div>
+ <div class="panel">
+  <div class="pt">買い回りペア明細（起点店舗→併用先） <span class="badge b-mix">実データ3行×ダミー20行</span> <label class="sl" style="margin-left:8px;">絞込:</label><select id="selPairF"><option value="">全て</option></select></div>
   <div class="tsc"><table id="t_pair"></table></div>
-  <div class="note">実データ行はサンプル受領形式そのまま。ダミー行の店名は匿名化ラベル。</div>
  </div>
  <div class="grid g2">
-  <div class="panel">
-   <div class="pt">施設間フロー（二重橋スクエア起点） <span class="badge b-dmy">ダミー</span></div>
-   <div class="flowbox"><svg id="svgFlow" viewBox="0 0 560 300" width="100%" height="300"></svg></div>
-   <div class="note">矢印の太さ=併用人数（推定）。本データ受領後に全施設ペアへ拡張。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">利用施設数の分布（国別・100%積み上げ） <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_facN"></canvas></div>
-   <div class="note">ID代替集計I「利用施設数分布」の受け皿。数値は想定イメージ。</div>
-  </div>
+  <div class="panel"><div class="pt">利用施設数の分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_facN"></canvas></div><div class="note">ID代替集計I の受け皿。</div></div>
+  <div class="panel"><div class="sisa" style="margin:0;"><div class="lb">SO WHAT</div><p>実測ペアの併用率は<b>1.42%</b>——ラグジュアリーレストラン（ADRIFT）で食事しても98.6%はその1軒で完結している。飲食→物販の動線（例: 二重橋→仲通りDIOR）は「存在するが極細」。<b>回遊の太さ＝面の消費額</b>なので、①仲通り軸の回遊特典 ②レシート連動クーポン ③コンシェルジュ接客連携 の効果検証を、このペア表の月次変化で行う設計にする。米国83%が1施設のみ（利用施設数分布）＝伸びしろは欧米の「2施設目」。</p></div></div>
  </div>
-</div>
+</section>
 
-<!-- ============ TAB5 リピート・定着 ============ -->
-<div class="page" id="p5">
+<!-- ========== 7 リピート・定着 ========== -->
+<section class="sec" id="s7">
+ <div class="sech"><span class="en">RETENTION</span><h2><b>7</b>リピート・定着</h2><div class="desc">ID代替集計（A リピート率／B 利用回数／G コホート／H 推定再訪率）の受け皿。現在は設計イメージ値。</div></div>
  <div class="grid g2">
-  <div class="panel">
-   <div class="pt">リピート率（国別） <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_repeat"></canvas></div>
-   <div class="tsc" style="margin-top:10px;"><table id="t_repeat"></table></div>
-  </div>
-  <div class="panel">
-   <div class="pt">利用回数分布（国別・100%積み上げ） <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch"><canvas id="c_freq"></canvas></div>
-   <div class="note">1回/2回/3〜5回/6回以上。ID代替集計B の受け皿。</div>
-  </div>
+  <div class="panel"><div class="pt">リピート率（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_repeat"></canvas></div><div class="tsc" style="margin-top:8px;"><table id="t_repeat"></table></div></div>
+  <div class="panel"><div class="pt">利用回数分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_freq"></canvas></div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p>設計上の見どころ: <b>韓国は翌月再利用12.4%と近距離リピート型</b>、米国は5.8%だが1回の滞在で高額——「リピートで積む国」と「1回で獲りきる国」でCRM設計が真逆になる。受領後、この2類型の実数確定が最初の分析。</p></div></div>
  </div>
- <div class="panel">
-  <div class="pt">コホート残存率（初回利用月別・+1〜+3ヶ月） <span class="badge b-dmy">ダミー</span></div>
-  <div class="tsc"><table class="hm" id="t_cohort"></table></div>
-  <div class="note">+1M≈8%・+2M≈5%・+3M≈4%を基準に±乱数。セル濃淡=残存率。ID代替集計G の受け皿。</div>
- </div>
- <div class="panel">
-  <div class="pt">推定再訪率（90日以上あけて再出現したカード比率） <span class="badge b-dmy">ダミー</span></div>
-  <div class="ch short"><canvas id="c_revisit"></canvas></div>
-  <div class="note">ID代替集計H の受け皿。訪日リピートの proxy。</div>
- </div>
-</div>
+ <div class="panel"><div class="pt">コホート残存率（初回利用月別） <span class="badge b-dmy">ダミー</span></div><div class="tsc"><table class="hm" id="t_cohort"></table></div><div class="note">+1M≈8%/+2M≈5%/+3M≈4%基準±乱数。ID代替集計G の受け皿。</div></div>
+ <div class="panel"><div class="pt">推定再訪率（90日以上あけて再出現） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_revisit"></canvas></div><div class="note">訪日リピート（=再来日）のproxy。観光庁実測では訪都リピーター率54.6%（セクション9）。</div></div>
+</section>
 
-<!-- ============ TAB6 滞在・単価 ============ -->
-<div class="page" id="p6">
- <div class="panel">
-  <div class="pt">継続利用月数（施設別・最大連続2ヶ月の人数） <span class="badge b-real">実データ 2026-05</span></div>
-  <div class="ch short"><canvas id="c_keizoku"></canvas></div>
-  <div class="note">サンプル集計「継続利用」より（最大連続2ヶ月パターンの上位施設）。</div>
- </div>
+<!-- ========== 8 滞在・単価 ========== -->
+<section class="sec" id="s8">
+ <div class="sech"><span class="en">STAY & SPEND</span><h2><b>8</b>滞在・単価</h2><div class="desc">ID代替集計（E 同月内利用間隔／F 購買額レンジ／J 利用日数）＋継続利用の受け皿。</div></div>
+ <div class="panel"><div class="pt">継続利用（施設別・最大連続2ヶ月の人数） <span class="badge b-real">実データ 2026-05</span></div><div class="ch short"><canvas id="c_keizoku"></canvas></div></div>
  <div class="grid g3">
-  <div class="panel">
-   <div class="pt">同月内利用間隔 <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch short"><canvas id="c_interval"></canvas></div>
-   <div class="note">同日のみ/2〜6日/7日+。集計E の受け皿（滞在期間の目安）。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">累計購買額レンジ <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch short"><canvas id="c_range"></canvas></div>
-   <div class="note">〜1万/〜5万/〜20万/20万+。集計F（高単価層の規模）。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">同月内利用日数 <span class="badge b-dmy">ダミー</span></div>
-   <div class="ch short"><canvas id="c_days"></canvas></div>
-   <div class="note">1日のみ/2〜3日/4日+。集計J の受け皿。</div>
-  </div>
+  <div class="panel"><div class="pt">同月内利用間隔 <span class="badge b-dmy">ダミー</span></div><div class="ch mini"><canvas id="c_interval"></canvas></div></div>
+  <div class="panel"><div class="pt">累計購買額レンジ <span class="badge b-dmy">ダミー</span></div><div class="ch mini"><canvas id="c_range"></canvas></div></div>
+  <div class="panel"><div class="pt">同月内利用日数 <span class="badge b-dmy">ダミー</span></div><div class="ch mini"><canvas id="c_days"></canvas></div></div>
  </div>
-</div>
+ <div class="sisa"><div class="lb">SO WHAT</div><p>「継続利用」実測で新丸ビル1,734人・丸ビル1,386人が<b>2ヶ月連続で決済</b>している——観光客では説明できない層＝<b>中間（長期滞在/反復）・居住者候補が既に固定客化している</b>証拠。設計値では中国の累計20万円超が9%：購買額レンジ×国の実数が届けば「大丸有の外国人上顧客」の定義（例: 月2回以上 or 累計20万円超）を初めて置ける。</p></div>
+</section>
 
-<!-- ============ TAB7 AI・SNS構想 ============ -->
-<div class="page" id="p7">
- <h2 class="sec">AI可視性・SNSウォッチ（グローバル）— 拡張構想デモ</h2>
+<!-- ========== 9 市場・オープンデータ ========== -->
+<section class="sec" id="s9">
+ <div class="sech"><span class="en">MARKET / OPEN DATA</span><h2><b>9</b>市場・オープンデータ</h2><div class="desc">JNTO・観光庁・東京都の一次統計と大丸有実測のクロス。市場の風向きと「捕捉率」で現在地を測る。</div></div>
+ <div class="grid g4">
+  <div class="panel kpi" title="JNTO 2025年暦年確定値"><div class="pt">訪日外客数 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">4,268<small>万人</small></div><div class="cmp up">+15.8% 過去最高</div><div class="l">2026年1-7月は2,453万人（−1.7%）</div></div>
+  <div class="panel kpi" title="観光庁 2025年暦年確報"><div class="pt">訪日消費額 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">9.45<small>兆円</small></div><div class="cmp up">+16.4% うち買物代2.55兆円</div><div class="l">1人当たり支出 22.9万円</div></div>
+  <div class="panel kpi" title="東京都産業労働局 2025年"><div class="pt">訪都外国人 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">2,865<small>万人</small></div><div class="cmp up">消費 4.55兆円（全国の約48%）</div><div class="l">「東京駅・丸の内・日本橋」訪問率 51.8%＝都内3位</div></div>
+  <div class="panel kpi" title="訪都外国人2,865万人×丸の内周辺訪問率51.8%=約1,484万人。大丸有決済者53.1万人/年→転換3.6%"><div class="pt">来訪→購買 転換 <span class="badge b-mix">実測×オープンデータ</span></div><div class="v">3.6<small>%</small></div><div class="cmp">理論来訪 約1,484万人/年</div><div class="l">決済者53.1万人/年 ÷ エリア訪問者（概算）</div></div>
+ </div>
  <div class="grid g2">
-  <div class="panel">
-   <div class="pt">AI回答でのエリア言及シェア（英語圏想定デモ） <span class="badge b-dmy">構想ダミー</span></div>
-   <div class="ch"><canvas id="c_aiShare"></canvas></div>
-   <div class="note">例：「Where to shop in Tokyo」「Tokyo luxury shopping district」等 30クエリ×5言語(英/中/韓/泰/仏)をChatGPT・Gemini・Google AI概要に毎日投げ、丸の内/大丸有 vs 銀座・表参道・新宿の言及率を実測する構想（トヨタGEOボードと同方式）。</div>
-  </div>
-  <div class="panel">
-   <div class="pt">SNS言及ウォッチ（プラットフォーム別・月間） <span class="badge b-dmy">構想ダミー</span></div>
-   <div class="ch"><canvas id="c_sns"></canvas></div>
-   <div class="note">取得可能性: YouTube(公式API・無料枠)◎ / Reddit(公式API)◎ / Instagramハッシュタグ件数(取得制限あり)△ / X(有料API)△ / 小紅書・微博(公式APIなし)×→手動定点。</div>
+  <div class="panel"><div class="pt">訪日客数 前年比（2026年1-7月・国別） <span class="badge b-open">JNTO実測</span></div><div class="ch"><canvas id="c_jnto"></canvas></div><div class="note">出典: <a href="https://www.jnto.go.jp/statistics/data/visitors-statistics/" target="_blank" rel="noopener">JNTO訪日外客統計</a>（2026年8月19日発表）。中国は訪日自粛・減便の影響。</div></div>
+  <div class="panel"><div class="pt">来訪→購買ファネル <span class="badge b-mix">実測×オープンデータ</span></div>
+  <div class="flowbox"><svg viewBox="0 0 560 260" width="100%" style="height:auto;"><defs><marker id="ar2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#5d6f8a"/></marker></defs>
+   <rect x="30" y="14" rx="7" width="500" height="42" fill="rgba(124,92,255,.18)" stroke="#7C5CFF"/>
+   <text x="280" y="32" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">訪都外国人 2,865万人/年（2025・東京都）</text>
+   <text x="280" y="48" fill="#A9B7CC" font-size="9.5" text-anchor="middle">日本全体4,268万人の67%が東京を訪れる</text>
+   <rect x="95" y="76" rx="7" width="370" height="42" fill="rgba(0,194,255,.15)" stroke="#00C2FF"/>
+   <text x="280" y="94" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">東京駅・丸の内・日本橋を訪問 約1,484万人</text>
+   <text x="280" y="110" fill="#A9B7CC" font-size="9.5" text-anchor="middle">訪問率51.8%（渋谷60.3%・銀座54.1%に次ぐ都内3位）</text>
+   <rect x="185" y="138" rx="7" width="190" height="42" fill="rgba(0,229,160,.15)" stroke="#00E5A0"/>
+   <text x="280" y="156" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">大丸有で決済 53.1万人/年</text>
+   <text x="280" y="172" fill="#00E5A0" font-size="9.5" text-anchor="middle">来訪→購買 転換 3.6%（概算）</text>
+   <rect x="222" y="200" rx="7" width="116" height="40" fill="rgba(255,176,32,.15)" stroke="#FFB020"/>
+   <text x="280" y="217" fill="#E8EEF7" font-size="11.5" font-weight="bold" text-anchor="middle">69.0億円/年</text>
+   <text x="280" y="232" fill="#FFB020" font-size="9.5" text-anchor="middle">客単価 12,977円</text>
+   <line x1="280" y1="56" x2="280" y2="74" stroke="#5d6f8a" marker-end="url(#ar2)"/>
+   <line x1="280" y1="118" x2="280" y2="136" stroke="#5d6f8a" marker-end="url(#ar2)"/>
+   <line x1="280" y1="180" x2="280" y2="198" stroke="#5d6f8a" marker-end="url(#ar2)"/>
+  </svg></div>
+  <div class="note">分母の来訪は都調査の訪問率（東京駅・丸の内・日本橋の合算圏）による概算。人流実測が入れば置換。</div></div>
+ </div>
+ <div class="panel">
+  <div class="pt">訪日客のうち何%が大丸有で決済しているか（国別） <span class="badge b-mix">実測×JNTO</span></div>
+  <div class="ch"><canvas id="c_capture"></canvas></div>
+  <div class="sisa"><div class="lb">SO WHAT</div><p><b>英・SGは訪日客の4.3%、米3.6%、仏3.3%が大丸有で決済</b>——欧米豪・SGに対しては東京駅直結×ラグジュアリー×落ち着いた街並みが既に刺さっている。一方<b>韓国0.6%・台湾0.3%・中国0.4%</b>と東アジアのボリューム市場をほぼ取りこぼしており、ここに銀座・新宿から1%奪うだけで年数億円規模が動く。訪日回復局面（7月+0.1%転換）の受け皿づくりが急務。</p></div>
+ </div>
+ <div class="grid g2">
+  <div class="panel"><div class="pt">国別「買物市場」の規模 vs 大丸有の捕捉 <span class="badge b-mix">実測×観光庁</span></div><div class="ch"><canvas id="c_shopMkt"></canvas></div><div class="note">棒=国別の訪日買物代×東京シェア48%（東京での買物市場・概算）。折れ線=大丸有の捕捉率（年換算取扱高÷同市場）。豪英加タイの買物代は消費額×全体買物比率27%で概算。</div></div>
+  <div class="panel"><div class="pt">市場ファクト（2025-2026） <span class="badge b-open">オープンデータ</span></div>
+   <div class="tsc"><table>
+    <tr><th>ファクト</th><th>数値</th></tr>
+    <tr><td>買物代の国別最大は中国</td><td class="n">7,619億円（買物代比率38%）</td></tr>
+    <tr><td>1人当たり買物代の最高はSG</td><td class="n">100,620円/人</td></tr>
+    <tr><td>2026年4-6月期 消費額首位が交代</td><td class="n">米国3,848億円が初の首位</td></tr>
+    <tr><td>1人当たり旅行支出の上位</td><td class="n">独39.2万・英39.1万・豪38.7万円</td></tr>
+    <tr><td>訪日客のカード利用率</td><td class="n">59.5%（観光庁2019・最新公的値）</td></tr>
+    <tr><td>買物場所「百貨店・デパート」利用</td><td class="n">55.6%（同上）</td></tr>
+    <tr><td>Torch Tower竣工（大丸有の次の核）</td><td class="n">2028年3月末予定・約385m</td></tr>
+   </table></div>
+   <div class="note">出典: <a href="https://www.mlit.go.jp/kankocho/content/001992584.pdf" target="_blank" rel="noopener">観光庁 2025年暦年確報</a>／<a href="https://www.mlit.go.jp/kankocho/news02_00094.html" target="_blank" rel="noopener">2026年4-6月期速報</a>／<a href="https://www.sangyo-rodo.metro.tokyo.lg.jp/toukei/tourism/tourism/r7" target="_blank" rel="noopener">東京都 行動特性調査</a>／<a href="https://tokyotorch.mec.co.jp/" target="_blank" rel="noopener">TOKYO TORCH</a></div>
   </div>
  </div>
- <div class="panel aiplan">
-  <div class="pt">実装可否の整理</div>
-  ・<b>AIウォッチ：可能（即日）。</b>トヨタGEOボードのパイプライン（クエリ→AI回答取得→言及/引用判定→日次スコア）を多言語クエリに差し替えるだけで動く。指標例：エリア出現率／同伴言及（銀座と並記される率）／引用元（marunouchi.com・公式が引かれているか）／言語別スコア。<br>
-  ・<b>SNSウォッチ：部分的に可能。</b>YouTube・Redditは公式APIで定量化できる（例：marunouchi 言及動画数・視聴数、r/JapanTravelでの言及数）。Instagram・TikTokはAPI制限が強く定点観測は近似値、小紅書は公式手段がないため手動サンプリング運用になる。<br>
-  ・<b>費用目安：</b>AIウォッチはAPI従量（規模により月数千〜数万円）、YouTube/Redditは無料枠内。ダッシュボードへは本ボードにタブ追加で統合可能。
+</section>
+<!-- ========== 10 ターゲットスコア ========== -->
+<section class="sec" id="s10">
+ <div class="sech"><span class="en">TARGET SCORING</span><h2><b>10</b>ターゲットスコア</h2><div class="desc">「どの国に投資するか」を1枚で判定する合成スコア。実測（大丸有）×オープンデータ（JNTO・観光庁）の5軸・100点満点。</div></div>
+ <div class="panel">
+  <div class="pt">スコアモデル（重みは変更可能な設計） <span class="badge b-mix">実測×オープンデータ</span></div>
+  <div class="tsc"><table>
+   <tr><th>軸</th><th>重み</th><th>使用データ</th><th>出所</th></tr>
+   <tr><td>① 現在の規模（大丸有取扱高）</td><td class="n">25点</td><td>2026-05 国別取扱高</td><td>ニコス実測</td></tr>
+   <tr><td>② 未捕捉ポテンシャル（東京買物市場−大丸有実績）</td><td class="n">25点</td><td>国別買物代×東京シェア48% − 年換算取扱高</td><td>観光庁×実測</td></tr>
+   <tr><td>③ 市場モメンタム（訪日客数 前年比）</td><td class="n">20点</td><td>2026年1-7月 国別前年比</td><td>JNTO</td></tr>
+   <tr><td>④ 大丸有での客単価</td><td class="n">15点</td><td>2026-05 取扱高÷人数</td><td>ニコス実測</td></tr>
+   <tr><td>⑤ 旅行支出力（1人当たり訪日支出）</td><td class="n">15点</td><td>2025年 国別1人当たり旅行支出</td><td>観光庁確報</td></tr>
+  </table></div>
+  <div class="note">各軸を10ヶ国内で0-1正規化（モメンタムは−56%〜+22%を0-1へ）し加重合成。豪英加タイの買物代は消費額×27%の概算値。</div>
  </div>
-</div>
+ <div class="grid g21">
+  <div class="panel"><div class="pt">国別ターゲットスコア ランキング</div><div id="scoreList"></div></div>
+  <div class="panel"><div class="pt"><label class="sl">国:</label><select id="selScore"></select> 5軸プロファイル</div><div class="ch"><canvas id="c_radar"></canvas></div></div>
+ </div>
+ <div class="sisa"><div class="lb">SO WHAT</div><p>1位<b>米国</b>——規模首位×成長+6.5%×支出力34.0万円/人で、唯一の弱点が大丸有単価11,545円。「<b>米国の単価を上げる</b>」が最小の力で最大の売上を動かすレバー（ラグジュアリー枠・体験型への誘導）。2位<b>中国</b>はポテンシャル・単価とも最大だがモメンタム最低（訪日−56.3%）＝2026年は単価維持と小紅書の種まきに徹し回復局面で刈る<b>仕込みの年</b>。3位<b>台湾</b>は成長+21.8%×買物性向32.9%なのに捕捉率0.27%と受け皿不足——繁体字の情報発信が最も費用対効果が高い。</p></div>
+</section>
+
+<!-- ========== 11 AI・検索可視性 ========== -->
+<section class="sec" id="s11">
+ <div class="sech"><span class="en">AI & SEARCH VISIBILITY</span><h2><b>11</b>AI・検索可視性</h2><div class="desc">訪日客が出発前に見る「検索・AIの回答面」で丸の内がどれだけ登場するか。2026-08-21に15クエリ106件を実測。</div></div>
+ <div class="grid g4">
+  <div class="panel kpi" title="非指名13クエリ（where to shop in Tokyo等）の上位結果タイトル/URLに丸の内が出た回数"><div class="pt">非指名クエリでの露出 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/13</small></div><div class="cmp down">銀座3・浅草3クエリに対し0</div><div class="l">丸の内が出るのは指名クエリのみ</div></div>
+  <div class="panel kpi" title="検索上位常連の定番ガイド10本の本文で、ショッピングエリアとして丸の内を掲載している本数"><div class="pt">定番ガイド10本への掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/10</small></div><div class="cmp down">銀座・原宿は9/10</div><div class="l">掲載はjapan-guide.comのみ</div></div>
+  <div class="panel kpi" title="GO TOKYO（東京都）とJNTOのショッピング特集本文"><div class="pt">公式観光メディア掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/2</small></div><div class="cmp down">GO TOKYO・JNTOとも本文に無し</div><div class="l">公式ですら「買い物の街」として語っていない</div></div>
+  <div class="panel kpi" title="marunouchi.com（Uncover Marunouchi）の出現"><div class="pt">自社サイトの出現 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/15</small></div><div class="cmp">指名クエリで2位のみ</div><div class="l">ドメイン力はある＝非指名コンテンツ不足</div></div>
+ </div>
+ <div class="grid g2">
+  <div class="panel"><div class="pt">定番ガイド10本の本文で「買い物エリア」として掲載された数 <span class="badge b-real">実測 2026-08-21</span></div><div class="ch tall"><canvas id="c_areaRank"></canvas></div><div class="note">対象: japan-guide／GO TOKYO(EN)／Truly Tokyo／Hotels.com Go Guides／JNTO中文／Hilton(韓)／Tripstore(韓)／KTC(泰)／Agoda(中)／Japan Experience(仏)。</div></div>
+  <div class="panel"><div class="pt">検索面を支配するドメイン（106件中の出現回数） <span class="badge b-real">実測 2026-08-21</span></div><div class="ch tall"><canvas id="c_domRank"></canvas></div><div class="note">hotels.com Go Guidesは同一記事群が英・韓・仏の3言語市場で上位＝<b>1記事への掲載可否が多言語の露出を桁で左右する</b>。</div></div>
+ </div>
+ <div class="panel">
+  <div class="pt">クエリ×エリア出現マトリクス（上位結果タイトル/URL） <span class="badge b-real">実測 2026-08-21・106件</span></div>
+  <div class="tsc"><table id="t_qmx"></table></div>
+ </div>
+ <div class="panel">
+  <div class="pt">AIウォッチ設計：毎日測る具体クエリ30本（5言語×6） <span class="badge b-dmy">測定設計・未稼働</span></div>
+  <div class="tsc"><table id="t_aiq"></table></div>
+  <div class="note">トヨタGEOボードと同じパイプライン（クエリ→ChatGPT・Gemini・Google AI概要の回答取得→エリア言及/引用判定→日次スコア）。指標: ①丸の内出現率 ②銀座との並記率 ③引用元にmarunouchi.com/公式が入る率 ④言語別スコア。API従量で月数千〜数万円・即日稼働可能。</div>
+ </div>
+ <div class="sisa"><div class="lb">SO WHAT — 載るための3アクション</div><p>①<b>公式2媒体（GO TOKYO・JNTO）のショッピング特集への掲載交渉</b>——DMO・行政渉外で解ける領域で、タイ語圏はGO TOKYOが検索1-2位を独占しているため即効性最大。②<b>横展開リスト記事への働きかけ</b>——hotels.com Go Guides・Time Out・MATCHA・triple.guide(韓)・乐吃购(中)。japan-guideに既に丸の内セクションがある＝素材が揃えば載る証明。③<b>Uncover Marunouchiで非指名テーマの多言語記事</b>——「Tokyo luxury shopping」「東京駅 買い物」を英・繁/簡・韓・泰で。丸の内が構造的に勝てる切り口は「銀座の隣の、静かなラグジュアリー」「東京駅直結」。</p></div>
+</section>
+
+<!-- ========== 0 読み方ガイド ========== -->
+<section class="sec" id="s0">
+ <div class="sech"><span class="en">HOW TO READ</span><h2><b>?</b>読み方ガイド</h2><div class="desc">このボードの数字の出所・定義・更新の仕組み。はじめての人はここから。</div></div>
+ <div class="grid g2">
+ <div class="panel"><div class="pt">バッジの意味</div>
+  <div style="font-size:12px;line-height:2.4;">
+  <span class="badge b-real">実データ 2026-05</span> 三菱UFJニコス提供サンプル（統計値）の実測。そのまま使用。<br>
+  <span class="badge b-open">オープンデータ</span> JNTO・観光庁・東京都など公的一次統計の実数。<br>
+  <span class="badge b-mix">実データ×ダミー配分</span> 合計は実測、内訳の配分だけ生成値（ID紐付け未受領のため）。<br>
+  <span class="badge b-dmy">ダミー</span> 受け皿デモ用の生成値（乱数シード20260521固定）。本受領後に差し替え。
+  </div></div>
+ <div class="panel"><div class="pt">主要な定義</div>
+  <dl class="gd">
+   <dt>件数 / 利用人数 / 取扱高</dt><dd>決済件数 / ユニーク人数（カードベース近似）/ 決済金額（円）。客単価=取扱高÷人数、件単価=取扱高÷件数。</dd>
+   <dt>顧客区分</dt><dd>観光客候補（短期滞在）/ 中間（長期滞在・反復利用）/ 居住者候補。ニコスがカード利用パターンから判定。</dd>
+   <dt>DCC</dt><dd>自国通貨払いサービス。現行KPIの計測基盤だが、海外発行カード決済全体の約9%しか捕捉していない。</dd>
+   <dt>捕捉率</dt><dd>大丸有の年換算取扱高 ÷（国別の訪日買物代×東京シェア48%）。「東京での買物市場のうち大丸有が取れている割合」の概算。</dd>
+  </dl></div>
+ </div>
+ <div class="panel"><div class="pt">ID代替集計10本（カードIDは受領せず、統計表で受領）</div>
+  <div class="tsc"><table>
+   <tr><th>記号</th><th>集計</th><th>本ボードの受け皿</th><th>状態</th></tr>
+   <tr><td>A</td><td>リピート率（翌月・3ヶ月内）</td><td>セクション7</td><td>相談中（イメージ値表示）</td></tr>
+   <tr><td>B</td><td>利用回数分布</td><td>セクション7</td><td>相談中</td></tr>
+   <tr><td>—</td><td>継続利用（連続月数）</td><td>セクション8</td><td class="up">サンプル受領済</td></tr>
+   <tr><td>—</td><td>買い回り（起点×併用）</td><td>セクション6</td><td class="up">サンプル受領済（全ペア化を相談中）</td></tr>
+   <tr><td>E</td><td>同月内利用間隔</td><td>セクション8</td><td>相談中</td></tr>
+   <tr><td>F</td><td>累計購買額レンジ</td><td>セクション8</td><td>相談中</td></tr>
+   <tr><td>G</td><td>コホート残存率</td><td>セクション7</td><td>相談中</td></tr>
+   <tr><td>H</td><td>推定再訪率（90日+）</td><td>セクション7</td><td>相談中</td></tr>
+   <tr><td>I</td><td>利用施設数分布</td><td>セクション6</td><td>相談中</td></tr>
+   <tr><td>J</td><td>同月内利用日数</td><td>セクション8</td><td>相談中</td></tr>
+  </table></div></div>
+ <div class="panel"><div class="pt">データ運用フロー（月次）</div>
+  <div class="flowbox"><svg viewBox="0 0 560 150" width="100%" style="height:auto;"><defs><marker id="ar3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#5d6f8a"/></marker></defs>
+   <rect x="8" y="45" rx="7" width="98" height="52" fill="#0F1B2E" stroke="#7C5CFF"/><text x="57" y="66" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">ニコス</text><text x="57" y="82" fill="#A9B7CC" font-size="9" text-anchor="middle">月次データ生成</text>
+   <rect x="122" y="45" rx="7" width="98" height="52" fill="#0F1B2E" stroke="#00C2FF"/><text x="171" y="66" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">受領・検証</text><text x="171" y="82" fill="#A9B7CC" font-size="9" text-anchor="middle">毎月＋四半期集計</text>
+   <rect x="236" y="45" rx="7" width="98" height="52" fill="#0F1B2E" stroke="#00C2FF"/><text x="285" y="66" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">本ボード更新</text><text x="285" y="82" fill="#A9B7CC" font-size="9" text-anchor="middle">DATA定数差替</text>
+   <rect x="350" y="45" rx="7" width="98" height="52" fill="#0F1B2E" stroke="#FFB020"/><text x="399" y="66" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">示唆→施策</text><text x="399" y="82" fill="#A9B7CC" font-size="9" text-anchor="middle">回遊・単価・国別</text>
+   <rect x="464" y="45" rx="7" width="90" height="52" fill="#0F1B2E" stroke="#00E5A0"/><text x="509" y="66" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">効果検証</text><text x="509" y="82" fill="#A9B7CC" font-size="9" text-anchor="middle">前後比較で判定</text>
+   <line x1="106" y1="71" x2="120" y2="71" stroke="#5d6f8a" marker-end="url(#ar3)"/>
+   <line x1="220" y1="71" x2="234" y2="71" stroke="#5d6f8a" marker-end="url(#ar3)"/>
+   <line x1="334" y1="71" x2="348" y2="71" stroke="#5d6f8a" marker-end="url(#ar3)"/>
+   <line x1="448" y1="71" x2="462" y2="71" stroke="#5d6f8a" marker-end="url(#ar3)"/>
+   <path d="M509 97 C 509 130, 171 130, 171 99" fill="none" stroke="#5d6f8a" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+   <text x="340" y="127" fill="#5d6f8a" font-size="9">検証結果を翌月の見る場所（クロスのセル）に反映</text>
+  </svg></div></div>
+ <div class="panel"><div class="pt">出典一覧（オープンデータ・実測）</div>
+  <div class="note" style="font-size:10.5px;">
+  <a href="https://www.jnto.go.jp/statistics/data/visitors-statistics/" target="_blank" rel="noopener">JNTO 訪日外客統計</a>（2025年暦年確定・2026年月次）／
+  <a href="https://www.mlit.go.jp/kankocho/content/001992584.pdf" target="_blank" rel="noopener">観光庁 インバウンド消費動向調査 2025年暦年確報</a>／
+  <a href="https://www.mlit.go.jp/kankocho/news02_00094.html" target="_blank" rel="noopener">同 2026年4-6月期1次速報</a>／
+  <a href="https://www.sangyo-rodo.metro.tokyo.lg.jp/data/tourism/jittai/2025-jittai-q4" target="_blank" rel="noopener">東京都 観光客数等実態調査 2025</a>／
+  <a href="https://www.sangyo-rodo.metro.tokyo.lg.jp/toukei/tourism/tourism/r7" target="_blank" rel="noopener">東京都 国・地域別行動特性調査 令和7年</a>／
+  <a href="https://www.mlit.go.jp/kankocho/tokei_hakusyo/content/001345781.pdf" target="_blank" rel="noopener">観光庁 2019年年次報告（決済手段）</a>／
+  <a href="https://www.mec.co.jp/news/detail/2024/01/16_mec240116_marunouchi" target="_blank" rel="noopener">三菱地所 就業人口リリース</a>／
+  <a href="https://tokyotorch.mec.co.jp/" target="_blank" rel="noopener">TOKYO TORCH（Torch Tower 2028年3月末竣工予定）</a>／
+  検索面実測: 2026-08-21 15クエリ・106件（本ボード独自）／購買実測: 三菱UFJニコス提供サンプル 2026-05（統計値）
+  </div></div>
+</section>
 
 <div class="foot">
- DAIMARUYU INBOUND BOARD ｜ データ: 三菱UFJニコス提供サンプル（2026-05実測の統計値）＋生成ダミー（乱数シード固定）。実データ受領後にDATA定数を差し替えて全ウィジェットが実数化される設計。<br>
- 顧客区分=観光客候補(短期滞在)/中間(長期滞在・反復利用)/居住者候補 ｜ KPI: 2026年度DCC売上44.3億円(商業全体の3.6%)・2030年度58億円 ｜ カードIDは受領せず、リピート・買い回り等はID代替の統計集計10本で受領。
+ DAIMARUYU INBOUND BOARD v2 ｜ 実測（ニコス2026-05統計値・JNTO/観光庁/東京都・検索面106件）＋生成ダミー（シード固定）。ダミーは本データ受領後にDATA定数の差し替えで実数化。数値の再確認は読み方ガイドの出典から一次資料へ。
 </div>
+</main>
 </div>
 <script>
-/* ================= データ（実測 2026-05 サンプル） ================= */
+/* ================= 実測データ ================= */
 const REAL = {"month":"2026-05","total":{"count":47087,"users":44285,"amount":574676997},
 "kubun":[["観光客候補(短期滞在)",36077,34250,428850175],["中間(長期滞在/反復利用)",6766,6270,89592935],["居住者候補",4244,3765,56233887]],
 "brand":[["VISA",26510,25101,321807257],["MASTER",20076,18717,234779101],["銀聯",501,467,18090639]],
 "kuni":[["アメリカ",11695,10874,125535106],["韓国",6331,6087,58946046],["台湾",2204,2120,43495917],["香港",2363,2220,41918237],["中国",1524,1437,40930482],["シンガポール",2663,2507,36397151],["オーストラリア",2187,2016,20987041],["イギリス",2173,1998,18369200],["フランス",1377,1304,13867264],["カナダ",1280,1223,13030589],["タイ",921,866,12855558],["ドイツ",1280,1204,11110268],["インドネシア",470,444,9642458],["スイス",590,561,8251512],["インド",737,687,8051219]],
 "shisetsu":[["新丸の内ビルディング",12655,11805,147826665],["丸の内ビルディング",9654,9060,101588076],["ブリックスクエア",4629,4486,48458874],["三菱ビル",3693,3465,42503215],["新大手町ビル",415,413,26094016],["有楽町電気ビル",933,928,24204835],["二重橋スクエア",807,786,23162044],["丸の内仲通りビル",373,345,20112737],["新東京ビル",1068,1008,15417649],["丸の内オアゾ",3558,3251,15142018],["新丸ビル(DCC)",877,878,14776190],["丸の内二丁目ビル",818,743,13641343]]};
 
-/* ================= 乱数（シード固定） ================= */
+/* オープンデータ（JNTO・観光庁 2025確報/2026速報） */
+const OPEN = {
+ // [2026年1-7月訪日前年比%, 1-7月累計人数, 2025年1人当たり旅行支出円, 2025年買物代総額億円(★=27%概算), 2025年1人当たり買物代円]
+ "アメリカ":[6.5,2107900,339708,2216,67236],
+ "韓国":[20.3,6569800,105058,2423,25639],
+ "台湾":[21.8,4736000,184413,3955,60079],
+ "香港":[8.6,1571000,226011,1714,68917],
+ "中国":[-56.3,2486500,246550,7619,91457],
+ "シンガポール":[10.3,407400,319901,727,100620],
+ "オーストラリア":[4.2,643100,386512,1098,null],
+ "イギリス":[6.5,328200,391320,561,null],
+ "フランス":[8.6,278000,null,null,null],
+ "カナダ":[8.1,419000,322489,595,null],
+ "タイ":[4.0,758300,205246,682,null],
+ "インドネシア":[12.1,418700,null,null,null],
+ "マレーシア":[15.5,395100,null,null,null]
+};
+const TOKYO_SHARE=0.48;
+
+/* 検索面実測 2026-08-21 */
+const AREA_PAGES=[["銀座",9],["原宿",9],["渋谷",8],["新宿",8],["秋葉原",7],["日本橋",4],["表参道",3],["浅草",3],["代官山",3],["東京駅",2],["丸の内",1],["池袋",1]];
+const DOMAINS=[["hotels.com (Go Guides)",7],["gotokyo.org (都公式)",6],["japan-guide.com",5],["tripadvisor.com",5],["JNTO (japan.travel)",4],["timeout.com",3],["agoda.com",3],["triple.guide (韓)",3],["trulytokyo.com",2],["matcha-jp.com",2]];
+const QMX=[
+ ["where to shop in Tokyo",7,[]],
+ ["best shopping districts Tokyo",9,["銀座"]],
+ ["Tokyo luxury shopping",8,["銀座","渋谷","表参道"]],
+ ["Tokyo shopping guide first time",9,[]],
+ ["best department stores Tokyo",8,["日本橋"]],
+ ["Tokyo souvenir shopping where",8,["新宿","浅草"]],
+ ["东京 购物 推荐 地方",6,["原宿","浅草"]],
+ ["东京 奢侈品 购物 哪里",6,["原宿","浅草"]],
+ ["도쿄 쇼핑 추천 지역",6,[]],
+ ["도쿄 명품 쇼핑 어디",7,[]],
+ ["ช้อปปิ้งโตเกียว ที่ไหนดี",6,[]],
+ ["où faire du shopping à Tokyo",5,[]],
+ ["東京 ショッピングエリア おすすめ 外国人",6,["銀座","新宿"]],
+ ["Marunouchi shopping worth visiting",7,["丸の内","東京駅"]],
+ ["Tokyo Station area shopping",8,["丸の内","東京駅","日本橋"]]];
+const QCOLS=["銀座","新宿","渋谷","原宿","表参道","浅草","日本橋","東京駅","丸の内"];
+const AIQ=[
+ ["英語","where to shop in Tokyo ／ best shopping districts Tokyo ／ Tokyo luxury shopping ／ best department stores Tokyo ／ Tokyo Station shopping ／ what souvenirs to buy in Tokyo"],
+ ["中国語(簡/繁)","东京购物推荐 ／ 东京奢侈品哪里买 ／ 东京站附近购物 ／ 东京百货公司推荐 ／ 東京 精品 血拼 ／ 东京伴手礼哪里买"],
+ ["韓国語","도쿄 쇼핑 추천 ／ 도쿄 명품 쇼핑 ／ 도쿄역 쇼핑 ／ 도쿄 백화점 추천 ／ 도쿄 기념품 어디서 ／ 도쿄 쇼핑 코스"],
+ ["タイ語","ช้อปปิ้งโตเกียวที่ไหนดี ／ ซื้อแบรนด์เนมโตเกียว ／ โตเกียวสเตชั่นช้อปปิ้ง ／ ห้างโตเกียวแนะนำ ／ ของฝากโตเกียว ／ ย่านช้อปปิ้งโตเกียว"],
+ ["フランス語","où faire du shopping à Tokyo ／ quartiers shopping Tokyo ／ Tokyo shopping luxe ／ grands magasins Tokyo ／ shopping gare de Tokyo ／ souvenirs à acheter à Tokyo"]];
+
+/* ================= 乱数・整形 ================= */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
-const rnd = mulberry32(20260521);
-const R = (lo,hi)=>lo+(hi-lo)*rnd();
+const rnd=mulberry32(20260521);
+const R=(lo,hi)=>lo+(hi-lo)*rnd();
+const cm=n=>Math.round(n).toLocaleString('ja-JP');
+function yen(n){if(n>=1e8)return (n/1e8).toFixed(2)+'億円';if(n>=1e4)return cm(n/1e4)+'万円';return cm(n)+'円';}
+const pct=(n,d=1)=>n.toFixed(d)+'%';
 
-/* ================= 整形 ================= */
-const cm = n=>Math.round(n).toLocaleString('ja-JP');
-function yen(n){ // 億円/万円表記
- if(n>=1e8) return (n/1e8).toFixed(2)+'億円';
- if(n>=1e4) return cm(n/1e4)+'万円';
- return cm(n)+'円';
-}
-const pct = (n,d=1)=>n.toFixed(d)+'%';
-
-/* ================= 月次24ヶ月生成 ================= */
+/* ================= 月次生成 ================= */
 const MONTHS=[];{let y=2024,m=9;for(let i=0;i<24;i++){MONTHS.push(y+'-'+String(m).padStart(2,'0'));m++;if(m>12){m=1;y++;}}}
 const seas={1:1.0,2:0.85,3:1.25,4:1.25,5:1.0,6:0.9,7:1.0,8:1.0,9:1.0,10:1.1,11:1.2,12:1.0};
 function fy(ym){const[y,m]=ym.split('-').map(Number);return m>=4?y:y-1;}
 const yf={2024:1.0,2025:1.18,2026:1.2744};
-const BASE = REAL.total.amount/1.2744; // 2026-05(季節1.0)から逆算
-const M_AMT={}, M_USERS={};
-MONTHS.forEach(ym=>{
- const m=Number(ym.split('-')[1]);
- let a = BASE*yf[fy(ym)]*seas[m]*R(0.95,1.05);
- if(ym==='2026-05') a=REAL.total.amount;
+const BASE=REAL.total.amount/1.2744;
+const M_AMT={},M_USERS={};
+MONTHS.forEach(ym=>{const m=Number(ym.split('-')[1]);
+ let a=BASE*yf[fy(ym)]*seas[m]*R(0.95,1.05);
+ if(ym==='2026-05')a=REAL.total.amount;
  M_AMT[ym]=a;
- let unit = 12980*R(0.96,1.04);
- M_USERS[ym]= ym==='2026-05'? REAL.total.users : Math.round(a/unit);
-});
-/* 前年同月比 */
-const YOY = MONTHS.map((ym,i)=>{
- if(i<12) return null;
- return (M_AMT[ym]/M_AMT[MONTHS[i-12]]-1)*100;
-});
+ M_USERS[ym]=ym==='2026-05'?REAL.total.users:Math.round(a/(12980*R(0.96,1.04)));});
+const YOY=MONTHS.map((ym,i)=>i<12?null:(M_AMT[ym]/M_AMT[MONTHS[i-12]]-1)*100);
 
-/* ================= Chart.js 既定 ================= */
+/* ================= Chart既定 ================= */
 Chart.defaults.font.family="'BIZ UDGothic',Meiryo,sans-serif";
 Chart.defaults.font.size=11;
 Chart.defaults.color='#A9B7CC';
@@ -300,223 +582,318 @@ Chart.defaults.plugins.legend.labels.boxWidth=10;
 Chart.defaults.plugins.legend.labels.boxHeight=10;
 Chart.defaults.maintainAspectRatio=false;
 const C1='#00C2FF',C2='#7C5CFF',C3='#00E5A0',C4='#FFB020',C5='#FF5C7A',C6='#8FA3BF';
-const SERIES=[C1,C2,C3,C4,C5,C6];
-const gridY={grid:{color:'#22334E'},beginAtZero:true};
+const SER=[C1,C2,C3,C4,C5,C6];
+const gY={grid:{color:'#22334E'},beginAtZero:true};
 
-/* ================= TAB1 ================= */
-const t=REAL.total;
-document.getElementById('k1').innerHTML=(t.amount/1e8).toFixed(2)+'<small>億円</small>';
-const prev=M_AMT['2026-04'];
-const mom=(t.amount/prev-1)*100;
-document.getElementById('k1c').innerHTML=(mom>=0?'<span class="up">▲ +':'<span class="down">▼ ')+Math.abs(mom).toFixed(1)+'%</span> <span style="color:var(--sub);font-weight:400;">前月比(前月はダミー)</span>';
-document.getElementById('k2').innerHTML=cm(t.users)+'<small>人</small>';
-document.getElementById('k2c').innerHTML='<span style="color:var(--sub);font-weight:400;">1人あたり '+(t.count/t.users).toFixed(2)+'件</span>';
-document.getElementById('k3').innerHTML=cm(Math.round(t.amount/t.users))+'<small>円</small>';
-document.getElementById('k3c').innerHTML='<span style="color:var(--sub);font-weight:400;">件単価 '+cm(Math.round(t.amount/t.count))+'円</span>';
-
-new Chart(c_month,{data:{labels:MONTHS,datasets:[
- {type:'bar',label:'取扱高',data:MONTHS.map(m=>M_AMT[m]/1e8),backgroundColor:MONTHS.map(m=>m==='2026-05'?C3:C1+'CC'),borderRadius:3,yAxisID:'y'},
- {type:'line',label:'前年同月比',data:YOY,borderColor:C4,backgroundColor:C4,yAxisID:'y2',spanGaps:false,pointRadius:2,borderWidth:2,tension:.3}
-]},options:{scales:{
- y:{...gridY,title:{display:true,text:'億円'}},
- y2:{position:'right',grid:{display:false},title:{display:true,text:'前年比%'},ticks:{callback:v=>'+'+v+'%'}},
- x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:24}}},
- plugins:{tooltip:{callbacks:{label:c=>c.dataset.type==='line'? '前年同月比 +'+c.parsed.y.toFixed(1)+'%' : '取扱高 '+yen(c.parsed.y*1e8)+(c.label==='2026-05'?'（実測）':'（ダミー）')}},legend:{position:'bottom'}}}});
-
-/* 顧客区分推移 */
-const kbBase=REAL.kubun.map(k=>k[3]/t.amount);
-const kbSeries=[[],[],[]];
-MONTHS.forEach(ym=>{
- let s0=kbBase[0]+R(-0.02,0.02), s1=kbBase[1]+R(-0.012,0.012);
- if(ym==='2026-05'){s0=kbBase[0];s1=kbBase[1];}
- const s2=1-s0-s1;
- kbSeries[0].push(s0*100);kbSeries[1].push(s1*100);kbSeries[2].push(s2*100);
-});
-new Chart(c_kubun,{type:'bar',data:{labels:MONTHS,datasets:[
- {label:'観光客候補',data:kbSeries[0],backgroundColor:C1},
- {label:'中間(長期滞在)',data:kbSeries[1],backgroundColor:C2},
- {label:'居住者候補',data:kbSeries[2],backgroundColor:C6}
-]},options:{scales:{x:{stacked:true,grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}},y:{...gridY,stacked:true,max:100,ticks:{callback:v=>v+'%'}}},
- plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y.toFixed(1)+'%'}},legend:{position:'bottom'}}}});
-
-/* 日別60日 + 土日帯 */
-const DAYS=[],DAMT=[];
-{const end=new Date(2026,7,20);// 2026-08-20
- for(let i=59;i>=0;i--){const d=new Date(end);d.setDate(end.getDate()-i);DAYS.push(d);}
- const dowC={0:1.25,1:0.9,2:0.9,3:0.9,4:0.9,5:1.1,6:1.35};
- DAYS.forEach(d=>{const ym=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-  DAMT.push(M_AMT[ym]/30*dowC[d.getDay()]*R(0.9,1.1));});}
-const wkndPlugin={id:'wknd',beforeDraw(ch){const{ctx,chartArea:ar,scales:{x}}=ch;if(!ar)return;ctx.save();ctx.fillStyle='rgba(140,163,191,0.10)';
- DAYS.forEach((d,i)=>{if(d.getDay()===0||d.getDay()===6){const c=x.getPixelForValue(i);const w=(ar.right-ar.left)/DAYS.length;ctx.fillRect(c-w/2,ar.top,w,ar.bottom-ar.top);}});ctx.restore();}};
-new Chart(c_daily,{type:'line',data:{labels:DAYS.map(d=>(d.getMonth()+1)+'/'+d.getDate()),datasets:[{label:'日別取扱高',data:DAMT.map(v=>v/1e6),borderColor:C1,backgroundColor:'rgba(0,194,255,.15)',fill:true,pointRadius:0,borderWidth:2,tension:.35}]},
- options:{scales:{y:{...gridY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}},plugins:[wkndPlugin]});
-
-/* ================= TAB2 国別 ================= */
-new Chart(c_kuni,{type:'bar',data:{labels:REAL.kuni.map(k=>k[0]),datasets:[{label:'取扱高',data:REAL.kuni.map(k=>k[3]/1e6),backgroundColor:C1,borderRadius:3}]},
- options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.dataIndex];return ['取扱高 '+yen(k[3])+'（構成比 '+pct(k[3]/REAL.total.amount*100)+'）','利用人数 '+cm(k[2])+'人 / 客単価 '+cm(Math.round(k[3]/k[2]))+'円'];}}}}}});
-
-/* 国セレクタ月次 */
-const sel=document.getElementById('selKuni');
-REAL.kuni.forEach((k,i)=>{const o=document.createElement('option');o.value=i;o.textContent=k[0];sel.appendChild(o);});
-const kuniSeed={}; REAL.kuni.forEach(k=>{kuniSeed[k[0]]=MONTHS.map(ym=>{
- const m=Number(ym.split('-')[1]);
- let v=M_AMT[ym]*(k[3]/REAL.total.amount)*R(0.92,1.08);
- if(k[0]==='中国'&&m===2)v*=1.4;
- return v;});});
-let chTrend=null,chKubun=null;
-function drawKuni(i){
- const k=REAL.kuni[i];
- if(chTrend)chTrend.destroy();
- chTrend=new Chart(c_kuniTrend,{type:'bar',data:{labels:MONTHS,datasets:[{label:k[0],data:kuniSeed[k[0]].map(v=>v/1e6),backgroundColor:C2,borderRadius:2}]},
-  options:{scales:{y:{...gridY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}}},
-  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}}});
- /* 顧客区分内訳: 国特性で微調整 */
- const tourist=({'アメリカ':.82,'韓国':.78,'台湾':.80,'香港':.77,'中国':.75,'シンガポール':.76,'オーストラリア':.83,'イギリス':.81,'フランス':.82,'カナダ':.82,'タイ':.74,'ドイツ':.80,'インドネシア':.72,'スイス':.81,'インド':.70})[k[0]]||.76;
- const mid=(1-tourist)*.62, res=1-tourist-mid;
- if(chKubun)chKubun.destroy();
- chKubun=new Chart(c_kuniKubun,{type:'doughnut',data:{labels:['観光客候補','中間(長期滞在)','居住者候補'],datasets:[{data:[tourist*100,mid*100,res*100],backgroundColor:[C1,C2,C6],borderColor:'#16263D',borderWidth:2}]},
-  options:{plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+' '+c.parsed.toFixed(1)+'%（推定）'}}},cutout:'55%'}});
-}
-sel.addEventListener('change',e=>drawKuni(Number(e.target.value)));
-drawKuni(0);
-
-/* 散布図 */
-new Chart(c_scatter,{type:'bubble',data:{datasets:REAL.kuni.map((k,i)=>({label:k[0],
- data:[{x:k[2],y:Math.round(k[3]/k[2]),r:Math.sqrt(k[3]/1e6)*1.35}],backgroundColor:SERIES[i%6]+'B3',borderColor:SERIES[i%6]}))},
- options:{scales:{x:{...gridY,title:{display:true,text:'利用人数（人）'}},y:{...gridY,title:{display:true,text:'客単価（円）'}}},
- plugins:{legend:{position:'bottom',labels:{boxWidth:8}},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.datasetIndex];return k[0]+'：人数 '+cm(k[2])+'人 / 単価 '+cm(Math.round(k[3]/k[2]))+'円 / 取扱高 '+yen(k[3]);}}}}}});
-
-/* ================= TAB3 施設 ================= */
-new Chart(c_shisetsu,{type:'bar',data:{labels:REAL.shisetsu.map(s=>s[0]),datasets:[{data:REAL.shisetsu.map(s=>s[3]/1e6),backgroundColor:REAL.shisetsu.map(s=>(s[0]==='新大手町ビル'||s[0]==='丸の内仲通りビル')?C4:C1),borderRadius:3}]},
- options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const s=REAL.shisetsu[c.dataIndex];return ['取扱高 '+yen(s[3])+'（構成比 '+pct(s[3]/REAL.total.amount*100)+'）','件数 '+cm(s[1])+'件 / 件単価 '+cm(Math.round(s[3]/s[1]))+'円'];}}}}}});
-
-/* ヒートマップ */
-{const kuni6=REAL.kuni.slice(0,6);
- const tbl=document.getElementById('t_heat');
- let html='<tr><th>施設＼国</th>'+kuni6.map(k=>'<th style="text-align:right;">'+k[0]+'</th>').join('')+'</tr>';
- const cells=[];
- REAL.shisetsu.forEach(s=>{
-  const row=kuni6.map(k=> s[3]*(k[3]/REAL.total.amount)*R(0.8,1.2));
-  const rs=row.reduce((a,b)=>a+b,0);
-  cells.push(row.map(v=>v/rs*s[3])); // 正規化して行合計=施設実測
- });
- const flat=cells.flat(); const mx=Math.max(...flat);
- REAL.shisetsu.forEach((s,ri)=>{
-  html+='<tr><td>'+s[0]+'</td>'+cells[ri].map(v=>{
-   const al=Math.min(0.85,v/mx*0.85+0.04);
-   return '<td style="background:rgba(0,194,255,'+al.toFixed(2)+');">'+cm(v/1e4)+'</td>';
-  }).join('')+'</tr>';
- });
- tbl.innerHTML=html;}
-
-/* ================= TAB4 買い回り ================= */
-{const tbl=document.getElementById('t_pair');
- let rows=[
-  ['ADRIFT by David Myers(二重橋)','エシレ・メゾン デュ ブール',141,2,'1.42%','real'],
-  ['ADRIFT by David Myers(二重橋)','スターバックス新東京ビル',141,2,'1.42%','real'],
-  ['ADRIFT by David Myers(二重橋)','HOUSE OF DIOR',141,2,'1.42%','real']];
- const org=['新丸ビル・物販A','新丸ビル・飲食B','丸ビル・物販C','丸ビル・飲食D','ブリックスクエア・物販E','二重橋スクエア・飲食F','三菱ビル・物販G','オアゾ・物販H','新東京ビル・飲食I','丸の内仲通り・物販J'];
- const dst=['丸ビル・カフェK','新丸ビル・物販L','ブリックスクエア・雑貨M','丸の内仲通り・アパレルN','オアゾ・書店O','二重橋スクエア・物販P','有楽町電気ビル・飲食Q','三菱ビル・カフェR'];
- for(let i=0;i<20;i++){
-  const a=org[Math.floor(rnd()*org.length)], b=dst[Math.floor(rnd()*dst.length)];
-  const base=Math.round(R(60,900)); const g=Math.max(1,Math.round(base*R(0.008,0.05)));
-  rows.push([a,b,base,g,(g/base*100).toFixed(2)+'%','dmy']);
- }
- tbl.innerHTML='<tr><th>起点店舗</th><th>併用先</th><th style="text-align:right;">起点人数</th><th style="text-align:right;">併用人数</th><th style="text-align:right;">併用率</th><th></th></tr>'+
-  rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="n">'+cm(r[2])+'</td><td class="n">'+cm(r[3])+'</td><td class="n">'+r[4]+'</td><td>'+(r[5]==='real'?'<span class="badge b-real">実</span>':'<span class="badge b-dmy">ダ</span>')+'</td></tr>').join('');}
-
-/* SVGフロー */
-{const svg=document.getElementById('svgFlow');
- const flows=[['ブリックスクエア',68],['新東京ビル',44],['新国際ビル',39],['丸ビル',31]];
- const mx=Math.max(...flows.map(f=>f[1]));
- let s='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#00C2FF"/></marker></defs>';
- s+='<rect x="14" y="118" rx="9" width="150" height="56" fill="#0F1B2E" stroke="#00C2FF" stroke-width="1.5"/><text x="89" y="142" fill="#E8EEF7" font-size="13" font-weight="bold" text-anchor="middle">二重橋スクエア</text><text x="89" y="161" fill="#A9B7CC" font-size="10" text-anchor="middle">起点 786人(実測)</text>';
- flows.forEach((f,i)=>{
-  const y=40+i*70; const w=1.5+f[1]/mx*9;
-  s+='<path d="M164 146 C 300 146, 300 '+(y+26)+', 388 '+(y+26)+'" fill="none" stroke="#00C2FF" stroke-opacity="0.75" stroke-width="'+w.toFixed(1)+'" marker-end="url(#ah)"/>';
-  s+='<rect x="392" y="'+y+'" rx="8" width="152" height="52" fill="#0F1B2E" stroke="#22334E"/><text x="468" y="'+(y+22)+'" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">'+f[0]+'</text><text x="468" y="'+(y+40)+'" fill="#FFB020" font-size="10" text-anchor="middle">併用 '+f[1]+'人(ダミー)</text>';
- });
- svg.innerHTML=s;}
-
-/* 利用施設数分布 */
-function stack100(el,labels,names,data,colors){
- return new Chart(el,{type:'bar',data:{labels:labels,datasets:names.map((n,i)=>({label:n,data:data.map(d=>d[i]),backgroundColor:colors[i]}))},
- options:{indexAxis:'y',scales:{x:{...gridY,stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true,grid:{display:false}}},
- plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.x+'%（ダミー）'}}}}});}
-stack100(c_facN,['アメリカ','中国','韓国','香港','シンガポール'],['1施設','2施設','3施設+'],
- [[83,12,5],[71,19,10],[76,16,8],[74,18,8],[78,15,7]],[C1,C2,C4]);
-
-/* ================= TAB5 リピート・定着 ================= */
-{const nations=['アメリカ','韓国','台湾','香港','中国','シンガポール'];
- const rep=[[5.8,8.9],[12.4,18.2],[9.1,14.0],[8.2,12.6],[6.9,10.8],[7.6,11.9]];
- new Chart(c_repeat,{type:'bar',data:{labels:nations,datasets:[
-  {label:'翌月再利用率',data:rep.map(r=>r[0]),backgroundColor:C1,borderRadius:3},
-  {label:'3ヶ月以内再利用率',data:rep.map(r=>r[1]),backgroundColor:C2,borderRadius:3}]},
-  options:{scales:{y:{...gridY,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
-  plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y+'%（ダミー）'}}}}});
- const cards=[10874,6087,2120,2220,1437,2507];
- document.getElementById('t_repeat').innerHTML='<tr><th>国</th><th style="text-align:right;">当月カード数</th><th style="text-align:right;">翌月再利用</th><th style="text-align:right;">3ヶ月内</th></tr>'+
-  nations.map((n,i)=>'<tr><td>'+n+'</td><td class="n">'+cm(cards[i])+'</td><td class="n">'+rep[i][0]+'%</td><td class="n">'+rep[i][1]+'%</td></tr>').join('');}
-
-stack100(c_freq,['アメリカ','韓国','シンガポール','台湾','香港'],['1回','2回','3〜5回','6回+'],
- [[81,12,5,2],[66,18,11,5],[74,15,8,3],[70,17,9,4],[72,16,8,4]],[C1,C2,C4,C5]);
-
-/* コホート */
-{const tbl=document.getElementById('t_cohort');
- const rows=MONTHS.slice(0,23);
- let html='<tr><th>初回利用月</th><th style="text-align:right;">カード数</th><th style="text-align:right;">+1ヶ月</th><th style="text-align:right;">+2ヶ月</th><th style="text-align:right;">+3ヶ月</th></tr>';
- rows.forEach((ym,ri)=>{
-  const n=Math.round(M_USERS[ym]*R(0.58,0.68));
-  const base=[8,5,4];
-  html+='<tr><td>'+ym+'</td><td class="n">'+cm(n)+'</td>';
-  base.forEach((b,k)=>{
-   if(ri+k+1>=24){html+='<td class="n" style="color:#3d4f6b;">—</td>';return;}
-   const v=b*R(0.8,1.25);
-   const al=Math.min(0.8,v/10*0.8+0.03);
-   html+='<td class="n" style="background:rgba(124,92,255,'+al.toFixed(2)+');">'+v.toFixed(1)+'%</td>';
-  });
-  html+='</tr>';
- });
- tbl.innerHTML=html;}
-
-new Chart(c_revisit,{type:'bar',data:{labels:['韓国','香港','台湾','シンガポール','中国','アメリカ','オーストラリア'],datasets:[{data:[9.8,7.1,6.4,5.9,5.2,4.2,3.6],backgroundColor:C3,borderRadius:3}]},
- options:{indexAxis:'y',scales:{x:{...gridY,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'推定再訪率 '+c.parsed.x+'%（90日以上あけて再出現・ダミー）'}}}}});
-
-/* ================= TAB6 滞在・単価 ================= */
-new Chart(c_keizoku,{type:'bar',data:{labels:['新丸の内ビルディング','丸の内ビルディング','ブリックスクエア','丸の内オアゾ','三菱ビル'],datasets:[{data:[1734,1386,747,534,466],backgroundColor:C1,borderRadius:3}]},
- options:{indexAxis:'y',scales:{x:{...gridY,title:{display:true,text:'人'}},y:{grid:{display:false}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'最大連続2ヶ月利用 '+cm(c.parsed.x)+'人（実測）'}}}}});
-
-stack100(c_interval,['アメリカ','オーストラリア','中国','韓国'],['同日のみ','2〜6日','7日+'],
- [[58,31,11],[49,36,15],[62,29,9],[55,32,13]],[C1,C2,C4]);
-stack100(c_range,['アメリカ','中国','香港','台湾'],['〜1万','〜5万','〜20万','20万+'],
- [[52,33,12,3],[38,34,19,9],[41,35,17,7],[44,34,16,6]],[C6,C1,C2,C5]);
-stack100(c_days,['アメリカ','シンガポール','台湾','韓国'],['1日のみ','2〜3日','4日+'],
- [[72,22,6],[64,27,9],[68,25,7],[61,29,10]],[C1,C2,C4]);
-
-/* ================= TAB7 AI・SNS構想 ================= */
-new Chart(c_aiShare,{type:'bar',data:{labels:['丸の内・大丸有','銀座','表参道・青山','新宿','渋谷'],datasets:[
- {label:'英語',data:[34,78,52,61,58],backgroundColor:C1},
- {label:'中国語(簡体)',data:[22,84,41,66,49],backgroundColor:C5},
- {label:'韓国語',data:[27,71,48,63,72],backgroundColor:C2}]},
- options:{scales:{y:{...gridY,max:100,ticks:{callback:v=>v+'%'},title:{display:true,text:'AI回答での言及率(想定)'}},x:{grid:{display:false}}},
- plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y+'%（構想ダミー）'}}}}});
-new Chart(c_sns,{type:'bar',data:{labels:['YouTube','Reddit','Instagram','TikTok','小紅書'],datasets:[
- {label:'月間言及(件)',data:[420,180,2600,930,510],backgroundColor:[C3,C3,C4,C4,C5],borderRadius:3}]},
- options:{scales:{y:{...gridY},x:{grid:{display:false}}},
- plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'月間言及 '+cm(c.parsed.y)+'件（構想ダミー）。緑=API取得可 / 黄=制限あり / 赤=公式API無'}}}}});
-
-/* ================= タブ切替 ================= */
-document.getElementById('tabs').addEventListener('click',e=>{
- const b=e.target.closest('.tab'); if(!b)return;
- document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
- document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p));
+/* ================= ナビ ================= */
+const menu=document.getElementById('menu');
+menu.addEventListener('click',e=>{
+ const b=e.target.closest('.mi');if(!b)return;
+ document.querySelectorAll('.mi').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.sec').forEach(p=>p.classList.toggle('on',p.id===b.dataset.s));
+ menu.classList.remove('open');document.getElementById('mask').classList.remove('on');
+ window.scrollTo(0,0);
  window.dispatchEvent(new Event('resize'));
 });
+document.getElementById('burger').addEventListener('click',()=>{menu.classList.toggle('open');document.getElementById('mask').classList.toggle('on',menu.classList.contains('open'));});
+document.getElementById('mask').addEventListener('click',()=>{menu.classList.remove('open');document.getElementById('mask').classList.remove('on');});
+
+/* ================= S1 概要スナップ ================= */
+new Chart(c_snap,{type:'bar',data:{labels:['新丸ビル','丸ビル','ブリック','三菱ビル','その他8施設'],datasets:[
+ {label:'施設構成',data:[25.7,17.7,8.4,7.4,40.8],backgroundColor:[C1,C1,C2,C2,C6]}]},
+ options:{indexAxis:'y',scales:{x:{...gY,max:45,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高構成比 '+c.parsed.x+'%（実測）'}}}}});
+
+/* ================= S2 KPI月次 ================= */
+new Chart(c_month,{data:{labels:MONTHS,datasets:[
+ {type:'bar',label:'取扱高',data:MONTHS.map(m=>M_AMT[m]/1e8),backgroundColor:MONTHS.map(m=>m==='2026-05'?C3:C1+'CC'),borderRadius:3,yAxisID:'y'},
+ {type:'line',label:'前年同月比',data:YOY,borderColor:C4,backgroundColor:C4,yAxisID:'y2',spanGaps:false,pointRadius:2,borderWidth:2,tension:.3}]},
+ options:{scales:{y:{...gY,title:{display:true,text:'億円'}},y2:{position:'right',grid:{display:false},ticks:{callback:v=>'+'+v+'%'}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:24}}},
+ plugins:{tooltip:{callbacks:{label:c=>c.dataset.type==='line'?'前年同月比 +'+c.parsed.y.toFixed(1)+'%':'取扱高 '+yen(c.parsed.y*1e8)+(c.label==='2026-05'?'（実測）':'（ダミー）')}},legend:{position:'bottom'}}}});
+const kbBase=REAL.kubun.map(k=>k[3]/REAL.total.amount);
+const kbS=[[],[],[]];
+MONTHS.forEach(ym=>{let s0=kbBase[0]+R(-0.02,0.02),s1=kbBase[1]+R(-0.012,0.012);
+ if(ym==='2026-05'){s0=kbBase[0];s1=kbBase[1];}
+ kbS[0].push(s0*100);kbS[1].push(s1*100);kbS[2].push((1-s0-s1)*100);});
+new Chart(c_kubun,{type:'bar',data:{labels:MONTHS,datasets:[
+ {label:'観光客候補',data:kbS[0],backgroundColor:C1},{label:'中間(長期滞在)',data:kbS[1],backgroundColor:C2},{label:'居住者候補',data:kbS[2],backgroundColor:C6}]},
+ options:{scales:{x:{stacked:true,grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}},y:{...gY,stacked:true,max:100,ticks:{callback:v=>v+'%'}}},
+ plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y.toFixed(1)+'%'}},legend:{position:'bottom'}}}});
+const DAYS=[],DAMT=[];
+{const end=new Date(2026,7,20);for(let i=59;i>=0;i--){const d=new Date(end);d.setDate(end.getDate()-i);DAYS.push(d);}
+ const dc={0:1.25,1:0.9,2:0.9,3:0.9,4:0.9,5:1.1,6:1.35};
+ DAYS.forEach(d=>{const ym=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');DAMT.push(M_AMT[ym]/30*dc[d.getDay()]*R(0.9,1.1));});}
+const wknd={id:'wknd',beforeDraw(ch){const{ctx,chartArea:ar,scales:{x}}=ch;if(!ar)return;ctx.save();ctx.fillStyle='rgba(140,163,191,0.10)';
+ DAYS.forEach((d,i)=>{if(d.getDay()===0||d.getDay()===6){const c=x.getPixelForValue(i);const w=(ar.right-ar.left)/DAYS.length;ctx.fillRect(c-w/2,ar.top,w,ar.bottom-ar.top);}});ctx.restore();}};
+new Chart(c_daily,{type:'line',data:{labels:DAYS.map(d=>(d.getMonth()+1)+'/'+d.getDate()),datasets:[{data:DAMT.map(v=>v/1e6),borderColor:C1,backgroundColor:'rgba(0,194,255,.15)',fill:true,pointRadius:0,borderWidth:2,tension:.35}]},
+ options:{scales:{y:{...gY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}},plugins:[wknd]});
+{const dow=['日','月','火','水','木','金','土'];const sums=[0,0,0,0,0,0,0],cnts=[0,0,0,0,0,0,0];
+ DAYS.forEach((d,i)=>{sums[d.getDay()]+=DAMT[i];cnts[d.getDay()]++;});
+ new Chart(c_dow,{type:'bar',data:{labels:dow,datasets:[{data:sums.map((s,i)=>s/cnts[i]/1e6),backgroundColor:dow.map((_,i)=>i===0||i===6?C4:C1),borderRadius:3}]},
+ options:{scales:{y:{...gY,title:{display:true,text:'百万円/日'}},x:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'平均 '+yen(c.parsed.y*1e6)+'/日（ダミー）'}}}}});}
+new Chart(c_brand,{type:'bar',data:{labels:REAL.brand.map(b=>b[0]),datasets:[
+ {label:'取扱高構成比',data:REAL.brand.map(b=>b[3]/REAL.total.amount*100),backgroundColor:C1,borderRadius:3},
+ {label:'件単価(千円)',data:REAL.brand.map(b=>b[3]/b[1]/1000),backgroundColor:C4,borderRadius:3}]},
+ options:{scales:{y:{...gY},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'},
+ tooltip:{callbacks:{label:c=>{const b=REAL.brand[c.dataIndex];return c.datasetIndex===0?'取扱高 '+yen(b[3])+'（'+pct(b[3]/REAL.total.amount*100)+'）':'件単価 '+cm(b[3]/b[1])+'円／件数 '+cm(b[1])+'件';}}}}}});
+
+/* ================= S3 国別 ================= */
+new Chart(c_kuni,{type:'bar',data:{labels:REAL.kuni.map(k=>k[0]),datasets:[{data:REAL.kuni.map(k=>k[3]/1e6),backgroundColor:C1,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.dataIndex];return ['取扱高 '+yen(k[3])+'（'+pct(k[3]/REAL.total.amount*100)+'）','人数 '+cm(k[2])+'人／客単価 '+cm(k[3]/k[2])+'円'];}}}}}});
+{const t10=[...REAL.kuni].sort((a,b)=>b[3]/b[2]-a[3]/a[2]).slice(0,10);
+ new Chart(c_kuniTanka,{type:'bar',data:{labels:t10.map(k=>k[0]),datasets:[{data:t10.map(k=>Math.round(k[3]/k[2])),backgroundColor:t10.map(k=>k[3]/k[2]>REAL.total.amount/REAL.total.users?C4:C6),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:'円/人'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'客単価 '+cm(c.parsed.x)+'円（全体平均12,977円）'}}}}});}
+const selK=document.getElementById('selKuni');
+REAL.kuni.forEach((k,i)=>{const o=document.createElement('option');o.value=i;o.textContent=k[0];selK.appendChild(o);});
+const kuniSeed={};REAL.kuni.forEach(k=>{kuniSeed[k[0]]=MONTHS.map(ym=>{const m=Number(ym.split('-')[1]);let v=M_AMT[ym]*(k[3]/REAL.total.amount)*R(0.92,1.08);if(k[0]==='中国'&&m===2)v*=1.4;return v;});});
+let chT=null;
+function drawKuni(i){
+ const k=REAL.kuni[i];
+ if(chT)chT.destroy();
+ chT=new Chart(c_kuniTrend,{type:'bar',data:{labels:MONTHS,datasets:[{data:kuniSeed[k[0]].map(v=>v/1e6),backgroundColor:C2,borderRadius:2}]},
+  options:{scales:{y:{...gY,title:{display:true,text:'百万円'}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:true,maxTicksLimit:12}}},
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'取扱高 '+yen(c.parsed.y*1e6)+'（ダミー）'}}}}});
+ const od=OPEN[k[0]];
+ const tanka=k[3]/k[2];
+ let html='<table>';
+ html+='<tr><th colspan="2">'+k[0]+'（実測 2026-05 × オープンデータ）</th></tr>';
+ html+='<tr><td>大丸有 取扱高</td><td class="n">'+yen(k[3])+'（構成比 '+pct(k[3]/REAL.total.amount*100)+'）</td></tr>';
+ html+='<tr><td>大丸有 利用人数／客単価</td><td class="n">'+cm(k[2])+'人／'+cm(tanka)+'円</td></tr>';
+ if(od){
+  html+='<tr><td>訪日客数 2026年1-7月 前年比</td><td class="n '+(od[0]>=0?'up':'down')+'">'+(od[0]>=0?'+':'')+od[0]+'%（JNTO）</td></tr>';
+  html+='<tr><td>訪日客 月平均（2026年）</td><td class="n">'+cm(od[1]/7)+'人/月</td></tr>';
+  html+='<tr><td>大丸有 決済者率（対訪日客）</td><td class="n hot">'+pct(k[2]/(od[1]/7)*100,2)+'</td></tr>';
+  if(od[2])html+='<tr><td>訪日1人当たり旅行支出(2025)</td><td class="n">'+cm(od[2])+'円</td></tr>';
+  if(od[4])html+='<tr><td>1人当たり買物代(2025)</td><td class="n">'+cm(od[4])+'円</td></tr>';
+  if(od[3])html+='<tr><td>大丸有の買物市場捕捉率（東京圏）</td><td class="n hot">'+pct(k[3]*12/(od[3]*TOKYO_SHARE*1e8)*100,2)+'</td></tr>';
+ }else{html+='<tr><td colspan="2" style="color:var(--dim);">オープンデータ未整備の市場</td></tr>';}
+ html+='</table>';
+ document.getElementById('kuniProf').innerHTML=html;
+}
+selK.addEventListener('change',e=>drawKuni(Number(e.target.value)));
+new Chart(c_scatter,{type:'bubble',data:{datasets:REAL.kuni.map((k,i)=>({label:k[0],data:[{x:k[2],y:Math.round(k[3]/k[2]),r:Math.sqrt(k[3]/1e6)*1.35}],backgroundColor:SER[i%6]+'B3',borderColor:SER[i%6]}))},
+ options:{scales:{x:{...gY,title:{display:true,text:'利用人数（人）'}},y:{...gY,title:{display:true,text:'客単価（円）'}}},
+ plugins:{legend:{position:'bottom',labels:{boxWidth:8}},tooltip:{callbacks:{label:c=>{const k=REAL.kuni[c.datasetIndex];return k[0]+'：'+cm(k[2])+'人／'+cm(k[3]/k[2])+'円／'+yen(k[3]);}}}}}});
+
+/* ================= S4 クロス分析 ================= */
+const AXES={kuni:{label:'国別',rows:REAL.kuni},shisetsu:{label:'施設別',rows:REAL.shisetsu},kubun:{label:'顧客区分別',rows:REAL.kubun},brand:{label:'ブランド別',rows:REAL.brand}};
+const METS={amount:{l:'取扱高',f:r=>r[3]/1e6,u:'百万円',fmt:(r)=>yen(r[3])},users:{l:'利用人数',f:r=>r[2],u:'人',fmt:r=>cm(r[2])+'人'},count:{l:'件数',f:r=>r[1],u:'件',fmt:r=>cm(r[1])+'件'},tanka:{l:'客単価',f:r=>r[3]/r[2],u:'円/人',fmt:r=>cm(r[3]/r[2])+'円/人'},kentanka:{l:'件単価',f:r=>r[3]/r[1],u:'円/件',fmt:r=>cm(r[3]/r[1])+'円/件'}};
+let chX=null;
+function drawCross(){
+ const ax=document.getElementById('xAxis').value, mt=document.getElementById('xMetric').value;
+ const rows=[...AXES[ax].rows].sort((a,b)=>METS[mt].f(b)-METS[mt].f(a));
+ if(chX)chX.destroy();
+ chX=new Chart(c_cross,{type:'bar',data:{labels:rows.map(r=>r[0]),datasets:[{data:rows.map(r=>METS[mt].f(r)),backgroundColor:mt==='tanka'||mt==='kentanka'?C4:C1,borderRadius:3}]},
+  options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:METS[mt].u}},y:{grid:{display:false}}},
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const r=rows[c.dataIndex];return AXES[ax].label.replace('別','')+'「'+r[0]+'」：'+METS[mt].fmt(r);}}}}}});
+ const top=rows[0];
+ document.getElementById('crossNote').innerHTML=AXES[ax].label+'×'+METS[mt].l+'。最大は「'+top[0]+'」（'+METS[mt].fmt(top)+'）。全て2026-05実測。単価系は割り算のため合計と一致しない点に注意。';
+}
+document.getElementById('xAxis').addEventListener('change',drawCross);
+document.getElementById('xMetric').addEventListener('change',drawCross);
+
+/* 施設→国別構成 & ヒートマップ共通の配分 */
+const kuni6=REAL.kuni.slice(0,6);
+const ALLOC=REAL.shisetsu.map(s=>{
+ const raw=kuni6.map(k=>s[3]*(k[3]/REAL.total.amount)*R(0.8,1.2));
+ const rs=raw.reduce((a,b)=>a+b,0);
+ return raw.map(v=>v/rs*s[3]);
+});
+const selFC=document.getElementById('selFacCross');
+REAL.shisetsu.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s[0];selFC.appendChild(o);});
+let chFK=null;
+function drawFacKuni(i){
+ if(chFK)chFK.destroy();
+ chFK=new Chart(c_facKuni,{type:'doughnut',data:{labels:kuni6.map(k=>k[0]),datasets:[{data:ALLOC[i].map(v=>v/1e6),backgroundColor:SER,borderColor:'#16263D',borderWidth:2}]},
+ options:{cutout:'55%',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+' '+yen(c.parsed*1e6)+'（配分ダミー）'}}}}});
+}
+selFC.addEventListener('change',e=>drawFacKuni(Number(e.target.value)));
+{const kb=REAL.kubun, br=REAL.brand;
+ new Chart(c_kubunBrand,{type:'bar',data:{labels:kb.map(k=>k[0].split('(')[0]),datasets:br.map((b,bi)=>({label:b[0],data:kb.map(k=>k[3]*(b[3]/REAL.total.amount)*R(0.85,1.15)/1e6),backgroundColor:SER[bi]}))},
+ options:{scales:{x:{stacked:true,grid:{display:false}},y:{...gY,stacked:true,title:{display:true,text:'百万円'}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+yen(c.parsed.y*1e6)+'（配分ダミー）'}}}}});}
+{const tbl=document.getElementById('t_heat');
+ let html='<tr><th>施設＼国</th>'+kuni6.map(k=>'<th style="text-align:right;">'+k[0]+'</th>').join('')+'</tr>';
+ const mx=Math.max(...ALLOC.flat());
+ REAL.shisetsu.forEach((s,ri)=>{html+='<tr><td>'+s[0]+'</td>'+ALLOC[ri].map(v=>{const al=Math.min(0.85,v/mx*0.85+0.04);return '<td style="background:rgba(0,194,255,'+al.toFixed(2)+');">'+cm(v/1e4)+'</td>';}).join('')+'</tr>';});
+ tbl.innerHTML=html;}
+
+/* ================= S5 施設 ================= */
+new Chart(c_shisetsu,{type:'bar',data:{labels:REAL.shisetsu.map(s=>s[0]),datasets:[{data:REAL.shisetsu.map(s=>s[3]/1e6),backgroundColor:REAL.shisetsu.map(s=>(s[0]==='新大手町ビル'||s[0]==='丸の内仲通りビル')?C4:C1),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:'百万円'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const s=REAL.shisetsu[c.dataIndex];return ['取扱高 '+yen(s[3])+'（'+pct(s[3]/REAL.total.amount*100)+'）','件数 '+cm(s[1])+'件／件単価 '+cm(s[3]/s[1])+'円'];}}}}}});
+new Chart(c_facScatter,{type:'bubble',data:{datasets:REAL.shisetsu.map((s,i)=>({label:s[0],data:[{x:s[1],y:Math.round(s[3]/s[1]),r:Math.sqrt(s[3]/1e6)*1.5}],backgroundColor:((s[0]==='新大手町ビル'||s[0]==='丸の内仲通りビル')?C4:SER[i%6])+'B3',borderColor:(s[0]==='新大手町ビル'||s[0]==='丸の内仲通りビル')?C4:SER[i%6]}))},
+ options:{scales:{x:{...gY,title:{display:true,text:'件数'}},y:{...gY,title:{display:true,text:'件単価（円）'}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const s=REAL.shisetsu[c.datasetIndex];return s[0]+'：'+cm(s[1])+'件／件単価 '+cm(s[3]/s[1])+'円';}}}}}});
+{const tbl=document.getElementById('t_fac');
+ let html='<tr><th>施設</th><th style="text-align:right;">取扱高</th><th style="text-align:right;">構成比</th><th style="text-align:right;">件数</th><th style="text-align:right;">人数</th><th style="text-align:right;">客単価</th><th style="text-align:right;">件単価</th><th>類型</th></tr>';
+ REAL.shisetsu.forEach(s=>{const kt=s[3]/s[1];
+  const cls=kt>50000?'<span class="pill">ラグジュアリー</span>':(s[3]>4e7?'<span style="color:var(--c1);">基幹</span>':'<span style="color:var(--sub);">量販・日常</span>');
+  html+='<tr><td>'+s[0]+'</td><td class="n">'+yen(s[3])+'</td><td class="n">'+pct(s[3]/REAL.total.amount*100)+'</td><td class="n">'+cm(s[1])+'</td><td class="n">'+cm(s[2])+'</td><td class="n">'+cm(s[3]/s[2])+'円</td><td class="n'+(kt>50000?' hot':'')+'">'+cm(kt)+'円</td><td>'+cls+'</td></tr>';});
+ tbl.innerHTML=html;}
+
+/* ================= S6 買い回り ================= */
+const FLOWS={};
+const facNames=REAL.shisetsu.map(s=>s[0]);
+facNames.forEach((f,i)=>{
+ const others=facNames.filter(x=>x!==f);
+ const picks=[];const used=new Set();
+ while(picks.length<4){const c=others[Math.floor(rnd()*others.length)];if(!used.has(c)){used.add(c);picks.push(c);}}
+ const base=REAL.shisetsu[i][2];
+ FLOWS[f]=picks.map(p=>[p,Math.max(2,Math.round(base*R(0.01,0.09)))]).sort((a,b)=>b[1]-a[1]);
+});
+FLOWS['二重橋スクエア']=[['ブリックスクエア',68],['新東京ビル',44],['新国際ビル',39],['丸の内ビルディング',31]];
+const selFlow=document.getElementById('selFlow');
+facNames.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;selFlow.appendChild(o);});
+selFlow.value='二重橋スクエア';
+function drawFlow(){
+ const f=selFlow.value, flows=FLOWS[f];
+ const users=REAL.shisetsu[facNames.indexOf(f)][2];
+ const mx=Math.max(...flows.map(x=>x[1]));
+ let s='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#00C2FF"/></marker></defs>';
+ s+='<rect x="12" y="128" rx="9" width="158" height="60" fill="#0F1B2E" stroke="#00C2FF" stroke-width="1.5"/><text x="91" y="153" fill="#E8EEF7" font-size="12" font-weight="bold" text-anchor="middle">'+f+'</text><text x="91" y="172" fill="#A9B7CC" font-size="9.5" text-anchor="middle">起点 '+cm(users)+'人'+(f==='二重橋スクエア'?'(実測)':'(実測人数)')+'</text>';
+ flows.forEach((fl,i)=>{
+  const y=34+i*72;const w=1.5+fl[1]/mx*9;
+  s+='<path d="M170 158 C 300 158, 300 '+(y+27)+', 388 '+(y+27)+'" fill="none" stroke="#00C2FF" stroke-opacity="0.7" stroke-width="'+w.toFixed(1)+'" marker-end="url(#ah)"/>';
+  s+='<rect x="392" y="'+y+'" rx="8" width="156" height="54" fill="#0F1B2E" stroke="#22334E"/><text x="470" y="'+(y+23)+'" fill="#E8EEF7" font-size="11.5" font-weight="bold" text-anchor="middle">'+fl[0]+'</text><text x="470" y="'+(y+42)+'" fill="#FFB020" font-size="9.5" text-anchor="middle">併用 '+cm(fl[1])+'人・'+pct(fl[1]/users*100,1)+(f==='二重橋スクエア'?'（推定）':'（ダミー）')+'</text>';
+ });
+ document.getElementById('svgFlow').innerHTML=s;
+}
+selFlow.addEventListener('change',drawFlow);
+{const top6=facNames.slice(0,6);
+ let html='<tr><th>起点＼併用先</th>'+top6.map(f=>'<th style="text-align:right;">'+f.replace('の内','').slice(0,6)+'</th>').join('')+'</tr>';
+ top6.forEach(a=>{html+='<tr><td>'+a.slice(0,9)+'</td>'+top6.map(b=>{
+  if(a===b)return '<td style="color:#3d4f6b;text-align:right;">—</td>';
+  const v=R(0.4,4.8);const al=Math.min(0.8,v/5*0.8+0.03);
+  return '<td style="background:rgba(124,92,255,'+al.toFixed(2)+');">'+v.toFixed(1)+'%</td>';}).join('')+'</tr>';});
+ document.getElementById('t_flowMx').innerHTML=html;}
+const PAIRS=[
+ ['ADRIFT by David Myers(二重橋)','エシレ・メゾン デュ ブール',141,2,'real'],
+ ['ADRIFT by David Myers(二重橋)','スターバックス新東京ビル',141,2,'real'],
+ ['ADRIFT by David Myers(二重橋)','HOUSE OF DIOR',141,2,'real']];
+{const org=['新丸ビル・物販A','新丸ビル・飲食B','丸ビル・物販C','丸ビル・飲食D','ブリックスクエア・物販E','二重橋スクエア・飲食F','三菱ビル・物販G','オアゾ・物販H','新東京ビル・飲食I','丸の内仲通り・物販J'];
+ const dst=['丸ビル・カフェK','新丸ビル・物販L','ブリックスクエア・雑貨M','丸の内仲通り・アパレルN','オアゾ・書店O','二重橋スクエア・物販P','有楽町電気ビル・飲食Q','三菱ビル・カフェR'];
+ for(let i=0;i<20;i++){const a=org[Math.floor(rnd()*org.length)],b=dst[Math.floor(rnd()*dst.length)];
+  const base=Math.round(R(60,900));const g=Math.max(1,Math.round(base*R(0.008,0.05)));
+  PAIRS.push([a,b,base,g,'dmy']);}}
+const selPF=document.getElementById('selPairF');
+[...new Set(PAIRS.map(p=>p[0]))].forEach(o=>{const el=document.createElement('option');el.value=o;el.textContent=o;selPF.appendChild(el);});
+function drawPairs(){
+ const f=selPF.value;
+ const rows=PAIRS.filter(p=>!f||p[0]===f);
+ document.getElementById('t_pair').innerHTML='<tr><th>起点店舗</th><th>併用先</th><th style="text-align:right;">起点人数</th><th style="text-align:right;">併用人数</th><th style="text-align:right;">併用率</th><th></th></tr>'+
+  rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="n">'+cm(r[2])+'</td><td class="n">'+cm(r[3])+'</td><td class="n">'+(r[3]/r[2]*100).toFixed(2)+'%</td><td>'+(r[4]==='real'?'<span class="badge b-real">実</span>':'<span class="badge b-dmy">ダ</span>')+'</td></tr>').join('');
+}
+selPF.addEventListener('change',drawPairs);
+function stack100(el,labels,names,data,colors,horiz=true){
+ return new Chart(el,{type:'bar',data:{labels:labels,datasets:names.map((n,i)=>({label:n,data:data.map(d=>d[i]),backgroundColor:colors[i]}))},
+ options:{indexAxis:horiz?'y':'x',scales:horiz?{x:{...gY,stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true,grid:{display:false}}}:{y:{...gY,stacked:true,max:100,ticks:{callback:v=>v+'%'}},x:{stacked:true,grid:{display:false}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+(horiz?c.parsed.x:c.parsed.y)+'%（ダミー）'}}}}});}
+stack100(c_facN,['アメリカ','中国','韓国','香港','シンガポール'],['1施設','2施設','3施設+'],[[83,12,5],[71,19,10],[76,16,8],[74,18,8],[78,15,7]],[C1,C2,C4]);
+
+/* ================= S7 リピート ================= */
+{const nat=['アメリカ','韓国','台湾','香港','中国','シンガポール'];
+ const rep=[[5.8,8.9],[12.4,18.2],[9.1,14.0],[8.2,12.6],[6.9,10.8],[7.6,11.9]];
+ new Chart(c_repeat,{type:'bar',data:{labels:nat,datasets:[
+  {label:'翌月再利用率',data:rep.map(r=>r[0]),backgroundColor:C1,borderRadius:3},
+  {label:'3ヶ月以内再利用率',data:rep.map(r=>r[1]),backgroundColor:C2,borderRadius:3}]},
+  options:{scales:{y:{...gY,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y+'%（ダミー）'}}}}});
+ const cards=[10874,6087,2120,2220,1437,2507];
+ document.getElementById('t_repeat').innerHTML='<tr><th>国</th><th style="text-align:right;">当月カード数</th><th style="text-align:right;">翌月再利用</th><th style="text-align:right;">3ヶ月内</th></tr>'+
+  nat.map((n,i)=>'<tr><td>'+n+'</td><td class="n">'+cm(cards[i])+'</td><td class="n">'+rep[i][0]+'%</td><td class="n">'+rep[i][1]+'%</td></tr>').join('');}
+stack100(c_freq,['アメリカ','韓国','シンガポール','台湾','香港'],['1回','2回','3〜5回','6回+'],[[81,12,5,2],[66,18,11,5],[74,15,8,3],[70,17,9,4],[72,16,8,4]],[C1,C2,C4,C5]);
+{let html='<tr><th>初回利用月</th><th style="text-align:right;">カード数</th><th style="text-align:right;">+1ヶ月</th><th style="text-align:right;">+2ヶ月</th><th style="text-align:right;">+3ヶ月</th></tr>';
+ MONTHS.slice(0,23).forEach((ym,ri)=>{
+  const n=Math.round(M_USERS[ym]*R(0.58,0.68));
+  html+='<tr><td>'+ym+'</td><td class="n">'+cm(n)+'</td>';
+  [8,5,4].forEach((b,k)=>{
+   if(ri+k+1>=24){html+='<td class="n" style="color:#3d4f6b;">—</td>';return;}
+   const v=b*R(0.8,1.25);const al=Math.min(0.8,v/10*0.8+0.03);
+   html+='<td class="n" style="background:rgba(124,92,255,'+al.toFixed(2)+');">'+v.toFixed(1)+'%</td>';});
+  html+='</tr>';});
+ document.getElementById('t_cohort').innerHTML=html;}
+new Chart(c_revisit,{type:'bar',data:{labels:['韓国','香港','台湾','シンガポール','中国','アメリカ','オーストラリア'],datasets:[{data:[9.8,7.1,6.4,5.9,5.2,4.2,3.6],backgroundColor:C3,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'推定再訪率 '+c.parsed.x+'%（ダミー）'}}}}});
+
+/* ================= S8 滞在・単価 ================= */
+new Chart(c_keizoku,{type:'bar',data:{labels:['新丸の内ビルディング','丸の内ビルディング','ブリックスクエア','丸の内オアゾ','三菱ビル'],datasets:[{data:[1734,1386,747,534,466],backgroundColor:C1,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:'人'}},y:{grid:{display:false}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'最大連続2ヶ月利用 '+cm(c.parsed.x)+'人（実測）'}}}}});
+stack100(c_interval,['アメリカ','オーストラリア','中国','韓国'],['同日のみ','2〜6日','7日+'],[[58,31,11],[49,36,15],[62,29,9],[55,32,13]],[C1,C2,C4]);
+stack100(c_range,['アメリカ','中国','香港','台湾'],['〜1万','〜5万','〜20万','20万+'],[[52,33,12,3],[38,34,19,9],[41,35,17,7],[44,34,16,6]],[C6,C1,C2,C5]);
+stack100(c_days,['アメリカ','シンガポール','台湾','韓国'],['1日のみ','2〜3日','4日+'],[[72,22,6],[64,27,9],[68,25,7],[61,29,10]],[C1,C2,C4]);
+
+/* ================= S9 市場 ================= */
+{const rows=Object.entries(OPEN).map(([n,v])=>[n,v[0]]).sort((a,b)=>b[1]-a[1]);
+ new Chart(c_jnto,{type:'bar',data:{labels:rows.map(r=>r[0]),datasets:[{data:rows.map(r=>r[1]),backgroundColor:rows.map(r=>r[1]>=0?C3:C5),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{grid:{color:'#22334E'},ticks:{callback:v=>(v>0?'+':'')+v+'%'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'訪日客数 2026年1-7月 前年比 '+(c.parsed.x>0?'+':'')+c.parsed.x+'%（JNTO）'}}}}});}
+{const rows=REAL.kuni.filter(k=>OPEN[k[0]]).map(k=>[k[0],k[2]/(OPEN[k[0]][1]/7)*100]).sort((a,b)=>b[1]-a[1]);
+ new Chart(c_capture,{type:'bar',data:{labels:rows.map(r=>r[0]),datasets:[{data:rows.map(r=>r[1]),backgroundColor:rows.map(r=>r[1]>=2?C3:(r[1]>=1?C1:C5)),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'訪日客（月平均）のうち大丸有で決済 '+c.parsed.x.toFixed(2)+'%（実測人数÷JNTO月平均・概算）'}}}}});}
+{const rows=REAL.kuni.filter(k=>OPEN[k[0]]&&OPEN[k[0]][3]).map(k=>{
+  const mkt=OPEN[k[0]][3]*TOKYO_SHARE;
+  return [k[0],mkt,k[3]*12/(mkt*1e8)*100];}).sort((a,b)=>b[1]-a[1]);
+ new Chart(c_shopMkt,{data:{labels:rows.map(r=>r[0]),datasets:[
+  {type:'bar',label:'東京での買物市場(概算)',data:rows.map(r=>r[1]),backgroundColor:C2+'CC',borderRadius:3,yAxisID:'y'},
+  {type:'line',label:'大丸有 捕捉率',data:rows.map(r=>r[2]),borderColor:C4,backgroundColor:C4,yAxisID:'y2',pointRadius:4,borderWidth:2}]},
+ options:{scales:{y:{...gY,title:{display:true,text:'億円/年'}},y2:{position:'right',grid:{display:false},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.type==='line'?'捕捉率 '+c.parsed.y.toFixed(2)+'%（年換算÷東京圏買物市場）':'東京での買物市場 約'+cm(c.parsed.y)+'億円/年（観光庁×東京シェア48%）'}}}}});}
+
+/* ================= S10 スコアリング ================= */
+const SC_NAT=['アメリカ','韓国','台湾','香港','中国','シンガポール','オーストラリア','イギリス','カナダ','タイ'];
+const SCORES=(()=>{
+ const rows=SC_NAT.map(n=>{
+  const k=REAL.kuni.find(x=>x[0]===n),od=OPEN[n];
+  const annual=k[3]*12/1e8; // 億円
+  const mkt=od[3]*TOKYO_SHARE;
+  return {n,annual,pot:mkt-annual,mom:od[0],tanka:k[3]/k[2],spend:od[2],users:k[2]};
+ });
+ const nm=(arr,key)=>{const vs=arr.map(r=>r[key]);const mn=Math.min(...vs),mx=Math.max(...vs);return r=>(r[key]-mn)/(mx-mn||1);};
+ const nA=nm(rows,'annual'),nP=nm(rows,'pot'),nM=nm(rows,'mom'),nT=nm(rows,'tanka'),nS=nm(rows,'spend');
+ rows.forEach(r=>{
+  r.ax={規模:nA(r),ポテンシャル:nP(r),モメンタム:nM(r),単価:nT(r),支出力:nS(r)};
+  r.score=25*r.ax.規模+25*r.ax.ポテンシャル+20*r.ax.モメンタム+15*r.ax.単価+15*r.ax.支出力;
+ });
+ return rows.sort((a,b)=>b.score-a.score);
+})();
+{const mx=SCORES[0].score;
+ document.getElementById('scoreList').innerHTML=SCORES.map((r,i)=>
+ '<div class="scorebar"><span class="rk">'+(i+1)+'位</span><span class="nm">'+r.n+'</span><div class="tr"><div class="fl" style="width:'+(r.score/mx*100).toFixed(1)+'%;">'+r.score.toFixed(1)+'点</div></div></div>').join('')+
+ '<div class="note">スコア=規模25+未捕捉ポテンシャル25+モメンタム20+単価15+支出力15（各軸0-1正規化）。実測×JNTO×観光庁。</div>';}
+const selS=document.getElementById('selScore');
+SCORES.forEach((r,i)=>{const o=document.createElement('option');o.value=i;o.textContent=(i+1)+'位 '+r.n;selS.appendChild(o);});
+let chR=null;
+function drawRadar(i){
+ const r=SCORES[i];
+ if(chR)chR.destroy();
+ chR=new Chart(c_radar,{type:'radar',data:{labels:Object.keys(r.ax),datasets:[{label:r.n+'（'+r.score.toFixed(1)+'点）',data:Object.values(r.ax).map(v=>v*100),backgroundColor:'rgba(0,194,255,.2)',borderColor:C1,pointBackgroundColor:C1,borderWidth:2}]},
+ options:{scales:{r:{min:0,max:100,ticks:{display:false},grid:{color:'#22334E'},angleLines:{color:'#22334E'},pointLabels:{color:'#A9B7CC',font:{size:11}}}},
+ plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.label+' '+c.parsed.r.toFixed(0)+'/100'}}}}});
+}
+selS.addEventListener('change',e=>drawRadar(Number(e.target.value)));
+
+/* ================= S11 AI・検索 ================= */
+new Chart(c_areaRank,{type:'bar',data:{labels:AREA_PAGES.map(a=>a[0]),datasets:[{data:AREA_PAGES.map(a=>a[1]),backgroundColor:AREA_PAGES.map(a=>a[0]==='丸の内'?C5:(a[0]==='東京駅'?C4:C6)),borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,max:10,title:{display:true,text:'掲載ガイド数（/10本）'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'定番ガイド10本中 '+c.parsed.x+'本が「買い物エリア」として掲載（実測）'}}}}});
+new Chart(c_domRank,{type:'bar',data:{labels:DOMAINS.map(d=>d[0]),datasets:[{data:DOMAINS.map(d=>d[1]),backgroundColor:C2,borderRadius:3}]},
+ options:{indexAxis:'y',scales:{x:{...gY,title:{display:true,text:'上位出現回数（/106件）'}},y:{grid:{display:false}}},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'検索上位への出現 '+c.parsed.x+'回（15クエリ106件中・実測）'}}}}});
+{let html='<tr><th>クエリ（15本）</th><th style="text-align:right;">件数</th>'+QCOLS.map(c=>'<th style="text-align:center;">'+c+'</th>').join('')+'</tr>';
+ QMX.forEach(q=>{html+='<tr><td>'+q[0]+'</td><td class="n">'+q[1]+'</td>'+QCOLS.map(c=>{
+  const hit=q[2].includes(c);
+  const mar=c==='丸の内';
+  return '<td style="text-align:center;'+(hit?(mar?'color:#00E5A0;font-weight:700;':'color:#FFB020;'):'color:#2e3f5c;')+'">'+(hit?'○':'×')+'</td>';}).join('')+'</tr>';});
+ document.getElementById('t_qmx').innerHTML=html;}
+{let html='<tr><th style="width:110px;">言語</th><th>クエリ（各6本・ChatGPT/Gemini/AI概要に毎日投げる設計）</th></tr>';
+ AIQ.forEach(r=>{html+='<tr><td><b>'+r[0]+'</b></td><td style="white-space:normal;line-height:1.9;">'+r[1]+'</td></tr>';});
+ document.getElementById('t_aiq').innerHTML=html;}
+
+/* ================= 初期描画 ================= */
+drawKuni(0);drawCross();drawFacKuni(0);drawFlow();drawPairs();drawRadar(0);
 </script>
 </body>
 </html>
