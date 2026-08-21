@@ -472,7 +472,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
  <div class="panel">
   <div class="pt">ローカルプラットフォーム実査（7市場） <span class="badge b-real">実測 2026-08-21</span></div>
   <div class="tsc"><table id="t_local"></table></div>
-  <div class="sisa"><div class="lb">小紅書（RED）の深掘り</div><p>丸の内はREDで<b>街区として実質不可視</b>：Google経由の悉皆確認で丸の内関連ノート0件・SEO集約ページ0枚（<b>銀座は集約ページ3枚以上</b>が自動生成される話題量）。さらに中国語検索では街区「丸之内」が<b>地下鉄「丸ノ内線」の乗換攻略に埋没</b>する名称衝突が発生。中国訪日−56%のいまは露出の仕込み期＝「丸之内=东京站前」の再定義ノートをKOC起点で種まきし、回復局面（7月全体+0.1%転換）で刈り取る設計が合理的。※RED内部検索はクローラ遮断のため間接計測（計測限界を明記）。</p></div>
+  <div class="sisa"><div class="lb">ローカル実査の総括（2026-08-21・裏取り済み）</div><p>全市場で語られる中身は驚くほど一貫して<b>①東京駅駅舎の写真 ②冬イルミ（仲通り） ③無料展望（KITTE屋上・新丸ビル7F） ④エシレ等の限定グルメ</b>の4点に収れんする——つまり海外ローカル圏では丸の内は「無料で写真を撮る場所」であり、<b>「買う場所」の語彙をまだ持っていない</b>。小紅書は「丸之内」のSEO可視面が不在（6系統検索で未検出、対照群の銀座は集約ページ露出＝手法正常。RED内部はクローラ遮断のためGoogle可視面での判定）。携程・大衆点評には地区POI自体が無い。一方で韓国はkr.trip.comにガイド52件と最も厚く、TripAdvisorでは「欧風・静か・上質」評が確立済み（仲通り4.1点/133件、ただし銀座4,808件の1/36）。<b>勝ち筋は既にある評判「銀座の隣の、空いていて上質」を、無料フォトスポット→高単価購買へ接続する動線設計</b>にある。</p></div>
  </div>
 
  <div class="panel">
@@ -552,7 +552,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <a href="https://www.mlit.go.jp/kankocho/tokei_hakusyo/content/001345781.pdf" target="_blank" rel="noopener">観光庁 2019年年次報告（決済手段）</a>／
   <a href="https://www.mec.co.jp/news/detail/2024/01/16_mec240116_marunouchi" target="_blank" rel="noopener">三菱地所 就業人口リリース</a>／
   <a href="https://tokyotorch.mec.co.jp/" target="_blank" rel="noopener">TOKYO TORCH（Torch Tower 2028年3月末竣工予定）</a>／
-  検索面実測: 2026-08-21 15クエリ・106件（本ボード独自）／購買実測: 三菱UFJニコス提供サンプル 2026-05（統計値）
+  検索面実測: 2026-08-21 15クエリ・106件（本ボード独自）／Google AIモード実測: 同日3クエリ／ローカル実査: RED・Trip.com(中/HK/KR/TW)・Dcard・Pantip・Reddit(アーカイブAPI)・TripAdvisor 実アクセス40回超（本ボード独自）／購買実測: 三菱UFJニコス提供サンプル 2026-05（統計値）
   </div></div>
 </section>
 
@@ -598,15 +598,17 @@ const PAGES=[
  ["KTC タイ語10選","タイ語",1,"× ホテル言及のみ","https://www.ktc.co.th/article/travel-guide/asia/tokyo-shopping-destination"],
  ["乐吃购（letsgojp）","簡体字",2,"取得不可（丸ノ内線記事が上位）","https://tokyo.letsgojp.cn/"],
  ["marunouchi.com Uncover（自社）","英語",1,"● 指名2位・非指名テーマ記事なし","https://www.marunouchi.com/en/lp/uncovermarunouchi/shopping/"]];
-/* 実査: ローカルプラットフォーム7市場（2026-08-21） */
+/* 実査: ローカルプラットフォーム（2026-08-21・裏取り済み） */
 const LOCAL=[
- ["中国 SNS","小紅書（RED）","弱","丸ノ内線に埋没・街区認知ほぼゼロ。銀座=集約ページ3+ vs 丸之内=0","「丸之内=东京站前」再定義ノートをKOCで種まき"],
- ["中国 OTA","携程・大衆点評・馬蜂窩","ほぼ無","東京駅前の高級ホテル立地としてのみ存在。Trip.com投稿0件","携程Trip MomentsのPOI空白をホテル連携で充填"],
- ["韓国","Naver（間接）・Trip.com KR","中","駅舎広場フォト・KITTE・カフェ・イルミ・街デザイン論（KR版UGC20本超実測）","駅前広場×感度カフェをNaverインフルエンサー招請で増幅"],
- ["台湾","Dcard・PTT・攻略ブログ","中","「東京車站攻略の1章」扱い。KITTE無料夜景が唯一の看板","定着済み攻略フォーマットの丸之內パートを買い物へ拡張"],
- ["タイ","Pantip","弱〜中","「丸の内=1日買い物コース」スレが実在する唯一の市場","既存1 Day TripフォーマットをタイKOLで再生産"],
- ["欧米","Reddit(取得不可)・TAフォーラム","中","静かな高級宿泊拠点・皇居・冬イルミ。「買い物は銀座へ」と誘導される側","quiet luxury滞在×冬イルミで sterile 評を反転"],
- ["全球","TripAdvisor","中〜強","レビュー5.9万件（銀座8.8万件）。仲通り4.1点133件。象徴街区POI不在","「Marunouchi」街区POI育成・仲通りレビュー底上げ"]];
+ ["中国 SNS","小紅書（RED）","弱","SEO可視面に「丸之内」不在（6系統の検索語で未検出。対照群の銀座は購物攻略の集約ページが露出＝手法正常）。中国語圏のフックは東京駅夜景と丸の内イルミ（小紅書推薦の東京クリスマス6選入り）","「丸之内=东京站前」の地名再定義ノートをKOC起点で種まき","https://entokyo.com/2022-tokyo-christmas/","小紅書推薦6選(実例)"],
+ ["中国 OTA","Trip.com中文・携程・大衆点評","中","Trip.com中文はイルミPOI整備済（5.0点・106件・迪士尼コラボまで中文詳述）。一方、携程・大衆点評に地区POIなし（3クエリ＋千代田区景点リスト実閲覧で未検出）","中国国内アプリ側のPOI造成が空白＝ホテル・施設連携でPOI開設","https://hk.trip.com/travel-guide/attraction/tokyo/marunouchi-illumination-70367840/","丸之內霓彩燈飾POI"],
+ ["韓国","Trip.com KR・triple.guide","中〜強","마루노우치ページにガイド52件・観光30件・食24件。KITTE無料展望・ディズニーイルミ・「銀座より空いていて快適」の語りを実測","무료スポット×カフェ×イルミの語りをインフルエンサー招請で増幅","https://kr.trip.com/moments/destination-marunouchi-2135400/","kr.trip.com 마루노우치"],
+ ["韓国 Naver","Naver Blog","判定不能","検索経路403のため未判定（3クエリ実施・現地端末での追加実査が必要）。代替経路では KITTE・スノーピークカフェ・コムデギャルソン紹介ブログを確認","Naver API/現地実査で件数感を確定してから施策設計","https://likejp.com/4280","韓国語ブログ実例"],
+ ["台湾","Dcard・PTT・KOLブログ","中","独立目的地ではなく「東京車站攻略」の1章（Dcard本文レベルで確認）。定番はKITTE6樓免費夜景・新丸大樓7F・Echire・退税動線","定着済みの駅攻略フォーマットに「丸之內回遊パート」を供給","https://linshibi.com/?p=800","林氏璧 懶人包"],
+ ["タイ","Pantip","弱〜中","「丸の内1 Day Trip（食・遊・買）」スレが実在するが主要スレは2019年で停滞（Waybackで年次確認）。駅ナカ一番街の食は現役の話題","鮮度切れ＝新ネタ供給でタイKOLの1 Dayフォーマット再生産","https://pantip.com/topic/38548107","Pantip 1 Dayスレ(2019)"],
+ ["欧米 掲示板","Reddit r/JapanTravel","弱","タイトルに Marunouchi を含む投稿は5本のみ・全てscore1（アーカイブAPI実測）。地区名でなく東京駅・KITTE・個店名（Manten Sushi等）に分解されて登場","「Marunouchi」を語彙化する英語広報（地区名の付いた体験命名）","https://www.reddit.com/r/JapanTravel/comments/15sxkis/has_anyone_ate_at_both_the_nihonbashi_and/","Redditスレ実例"],
+ ["欧米 レビュー","TripAdvisor","中","仲通り4.1点・133件（欧風・静か・上質の評が確立）、イルミ4.3点・Travelers' Choice。ただし銀座地区4,808件の約1/36で量が課題","確立済みの「静かな上質」評をレビュー量で増幅（東京駅4,321件からの回遊誘導）","https://www.tripadvisor.com/Attraction_Review-g14129528-d9565563-Reviews-Marunouchi_Naka_Street-Marunouchi_Chiyoda_Tokyo_Tokyo_Prefecture_Kanto.html","仲通りレビュー"],
+ ["対照 銀座","全市場","強","RED集約ページ・Dcardタイトル・Pantipスレ・TA4.3点4,808件と全市場でタイトルレベル露出","対抗せず「銀座の隣の、空いていて上質な選択肢」ポジションを取る","https://www.tripadvisor.com/Attraction_Review-g14129573-d320511-Reviews-Ginza-Ginza_Chuo_Tokyo_Tokyo_Prefecture_Kanto.html","TA銀座(対照)"]];
 /* アクションボード */
 const ACTIONS=[
  ["GO TOKYO Shopping特集へ丸の内追加","英・泰",6,"なし","低（行政渉外）",95],
@@ -615,10 +617,10 @@ const ACTIONS=[
  ["小紅書KOCで「丸之内」ノート種まき","簡体字",0,"ほぼゼロ","中",78],
  ["Uncover Marunouchiに非指名テーマ記事（多言語）","英・中・韓・泰",1,"指名のみ","低（自社）",85],
  ["japan-guide 掲載内容の拡充（写真・仲通り）","英",5,"掲載済","低",70],
- ["triple.guide／Naverインフルエンサー招請","韓",3,"なし","中",68],
+ ["triple.guide／Naverインフルエンサー招請","韓",3,"POIあり・UGC薄","中",68],
  ["Time Out・MATCHA・LIVE JAPAN寄稿","英・多",5,"イルミのみ","中",65],
  ["TripAdvisor「Marunouchi」POI育成","多言語",5,"133件",  "高（長期）",55],
- ["Pantip系タイKOLの1 Day Trip再生産","泰",1,"2スレ","低",60]];
+ ["Pantip系タイKOLの1 Day Trip再生産","泰",1,"2019年スレ2本で停滞","低",60]];
 
 /* ================= 乱数・整形 ================= */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
@@ -1050,10 +1052,10 @@ new Chart(c_domRank,{type:'bar',data:{labels:DOMAINS.map(d=>d[0]),datasets:[{dat
   return '<tr><td data-v="'+p[0]+'">'+p[0]+'</td><td data-v="'+p[1]+'">'+p[1]+'</td><td class="n" data-v="'+p[2]+'">'+p[2]+'回</td><td class="'+v+'" data-v="'+p[3]+'">'+p[3]+'</td><td><a href="'+p[4]+'" target="_blank" rel="noopener">開く</a></td></tr>';}).join('');
  sortable(tbl);}
 {const tbl=document.getElementById('t_local');
- tbl.innerHTML='<tr><th>市場</th><th>主要チャネル</th><th>丸の内の存在感</th><th>語られる文脈（実査）</th><th>攻めどころ</th></tr>'+
+ tbl.innerHTML='<tr><th>市場</th><th>主要チャネル</th><th>存在感</th><th>語られる文脈（裏取り済み実査）</th><th>攻めどころ</th><th>実例</th></tr>'+
  LOCAL.map(l=>{
-  const v=l[2].includes('強')?'v-ok':(l[2].includes('中')?'v-md':'v-ng');
-  return '<tr><td><b>'+l[0]+'</b></td><td>'+l[1]+'</td><td class="'+v+'">'+l[2]+'</td><td style="white-space:normal;min-width:220px;">'+l[3]+'</td><td style="white-space:normal;min-width:200px;">'+l[4]+'</td></tr>';}).join('');}
+  const v=l[2].includes('強')?'v-ok':(l[2].includes('中')?'v-md':(l[2].includes('判定')?'v-md':'v-ng'));
+  return '<tr><td><b>'+l[0]+'</b></td><td style="white-space:normal;">'+l[1]+'</td><td class="'+v+'">'+l[2]+'</td><td style="white-space:normal;min-width:250px;">'+l[3]+'</td><td style="white-space:normal;min-width:180px;">'+l[4]+'</td><td><a href="'+l[5]+'" target="_blank" rel="noopener">'+l[6]+'</a></td></tr>';}).join('');}
 {const tbl=document.getElementById('t_action');
  tbl.innerHTML='<tr><th class="sv">アクション</th><th class="sv">市場</th><th class="sv" style="text-align:right;">検索面出現</th><th class="sv">現在の丸の内</th><th class="sv">難易度</th><th class="sv" style="text-align:right;">優先度</th></tr>'+
  ACTIONS.map(a=>'<tr><td data-v="'+a[0]+'" style="white-space:normal;min-width:230px;">'+a[0]+'</td><td data-v="'+a[1]+'">'+a[1]+'</td><td class="n" data-v="'+a[2]+'">'+(a[2]||'—')+'</td><td data-v="'+a[3]+'">'+a[3]+'</td><td data-v="'+a[4]+'">'+a[4]+'</td><td class="n hot" data-v="'+a[5]+'">'+a[5]+'</td></tr>').join('');
