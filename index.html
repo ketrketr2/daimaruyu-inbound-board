@@ -225,7 +225,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
    <tr><td>1</td><td><b>KPIは「達成できない」のではなく「測れていない」</b>。実測年換算69.0億は目標44.3億の156%。計測定義の刷新が最初の意思決定。</td><td>実測×KPI設定値</td><td>本頁ツリー</td></tr>
    <tr><td>2</td><td><b>単価×国ミックスが最大のレバー</b>。客単価は想定の47%。単価最高の中国が訪日−56%の逆風のいま、米(単価17,600円・訪日+6.5%)・SG(14,519円・+10.3%)の比重引き上げが現実解。</td><td>実測×JNTO</td><td>3・9・10</td></tr>
    <tr><td>3</td><td><b>欧米豪・SGでは既に「勝ちパターン」が存在する</b>。訪日客の3〜4%が大丸有で決済（英4.3%・SG4.3%・米3.6%）。この再現条件を韓台に移植できれば量が跳ねる。</td><td>実測×JNTO</td><td>9</td></tr>
-   <tr><td>4</td><td><b>買い回り率1.4%はまだ「点」の消費</b>。起点→併用の実測ペア（ADRIFT→エシレ等）は存在するが希薄。仲通り軸の回遊設計とID代替集計（全ペア化）で面の消費へ。</td><td>実測サンプル</td><td>6</td></tr>
+   <tr><td>4</td><td><b>買い回り率1.4%はまだ「点」の消費</b>。起点→併用の実測ペア（ADRIFT→エシレ等）は存在するが希薄。仲通り軸の回遊設計と全店舗ペア集計の取得で面の消費へ。</td><td>実測サンプル</td><td>6</td></tr>
    <tr><td>5</td><td><b>認知の入口（検索・AI）で「買い物の街」として語られていない</b>。定番ガイド10本中、丸の内掲載1本。GO TOKYO・JNTO公式のショッピング特集からも脱落。掲載交渉＋多言語コンテンツが最短ルート。</td><td>検索面実測106件</td><td>11</td></tr>
   </table></div>
  </div>
@@ -303,7 +303,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
 </section>
 <!-- ========== 6 買い回り ========== -->
 <section class="sec" id="s6">
- <div class="sech"><span class="en">CROSS-SHOPPING</span><h2><b>6</b>買い回り</h2><div class="desc">起点→併用の回遊。実測サンプル3ペア＋生成値。ニコスへの相談②（全組み合わせ化）が通れば全ペア実数化。</div></div>
+ <div class="sech"><span class="en">CROSS-SHOPPING</span><h2><b>6</b>買い回り</h2><div class="desc">どの店からどの店へ人が流れるか。実測サンプル3ペア＋生成値（全店舗ペアの集計を依頼中→承認され次第すべて実数化）。</div></div>
  <div class="grid g21">
   <div class="panel">
    <div class="pt"><label class="sl">起点施設:</label><select id="selFlow"></select> 施設間フロー <span class="badge b-mix">実測1系統×ダミー</span></div>
@@ -321,14 +321,14 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="tsc"><table id="t_pair"></table></div><div class="note">列見出しクリックでもソート可。推定寄与額=併用人数×全体件単価12,205円（ダミー）。</div>
  </div>
  <div class="grid g2">
-  <div class="panel"><div class="pt">利用施設数の分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_facN"></canvas></div><div class="note">ID代替集計I の受け皿。</div></div>
+  <div class="panel"><div class="pt">利用施設数の分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_facN"></canvas></div><div class="note">1人が月に何施設使うか。集計が届き次第、実数化。</div></div>
   <div class="panel"><div class="sisa" style="margin:0;"><div class="lb">SO WHAT</div><p>実測ペアの併用率は<b>1.42%</b>——ラグジュアリーレストラン（ADRIFT）で食事しても98.6%はその1軒で完結している。飲食→物販の動線（例: 二重橋→仲通りDIOR）は「存在するが極細」。<b>回遊の太さ＝面の消費額</b>なので、①仲通り軸の回遊特典 ②レシート連動クーポン ③コンシェルジュ接客連携 の効果検証を、このペア表の月次変化で行う設計にする。米国83%が1施設のみ（利用施設数分布）＝伸びしろは欧米の「2施設目」。</p></div></div>
  </div>
 </section>
 
 <!-- ========== 7 リピート・定着 ========== -->
 <section class="sec" id="s7">
- <div class="sech"><span class="en">RETENTION</span><h2><b>7</b>リピート・定着</h2><div class="desc">ID代替集計（A リピート率／B 利用回数／G コホート／H 推定再訪率）の受け皿。現在は設計イメージ値。</div></div>
+ <div class="sech"><span class="en">RETENTION</span><h2><b>7</b>リピート・定着</h2><div class="desc">「また来てくれているか」を測るセクション。リピート率・利用回数・初回客の残存・再来日の4本（現在は設計イメージ値。ニコスの集計表が届き次第、実数に差し替え）。</div></div>
  <div class="grid g2">
   <div class="panel"><div class="pt">リピート率（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_repeat"></canvas></div><div class="tsc" style="margin-top:8px;"><table id="t_repeat"></table></div></div>
   <div class="panel"><div class="pt">利用回数分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_freq"></canvas></div>
@@ -344,12 +344,12 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="note" id="cohortStat"></div>
  </div>
 </div>
- <div class="panel"><div class="pt">推定再訪率（90日以上あけて再出現） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_revisit"></canvas></div><div class="note">訪日リピート（=再来日）のproxy。観光庁実測では訪都リピーター率54.6%（セクション9）。</div></div>
+ <div class="panel"><div class="pt">再来日シグナル：90日以上あけた再出現率 <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_revisit"></canvas></div><div class="note">訪日リピート（=再来日）のproxy。観光庁実測では訪都リピーター率54.6%（セクション9）。</div></div>
 </section>
 
 <!-- ========== 8 滞在・単価 ========== -->
 <section class="sec" id="s8">
- <div class="sech"><span class="en">STAY & SPEND</span><h2><b>8</b>滞在・単価</h2><div class="desc">ID代替集計（E 同月内利用間隔／F 購買額レンジ／J 利用日数）＋継続利用の受け皿。</div></div>
+ <div class="sech"><span class="en">STAY & SPEND</span><h2><b>8</b>滞在・単価</h2><div class="desc">「どれくらい深く使われているか」を測るセクション。滞在中の利用間隔・使った総額・利用日数・連続利用。</div></div>
  <div class="panel"><div class="pt">継続利用（施設別・最大連続2ヶ月の人数） <span class="badge b-real">実データ 2026-05</span></div><div class="ch short"><canvas id="c_keizoku"></canvas></div></div>
  <div class="grid g3">
   <div class="panel"><div class="pt">同月内利用間隔 <span class="badge b-dmy">ダミー</span></div><div class="ch mini"><canvas id="c_interval"></canvas></div></div>
@@ -514,19 +514,19 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
    <dt>捕捉率</dt><dd>大丸有の年換算取扱高 ÷（国別の訪日買物代×東京シェア48%）。「東京での買物市場のうち大丸有が取れている割合」の概算。</dd>
   </dl></div>
  </div>
- <div class="panel"><div class="pt">ID代替集計10本（カードIDは受領せず、統計表で受領）</div>
+ <div class="panel"><div class="pt">ニコスに依頼している「深掘り集計」10本（カードIDは受け取らず、集計表で受領）</div>
   <div class="tsc"><table>
-   <tr><th>記号</th><th>集計</th><th>本ボードの受け皿</th><th>状態</th></tr>
-   <tr><td>A</td><td>リピート率（翌月・3ヶ月内）</td><td>セクション7</td><td>相談中（イメージ値表示）</td></tr>
-   <tr><td>B</td><td>利用回数分布</td><td>セクション7</td><td>相談中</td></tr>
-   <tr><td>—</td><td>継続利用（連続月数）</td><td>セクション8</td><td class="up">サンプル受領済</td></tr>
-   <tr><td>—</td><td>買い回り（起点×併用）</td><td>セクション6</td><td class="up">サンプル受領済（全ペア化を相談中）</td></tr>
-   <tr><td>E</td><td>同月内利用間隔</td><td>セクション8</td><td>相談中</td></tr>
-   <tr><td>F</td><td>累計購買額レンジ</td><td>セクション8</td><td>相談中</td></tr>
-   <tr><td>G</td><td>コホート残存率</td><td>セクション7</td><td>相談中</td></tr>
-   <tr><td>H</td><td>推定再訪率（90日+）</td><td>セクション7</td><td>相談中</td></tr>
-   <tr><td>I</td><td>利用施設数分布</td><td>セクション6</td><td>相談中</td></tr>
-   <tr><td>J</td><td>同月内利用日数</td><td>セクション8</td><td>相談中</td></tr>
+   <tr><th>#</th><th>集計の名前</th><th>何がわかるか</th><th>見る場所</th><th>状態</th></tr>
+   <tr><td>①</td><td>リピート率</td><td>また来てくれているか（翌月・3ヶ月以内の再利用）</td><td>7 リピート・定着</td><td>依頼中（現在はイメージ値）</td></tr>
+   <tr><td>②</td><td>利用回数の分布</td><td>月に何回使う客層か（1回きり／常連の比率）</td><td>7 リピート・定着</td><td>依頼中</td></tr>
+   <tr><td>③</td><td>コホート残存</td><td>初めて来た月の客が、翌月以降どれだけ残るか</td><td>7 リピート・定着</td><td>依頼中</td></tr>
+   <tr><td>④</td><td>推定再訪率</td><td>90日以上あけて再出現＝再来日のシグナル</td><td>7 リピート・定着</td><td>依頼中</td></tr>
+   <tr><td>⑤</td><td>継続利用</td><td>何ヶ月連続で使われているか（固定客の発見）</td><td>8 滞在・単価</td><td class="up">サンプル受領済み</td></tr>
+   <tr><td>⑥</td><td>同月内の利用間隔</td><td>滞在中に何日おきに使うか</td><td>8 滞在・単価</td><td>依頼中</td></tr>
+   <tr><td>⑦</td><td>同月内の利用日数</td><td>同じ月に何日使うか（滞在の長さの代理指標）</td><td>8 滞在・単価</td><td>依頼中</td></tr>
+   <tr><td>⑧</td><td>累計購買額レンジ</td><td>1人がいくら使う客層か（上顧客の定義に直結）</td><td>8 滞在・単価</td><td>依頼中</td></tr>
+   <tr><td>⑨</td><td>利用施設数の分布</td><td>1人が何施設を回遊するか</td><td>6 買い回り</td><td>依頼中</td></tr>
+   <tr><td>⑩</td><td>買い回りペア</td><td>どの店からどの店へ人が流れるか</td><td>6 買い回り</td><td class="up">サンプル受領済み（3ペア）・全店舗ペア化を依頼中</td></tr>
   </table></div></div>
  <div class="panel"><div class="pt">データ運用フロー（月次）</div>
   <div class="flowbox"><svg viewBox="0 0 560 150" width="100%" style="height:auto;"><defs><marker id="ar3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#5d6f8a"/></marker></defs>
