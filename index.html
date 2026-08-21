@@ -120,6 +120,35 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
 .v-md{color:var(--c4);font-weight:700;}
 .heatleg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--sub);margin-top:7px;}
 .heatleg i{width:26px;height:10px;display:inline-block;border-radius:2px;}
+
+/* ==== 用語ポップアップ ==== */
+.qm{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim);color:var(--sub);font-size:9.5px;font-weight:700;cursor:pointer;margin-left:5px;flex-shrink:0;vertical-align:middle;}
+.qm:hover{border-color:var(--c1);color:var(--c1);}
+#tmodal{display:none;position:fixed;inset:0;background:rgba(4,10,20,.72);z-index:200;align-items:center;justify-content:center;padding:20px;}
+#tmodal.on{display:flex;}
+#tmodal .box{background:var(--panel);border:1px solid #2c4166;border-radius:14px;max-width:560px;width:100%;padding:20px 24px;box-shadow:0 18px 60px rgba(0,0,0,.55);}
+#tmodal .th{font-size:14.5px;font-weight:700;color:var(--c1);margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+#tmodal .tx{font-size:12.5px;line-height:1.95;color:var(--tx);}
+#tmodal .ts{font-size:10.5px;color:var(--sub);margin-top:12px;border-top:1px solid var(--border);padding-top:9px;}
+#tmodal .cl{background:none;border:1px solid var(--border);color:var(--sub);border-radius:7px;padding:2px 10px;cursor:pointer;font-family:inherit;font-size:11px;flex-shrink:0;}
+/* ==== KPIタイル強化 ==== */
+.kpi{position:relative;overflow:hidden;background:linear-gradient(155deg,#1b2f4e 0%,#14243c 55%,#101d33 100%);}
+.kpi:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2));}
+.kpi:after{content:"";position:absolute;width:150px;height:150px;right:-55px;top:-55px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,255,.14),transparent 70%);pointer-events:none;}
+.kpi .v{font-size:31px;background:linear-gradient(92deg,#8FE8FF,#C9B8FF);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.kpi .v small{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--sub);}
+.kpi .src{font-size:9.5px;color:var(--dim);margin-top:9px;border-top:1px dashed #24385a;padding-top:6px;display:flex;justify-content:space-between;gap:8px;align-items:center;}
+.kpi .src a{color:#6f87ad;}
+/* ==== クリック展開（クエリ→キャプチャ） ==== */
+.qrow{display:flex;align-items:center;gap:10px;background:#0c1830;border:1px solid var(--border);border-radius:10px;padding:10px 14px;cursor:pointer;margin-top:9px;}
+.qrow:hover{border-color:#2c4166;}
+.qrow .tri{color:var(--c1);font-size:10px;transition:transform .2s;flex-shrink:0;}
+.qrow.open .tri{transform:rotate(90deg);}
+.qrow .qq{font-size:12.5px;font-weight:700;flex:1;min-width:0;}
+.qrow .vd{font-size:11px;font-weight:700;white-space:nowrap;}
+.qdet{display:none;margin-top:9px;}
+.qrow.open+.qdet{display:block;}
+.qdet .capcard{margin:0;}
 @media(max-width:860px){
  .hd .burger{display:block;}
  .hd .meta{display:none;}
@@ -162,10 +191,10 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
 <section class="sec on" id="s1">
  <div class="sech"><span class="en">EXECUTIVE OVERVIEW</span><h2><b>1</b>概要・示唆</h2><div class="desc">2026年5月実測サンプル（海外発行カード決済・CAFIS端末）を軸に、市場データ・検索実測とクロスした現在地。</div></div>
  <div class="grid g4">
-  <div class="panel kpi" title="実測: 2026年5月の海外発行カード取扱高 574,676,997円"><div class="pt">当月取扱高 <span class="badge b-real">実データ 2026-05</span></div><div class="v">5.75<small>億円</small></div><div class="cmp up">年換算 約69.0億円ペース</div><div class="l">件数 47,087件・海外発行カード決済</div></div>
-  <div class="panel kpi" title="実測 44,285人。年換算 531,420人 = KPI想定客数160,412人の3.3倍"><div class="pt">利用人数 <span class="badge b-real">実データ 2026-05</span></div><div class="v">44,285<small>人</small></div><div class="cmp">年換算 53.1万人</div><div class="l">KPI想定客数16.0万人/年の<b class="up">3.3倍</b></div></div>
-  <div class="panel kpi" title="取扱高÷利用人数。KPI想定単価27,643円に対して47%"><div class="pt">客単価 <span class="badge b-real">実データ 2026-05</span></div><div class="v">12,977<small>円</small></div><div class="cmp down">KPI想定 27,643円の47%</div><div class="l">最高は中国 28,483円／台湾 20,517円</div></div>
-  <div class="panel kpi" title="ニコス実測ベース年換算69.0億円 ÷ 2026年度KPI 44.3億円 = 156%。ただしKPIは現行DCC+pay系計測で設定されており定義が異なる"><div class="pt">KPI対比 <span class="badge b-mix">実測×定義差あり</span></div><div class="v">156<small>%</small></div><div class="cmp up">年換算69.0億 vs 目標44.3億</div><div class="l">計測定義の再設計が必要（下のKPIツリー参照）</div></div>
+  <div class="panel kpi"><div class="pt">当月取扱高 <span class="qm" data-term="nicos">?</span></div><div class="v"><span class="cu" data-v="5.75" data-dec="2">0</span><small>億円</small></div><div class="cmp up">年換算 約69.0億円ペース <span class="qm" data-term="nenkan">?</span></div><div class="l">47,087件・海外発行カード決済</div><div class="src"><span>出典: 三菱UFJニコス CAFIS実測 2026-05</span><span class="badge b-real">実データ</span></div></div>
+  <div class="panel kpi"><div class="pt">利用人数 <span class="qm" data-term="nicos">?</span></div><div class="v"><span class="cu" data-v="44285">0</span><small>人</small></div><div class="cmp">年換算 53.1万人 ＝ KPI想定客数の<b class="up">3.3倍</b></div><div class="l">カードベースのユニーク人数（近似）</div><div class="src"><span>出典: 三菱UFJニコス CAFIS実測 2026-05</span><span class="badge b-real">実データ</span></div></div>
+  <div class="panel kpi"><div class="pt">客単価 <span class="qm" data-term="tanka">?</span></div><div class="v"><span class="cu" data-v="12977">0</span><small>円</small></div><div class="cmp down">KPI想定 27,643円の47%</div><div class="l">最高は中国 28,483円／台湾 20,517円</div><div class="src"><span>出典: 取扱高÷利用人数（同実測）</span><span class="badge b-real">実データ</span></div></div>
+  <div class="panel kpi"><div class="pt">KPI対比 <span class="qm" data-term="kpi156">?</span></div><div class="v"><span class="cu" data-v="156">0</span><small>%</small></div><div class="cmp up">年換算69.0億 vs 目標44.3億</div><div class="l">計測定義が異なる（下の概念図参照）</div><div class="src"><span>出典: 実測×KPI設定値</span><span class="badge b-mix">定義差あり</span></div></div>
  </div>
 
  <div class="panel">
@@ -219,6 +248,40 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
  </div>
 
  <div class="panel">
+  <div class="pt">データの全体像：どのデータがどこを見ているか（概念図） <span class="qm" data-term="dcc">?</span> <span class="badge b-mix">実測×推計</span></div>
+  <div class="flowbox"><svg viewBox="0 0 560 292" width="100%" style="height:auto;">
+   <rect x="8" y="8" rx="10" width="544" height="276" fill="#0F1B2E" stroke="#3a4f74" stroke-dasharray="5 4"/>
+   <text x="22" y="30" fill="#A9B7CC" font-size="11" font-weight="bold">大丸有 商業全体売上（推計 約1,231億円/年 = KPI 44.3億 ÷ 3.6%）</text>
+   <rect x="22" y="42" rx="9" width="516" height="230" fill="rgba(140,163,191,.05)" stroke="#22334E"/>
+   <text x="36" y="63" fill="#8FA3BF" font-size="10.5" font-weight="bold">インバウンド売上（真の総額は現状、誰も測れていない）</text>
+   <rect x="36" y="74" rx="8" width="330" height="184" fill="rgba(0,194,255,.08)" stroke="#00C2FF" stroke-width="1.5"/>
+   <text x="50" y="96" fill="#00C2FF" font-size="11" font-weight="bold">海外発行カード決済 ＝ ニコスCAFISデータ</text>
+   <text x="50" y="112" fill="#E8EEF7" font-size="10">本ボードの実測基盤。年換算 約69.0億円</text>
+   <text x="50" y="126" fill="#A9B7CC" font-size="9">施設×国×月などの集計表で受領（カードIDは受領しない）</text>
+   <rect x="50" y="138" rx="7" width="140" height="104" fill="rgba(255,176,32,.12)" stroke="#FFB020" stroke-width="1.5"/>
+   <text x="120" y="158" fill="#FFB020" font-size="10.5" font-weight="bold" text-anchor="middle">DCC（自国通貨払い）</text>
+   <text x="120" y="176" fill="#E8EEF7" font-size="10" text-anchor="middle">カード全量の約9%</text>
+   <text x="120" y="192" fill="#E8EEF7" font-size="10" text-anchor="middle">≒ 5.9億円/年</text>
+   <text x="120" y="212" fill="#FFB020" font-size="9" text-anchor="middle">現行KPI(44.3億)は</text>
+   <text x="120" y="225" fill="#FFB020" font-size="9" text-anchor="middle">この計測を前提に設定</text>
+   <rect x="204" y="138" rx="7" width="148" height="104" fill="rgba(0,194,255,.05)" stroke="#22334E"/>
+   <text x="278" y="160" fill="#A9B7CC" font-size="10.5" font-weight="bold" text-anchor="middle">DCC以外のカード決済</text>
+   <text x="278" y="178" fill="#E8EEF7" font-size="10" text-anchor="middle">約91%・≒63.1億円/年</text>
+   <text x="278" y="198" fill="#8FA3BF" font-size="9" text-anchor="middle">従来は見えていなかった領域。</text>
+   <text x="278" y="211" fill="#8FA3BF" font-size="9" text-anchor="middle">ニコス定常受領で毎月可視化される</text>
+   <rect x="380" y="74" rx="8" width="144" height="184" fill="rgba(255,92,122,.06)" stroke="#FF5C7A" stroke-dasharray="5 4"/>
+   <text x="452" y="96" fill="#FF5C7A" font-size="10.5" font-weight="bold" text-anchor="middle">まだ見えていない領域</text>
+   <text x="452" y="118" fill="#E8EEF7" font-size="9.5" text-anchor="middle">・現金決済</text>
+   <text x="452" y="134" fill="#E8EEF7" font-size="9.5" text-anchor="middle">・QR/pay系（AliPay等）</text>
+   <text x="452" y="150" fill="#E8EEF7" font-size="9.5" text-anchor="middle">・他社アクワイアリング分</text>
+   <text x="452" y="166" fill="#E8EEF7" font-size="9.5" text-anchor="middle">・免税POSデータ</text>
+   <text x="452" y="192" fill="#8FA3BF" font-size="9" text-anchor="middle">参考: 訪日客のカード利用率</text>
+   <text x="452" y="205" fill="#8FA3BF" font-size="9" text-anchor="middle">59.5%（観光庁2019）</text>
+   <text x="452" y="228" fill="#FF5C7A" font-size="9" text-anchor="middle">→ 次の拡張候補</text>
+  </svg></div>
+  <div class="note">読み方: 現行KPIは黄色の小箱（DCC）だけを見て設定されている。本ボードは水色の箱（カード全量）で測るため、目標44.3億に対して実測156%という「定義のねじれ」が起きる——<b>ニコス定常受領の開始と同時に、目標をカード全量ベースへ引き直すのが最初の意思決定</b>。用語は各所の「?」をクリック。</div>
+ </div>
+ <div class="panel">
   <div class="pt">主要示唆（5本・各セクションへのインデックス）</div>
   <div class="tsc"><table>
    <tr><th style="width:30px;">#</th><th>示唆</th><th style="width:110px;">根拠データ</th><th style="width:60px;">詳細</th></tr>
@@ -239,7 +302,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="note">緑=実測月。生成規則: 実測基準×季節係数(3-4月1.25/11月1.2/10月1.1/2月0.85/6月0.9)×年成長(25年度+18%/26年度+8%)×±5%（シード固定）。</div>
  </div>
  <div class="grid g2">
-  <div class="panel"><div class="pt">顧客区分別 推移 <span class="seg" id="segKubun"></span> <span class="badge b-mix">実データ×ダミー</span></div><div class="ch"><canvas id="c_kubun"></canvas></div><div class="note">実測構成: 観光客候補74.6%／中間15.6%／居住者候補9.8%（2026-05）。</div></div>
+  <div class="panel"><div class="pt">顧客区分別 推移 <span class="qm" data-term="kubun">?</span> <span class="seg" id="segKubun"></span> <span class="badge b-mix">実データ×ダミー</span></div><div class="ch"><canvas id="c_kubun"></canvas></div><div class="note">実測構成: 観光客候補74.6%／中間15.6%／居住者候補9.8%（2026-05）。</div></div>
   <div class="panel"><div class="pt">日別取扱高（直近60日・土日帯） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_daily"></canvas></div><div class="note">月次÷30×曜日係数（土1.35/日1.25/金1.1/平日0.9）×±10%。薄帯=土日。</div></div>
  </div>
  <div class="grid g2">
@@ -282,7 +345,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="panel"><div class="pt">顧客区分 × ブランド クロス <span class="badge b-mix">実データ×ダミー配分</span></div><div class="ch"><canvas id="c_kubunBrand"></canvas></div><div class="note">区分計・ブランド計は実測。クロスセルは比例配分±15%。</div></div>
  </div>
  <div class="panel">
-  <div class="pt">施設 × 国TOP6 ヒートマップ <span class="seg" id="segHeat"></span> <span class="badge b-mix">実データ×ダミー配分</span></div>
+  <div class="pt">施設 × 国TOP6 ヒートマップ <span class="qm" data-term="haibun">?</span> <span class="seg" id="segHeat"></span> <span class="badge b-mix">実データ×ダミー配分</span></div>
   <div class="tsc"><table class="hm" id="t_heat"></table></div>
   <div class="sisa"><div class="lb">SO WHAT</div><p>このマトリクスが定常受領後の<b>主戦場</b>。例えば「新大手町ビル（件単価6.3万円）×中国・SG」のセルが立てば高単価戦略の検証になり、「オアゾ×韓国」が立てば量販導線の検証になる。<b>毎月このセルの増減で施策の当たり外れを判定する運用</b>を推奨。</p></div>
  </div>
@@ -310,20 +373,18 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
    <div class="flowbox"><svg id="svgFlow" viewBox="0 0 560 320" width="100%" style="height:auto;"></svg></div>
    <div class="note">矢印太さ=併用人数。二重橋スクエアのみ実測ペアあり（ADRIFT起点141人）。他起点は生成値。</div>
   </div>
-  <div class="panel">
-   <div class="pt">施設間 併用率マトリクス <span class="badge b-dmy">ダミー</span></div>
-   <div class="tsc"><table class="hm" id="t_flowMx"></table></div>
-   <div class="note">行=起点、列=併用先。全組み合わせ受領後に実数化。</div>
-  </div>
+  <div class="panel"><div class="pt">利用施設数の分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch"><canvas id="c_facN"></canvas></div><div class="note">1人が月に何施設使うか。集計が届き次第、実数化。</div></div>
+ </div>
+ <div class="panel">
+  <div class="pt">施設間 併用率マトリクス（TOP8） <span class="qm" data-term="haibun">?</span> <span class="badge b-dmy">ダミー</span></div>
+  <div class="tsc"><table class="hm" id="t_flowMx"></table></div>
+  <div class="note">行=起点、列=併用先。セル=起点利用者のうち併用先も使った人の割合。全店舗ペア集計の受領後に実数化。</div>
  </div>
  <div class="panel">
   <div class="pt">買い回りペア明細 <span class="badge b-mix">実データ3行×ダミー20行</span><br><label class="sl">起点:</label><select id="selPairF"><option value="">全て</option></select> <label class="sl">併用先:</label><select id="selPairTo"><option value="">全て</option></select> <label class="sl">並び替え指標:</label><select id="selPairM"><option value="rate">併用率</option><option value="g">併用人数</option><option value="base">起点人数</option><option value="yen">推定寄与額</option></select></div>
   <div class="tsc"><table id="t_pair"></table></div><div class="note">列見出しクリックでもソート可。推定寄与額=併用人数×全体件単価12,205円（ダミー）。</div>
  </div>
- <div class="grid g2">
-  <div class="panel"><div class="pt">利用施設数の分布（国別） <span class="badge b-dmy">ダミー</span></div><div class="ch short"><canvas id="c_facN"></canvas></div><div class="note">1人が月に何施設使うか。集計が届き次第、実数化。</div></div>
-  <div class="panel"><div class="sisa" style="margin:0;"><div class="lb">SO WHAT</div><p>実測ペアの併用率は<b>1.42%</b>——ラグジュアリーレストラン（ADRIFT）で食事しても98.6%はその1軒で完結している。飲食→物販の動線（例: 二重橋→仲通りDIOR）は「存在するが極細」。<b>回遊の太さ＝面の消費額</b>なので、①仲通り軸の回遊特典 ②レシート連動クーポン ③コンシェルジュ接客連携 の効果検証を、このペア表の月次変化で行う設計にする。米国83%が1施設のみ（利用施設数分布）＝伸びしろは欧米の「2施設目」。</p></div></div>
- </div>
+ <div class="panel"><div class="sisa" style="margin:0;"><div class="lb">SO WHAT</div><p>実測ペアの併用率は<b>1.42%</b>——ラグジュアリーレストラン（ADRIFT）で食事しても98.6%はその1軒で完結している。飲食→物販の動線（例: 二重橋→仲通りDIOR）は「存在するが極細」。<b>回遊の太さ＝面の消費額</b>なので、①仲通り軸の回遊特典 ②レシート連動クーポン ③コンシェルジュ接客連携 の効果検証を、このペア表の月次変化で行う設計にする。米国83%が1施設のみ（利用施設数分布）＝伸びしろは欧米の「2施設目」。</p></div></div>
 </section>
 
 <!-- ========== 7 リピート・定着 ========== -->
@@ -363,10 +424,10 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
 <section class="sec" id="s9">
  <div class="sech"><span class="en">MARKET / OPEN DATA</span><h2><b>9</b>市場・オープンデータ</h2><div class="desc">JNTO・観光庁・東京都の一次統計と大丸有実測のクロス。市場の風向きと「捕捉率」で現在地を測る。</div></div>
  <div class="grid g4">
-  <div class="panel kpi" title="JNTO 2025年暦年確定値"><div class="pt">訪日外客数 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">4,268<small>万人</small></div><div class="cmp up">+15.8% 過去最高</div><div class="l">2026年1-7月は2,453万人（−1.7%）</div></div>
-  <div class="panel kpi" title="観光庁 2025年暦年確報"><div class="pt">訪日消費額 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">9.45<small>兆円</small></div><div class="cmp up">+16.4% うち買物代2.55兆円</div><div class="l">1人当たり支出 22.9万円</div></div>
-  <div class="panel kpi" title="東京都産業労働局 2025年"><div class="pt">訪都外国人 2025 <span class="badge b-open">オープンデータ</span></div><div class="v">2,865<small>万人</small></div><div class="cmp up">消費 4.55兆円（全国の約48%）</div><div class="l">「東京駅・丸の内・日本橋」訪問率 51.8%＝都内3位</div></div>
-  <div class="panel kpi" title="訪都外国人2,865万人×丸の内周辺訪問率51.8%=約1,484万人。大丸有決済者53.1万人/年→転換3.6%"><div class="pt">来訪→購買 転換 <span class="badge b-mix">実測×オープンデータ</span></div><div class="v">3.6<small>%</small></div><div class="cmp">理論来訪 約1,484万人/年</div><div class="l">決済者53.1万人/年 ÷ エリア訪問者（概算）</div></div>
+  <div class="panel kpi"><div class="pt">訪日外客数 2025</div><div class="v"><span class="cu" data-v="4268">0</span><small>万人</small></div><div class="cmp up">+15.8% 過去最高</div><div class="l">2026年1-7月は2,453万人（−1.7%）</div><div class="src"><span>出典: <a href="https://www.jnto.go.jp/statistics/data/visitors-statistics/" target="_blank" rel="noopener">JNTO 訪日外客統計</a></span><span class="badge b-open">オープンデータ</span></div></div>
+  <div class="panel kpi"><div class="pt">訪日消費額 2025</div><div class="v"><span class="cu" data-v="9.45" data-dec="2">0</span><small>兆円</small></div><div class="cmp up">+16.4% うち買物代2.55兆円</div><div class="l">1人当たり支出 22.9万円</div><div class="src"><span>出典: <a href="https://www.mlit.go.jp/kankocho/content/001992584.pdf" target="_blank" rel="noopener">観光庁 2025年暦年確報</a></span><span class="badge b-open">オープンデータ</span></div></div>
+  <div class="panel kpi"><div class="pt">訪都外国人 2025</div><div class="v"><span class="cu" data-v="2865">0</span><small>万人</small></div><div class="cmp up">消費 4.55兆円（全国の約48%）</div><div class="l">「東京駅・丸の内・日本橋」訪問率 51.8%＝都内3位</div><div class="src"><span>出典: <a href="https://www.sangyo-rodo.metro.tokyo.lg.jp/data/tourism/jittai/2025-jittai-q4" target="_blank" rel="noopener">東京都 観光客数等実態調査</a></span><span class="badge b-open">オープンデータ</span></div></div>
+  <div class="panel kpi"><div class="pt">来訪→購買 転換 <span class="qm" data-term="kessai">?</span></div><div class="v"><span class="cu" data-v="3.6" data-dec="1">0</span><small>%</small></div><div class="cmp">理論来訪 約1,484万人/年</div><div class="l">決済者53.1万人/年 ÷ エリア訪問者（概算）</div><div class="src"><span>出典: 実測×都調査51.8%の掛算</span><span class="badge b-mix">実測×オープン</span></div></div>
  </div>
  <div class="grid g2">
   <div class="panel"><div class="pt">訪日客数 前年比（2026年1-7月・国別） <span class="badge b-open">JNTO実測</span></div><div class="ch"><canvas id="c_jnto"></canvas></div><div class="note">出典: <a href="https://www.jnto.go.jp/statistics/data/visitors-statistics/" target="_blank" rel="noopener">JNTO訪日外客統計</a>（2026年8月19日発表）。中国は訪日自粛・減便の影響。</div></div>
@@ -391,7 +452,7 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="note">分母の来訪は都調査の訪問率（東京駅・丸の内・日本橋の合算圏）による概算。人流実測が入れば置換。</div></div>
  </div>
  <div class="panel">
-  <div class="pt">国別の市場クロス <span class="seg" id="segCap"></span> <span class="badge b-mix">実測×オープンデータ</span></div>
+  <div class="pt">国別の市場クロス <span class="seg" id="segCap"></span> <span class="qm" data-term="kessai">?</span><span class="qm" data-term="hosoku">?</span> <span class="badge b-mix">実測×オープンデータ</span></div>
   <div class="ch"><canvas id="c_capture"></canvas></div>
   <div class="sisa"><div class="lb">SO WHAT</div><p><b>英・SGは訪日客の4.3%、米3.6%、仏3.3%が大丸有で決済</b>——欧米豪・SGに対しては東京駅直結×ラグジュアリー×落ち着いた街並みが既に刺さっている。一方<b>韓国0.6%・台湾0.3%・中国0.4%</b>と東アジアのボリューム市場をほぼ取りこぼしており、ここに銀座・新宿から1%奪うだけで年数億円規模が動く。訪日回復局面（7月+0.1%転換）の受け皿づくりが急務。</p></div>
  </div>
@@ -437,33 +498,69 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
 <!-- ========== 11 AI・検索可視性 ========== -->
 <section class="sec" id="s11">
  <div class="sech"><span class="en">AI & SEARCH VISIBILITY</span><h2><b>11</b>AI・検索可視性</h2><div class="desc">訪日客が出発前に見る「検索・AIの回答面」で丸の内がどれだけ登場するか。2026-08-21に15クエリ106件を実測。</div></div>
+ <div class="panel">
+  <div class="pt">はじめに：このセクションは何を測っているか（初見の方向け）</div>
+  <div class="flowbox"><svg viewBox="0 0 560 176" width="100%" style="height:auto;">
+   <rect x="8" y="30" rx="8" width="150" height="86" fill="#0F1B2E" stroke="#7C5CFF" stroke-width="1.4"/>
+   <text x="83" y="52" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">訪日客（出発前）</text>
+   <text x="83" y="70" fill="#A9B7CC" font-size="9" text-anchor="middle">「東京 どこで買い物？」を</text>
+   <text x="83" y="83" fill="#A9B7CC" font-size="9" text-anchor="middle">Google・AI・自国SNSに</text>
+   <text x="83" y="96" fill="#A9B7CC" font-size="9" text-anchor="middle">質問して行き先を決める</text>
+   <line x1="158" y1="73" x2="196" y2="73" stroke="#5d6f8a" marker-end="url(#arS11)"/>
+   <defs><marker id="arS11" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#5d6f8a"/></marker></defs>
+   <rect x="200" y="8" rx="8" width="170" height="46" fill="rgba(0,194,255,.08)" stroke="#00C2FF"/>
+   <text x="285" y="27" fill="#00C2FF" font-size="10" font-weight="bold" text-anchor="middle">① 検索結果の面</text>
+   <text x="285" y="43" fill="#A9B7CC" font-size="8.5" text-anchor="middle">Google上位に出るガイド記事 → 15クエリ106件を実測</text>
+   <rect x="200" y="62" rx="8" width="170" height="46" fill="rgba(0,229,160,.08)" stroke="#00E5A0"/>
+   <text x="285" y="81" fill="#00E5A0" font-size="10" font-weight="bold" text-anchor="middle">② AIの回答の面</text>
+   <text x="285" y="97" fill="#A9B7CC" font-size="8.5" text-anchor="middle">Google AIモードの回答本文 → 3クエリを実測</text>
+   <rect x="200" y="116" rx="8" width="170" height="46" fill="rgba(255,176,32,.08)" stroke="#FFB020"/>
+   <text x="285" y="135" fill="#FFB020" font-size="10" font-weight="bold" text-anchor="middle">③ 自国SNS・OTAの面</text>
+   <text x="285" y="151" fill="#A9B7CC" font-size="8.5" text-anchor="middle">小紅書・Naver・Dcard・Pantip等 → 7市場を実査</text>
+   <line x1="370" y1="31" x2="408" y2="66" stroke="#5d6f8a" marker-end="url(#arS11)"/>
+   <line x1="370" y1="85" x2="408" y2="85" stroke="#5d6f8a" marker-end="url(#arS11)"/>
+   <line x1="370" y1="139" x2="408" y2="104" stroke="#5d6f8a" marker-end="url(#arS11)"/>
+   <rect x="412" y="52" rx="8" width="140" height="66" fill="#0F1B2E" stroke="#FF5C7A" stroke-width="1.4"/>
+   <text x="482" y="76" fill="#E8EEF7" font-size="10.5" font-weight="bold" text-anchor="middle">この3つの面に</text>
+   <text x="482" y="92" fill="#FF5C7A" font-size="10.5" font-weight="bold" text-anchor="middle">丸の内が出てくるか？</text>
+   <text x="482" y="107" fill="#A9B7CC" font-size="8.5" text-anchor="middle">を数える（=可視性の計測）</text>
+  </svg></div>
+  <div class="note" style="font-size:11px;line-height:2;">
+  <b style="color:var(--tx);">クエリ</b>＝検索窓やAIに入力する質問文のこと（例:「where to shop in Tokyo」）。<span class="qm" data-term="query">?</span>　
+  <b style="color:var(--tx);">非指名クエリ</b>＝地名を入れずに聞く質問（「東京で買い物どこ？」）。<b>まだ丸の内を知らない人</b>の入口で、ここに出ることが新規獲得に直結。　
+  <b style="color:var(--tx);">指名クエリ</b>＝「丸の内 買い物」のように名指しで聞く質問。既に興味がある人しか使わない。<span class="qm" data-term="shimei">?</span>　
+  測定はすべて2026-08-21に実施し、原文キャプチャを保存（下の各行をクリックで開けます）。
+  </div>
+ </div>
  <div class="grid g4">
-  <div class="panel kpi" title="非指名13クエリ（where to shop in Tokyo等）の上位結果タイトル/URLに丸の内が出た回数"><div class="pt">非指名クエリでの露出 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/13</small></div><div class="cmp down">銀座3・浅草3クエリに対し0</div><div class="l">丸の内が出るのは指名クエリのみ</div></div>
-  <div class="panel kpi" title="検索上位常連の定番ガイド10本の本文で、ショッピングエリアとして丸の内を掲載している本数"><div class="pt">定番ガイド10本への掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/10</small></div><div class="cmp down">銀座・原宿は9/10</div><div class="l">掲載はjapan-guide.comのみ</div></div>
-  <div class="panel kpi" title="GO TOKYO（東京都）とJNTOのショッピング特集本文"><div class="pt">公式観光メディア掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/2</small></div><div class="cmp down">GO TOKYO・JNTOとも本文に無し</div><div class="l">公式ですら「買い物の街」として語っていない</div></div>
-  <div class="panel kpi" title="marunouchi.com（Uncover Marunouchi）の出現"><div class="pt">自社サイトの出現 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/15</small></div><div class="cmp">指名クエリで2位のみ</div><div class="l">ドメイン力はある＝非指名コンテンツ不足</div></div>
+  <div class="panel kpi" title="非指名13クエリ（where to shop in Tokyo等）の上位結果タイトル/URLに丸の内が出た回数"><div class="pt">非指名クエリでの露出 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/13</small></div><div class="cmp down">銀座3・浅草3クエリに対し0</div><div class="l">丸の内が出るのは指名クエリのみ</div><div class="src"><span>出典: 本ボード検索面実測 2026-08-21</span><span class="badge b-real">実測</span></div></div>
+  <div class="panel kpi" title="検索上位常連の定番ガイド10本の本文で、ショッピングエリアとして丸の内を掲載している本数"><div class="pt">定番ガイド10本への掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/10</small></div><div class="cmp down">銀座・原宿は9/10</div><div class="l">掲載はjapan-guide.comのみ</div><div class="src"><span>出典: 定番ガイド10本の本文実査</span><span class="badge b-real">実測</span></div></div>
+  <div class="panel kpi" title="GO TOKYO（東京都）とJNTOのショッピング特集本文"><div class="pt">公式観光メディア掲載 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">0<small>/2</small></div><div class="cmp down">GO TOKYO・JNTOとも本文に無し</div><div class="l">公式ですら「買い物の街」として語っていない</div><div class="src"><span>出典: <a href="https://www.gotokyo.org/en/see-and-do/shopping/index.html" target="_blank" rel="noopener">GO TOKYO</a>・<a href="https://www.japan-travel.cn/story/shopping-in-tokyo/" target="_blank" rel="noopener">JNTO中文</a></span><span class="badge b-real">実測</span></div></div>
+  <div class="panel kpi" title="marunouchi.com（Uncover Marunouchi）の出現"><div class="pt">自社サイトの出現 <span class="badge b-real">実測 2026-08-21</span></div><div class="v">1<small>/15</small></div><div class="cmp">指名クエリで2位のみ</div><div class="l">ドメイン力はある＝非指名コンテンツ不足</div><div class="src"><span>出典: <a href="https://www.marunouchi.com/en/lp/uncovermarunouchi/shopping/" target="_blank" rel="noopener">Uncover Marunouchi</a></span><span class="badge b-real">実測</span></div></div>
  </div>
 
  <div class="panel">
-  <div class="pt">Google AIモードの実回答（2026-08-21 実測・原文キャプチャ） <span class="badge b-real">AI回答面 実測</span></div>
-  <div class="capgrid">
-   <div class="capcard"><img src="cap01_ai_shop.jpg" loading="lazy" alt="AI Mode: where to shop in Tokyo"><div class="cb"><b>Q.「where to shop in Tokyo」→ 丸の内 <span class="v-ng">登場ゼロ</span></b>AIの回答: 銀座・表参道・渋谷・原宿・新宿・秋葉原・浅草の7エリア構成。<span class="v-ng">丸の内・東京駅は本文に一度も出ない</span>。引用: Japan Guide／Insight Guides／Agoda。</div></div>
-   <div class="capcard"><img src="cap02_ai_lux.jpg" loading="lazy" alt="AI Mode: Tokyo luxury shopping"><div class="cb"><b>Q.「Tokyo luxury shopping district」→ 丸の内 <span class="v-ng">圏外</span></b>AIが挙げたラグジュアリー4地区は銀座・表参道&青山・<span class="v-md">日本橋・六本木</span>。日本橋・六本木は入るのに丸の内が入らない。引用: Savvy Tokyo／TOMOGO／thepassportlifestyle。</div></div>
-   <div class="capcard"><img src="cap03_ai_maru.jpg" loading="lazy" alt="AI Mode: Is Marunouchi worth visiting"><div class="cb"><b>Q.「Is Marunouchi worth visiting for shopping」（指名）→ <span class="v-ok">絶賛</span></b>「absolutely worth visiting」。KITTE・仲通り・ブリックスクエア・エシレ・Character Streetまで詳述し、<span class="v-ok">引用元に marunouchi.com（+5）が入る</span>。引用: Tokyo Cheapo／JapanTravel／Visit Chiyoda／marunouchi.com。</div></div>
-   <div class="capcard"><div class="cb" style="padding:16px;"><b>判定（AI回答面）</b>非指名2クエリで丸の内<span class="v-ng">0/2</span>、指名では<span class="v-ok">高評価＋自社引用あり</span>。<br><br>→ AIは丸の内を「語れない」のではなく「<b style="color:var(--c4);">聞かれ方が非指名のとき、候補集合に入っていない</b>」。トヨタGEOで言う出現率の問題であり、引用可能な素材（marunouchi.com・Visit Chiyoda・Tokyo Cheapo）は既にAIに認識されている。非指名テーマの多言語コンテンツと定番ガイドへの掲載が効く構造。</div></div>
-  </div>
+  <div class="pt">Google AIモードに実際に聞いてみた（3クエリ・クリックで原文キャプチャ） <span class="qm" data-term="aimode">?</span> <span class="badge b-real">AI回答面 実測 2026-08-21</span></div>
+  <div class="note" style="margin-top:0;">訪日客になったつもりで、GoogleのAI回答機能に英語で質問。<b>回答本文に丸の内が出てくるか</b>と<b>AIが根拠に引用したサイト</b>を記録した。</div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">「where to shop in Tokyo」（東京どこで買い物？＝非指名）</span><span class="vd v-ng">丸の内 登場ゼロ</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap01_ai_shop.jpg" loading="lazy" alt="AI Mode回答1"><div class="cb"><b>AIの回答（原文キャプチャ）</b>挙げたのは銀座・表参道・渋谷・原宿・新宿・秋葉原・浅草の7エリア。<span class="v-ng">丸の内・東京駅は本文に一度も出ない</span>。AIが引用した根拠: Japan Guide／Insight Guides／Agoda。<a href="https://www.google.com/search?udm=50&hl=en&q=where+to+shop+in+Tokyo" target="_blank" rel="noopener">同じ質問を自分で試す</a></div></div></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">「Tokyo luxury shopping district」（高級ブランドはどの街？＝非指名）</span><span class="vd v-ng">丸の内 圏外</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap02_ai_lux.jpg" loading="lazy" alt="AI Mode回答2"><div class="cb"><b>AIの回答（原文キャプチャ）</b>ラグジュアリー4地区は銀座・表参道&青山・<span class="v-md">日本橋・六本木</span>。<span class="v-ng">日本橋・六本木は入るのに丸の内が入らない</span>。引用: Savvy Tokyo／TOMOGO／thepassportlifestyle。<a href="https://www.google.com/search?udm=50&hl=en&q=Tokyo+luxury+shopping+district+which+area" target="_blank" rel="noopener">自分で試す</a></div></div></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">「Is Marunouchi worth visiting for shopping」（丸の内って行く価値ある？＝指名）</span><span class="vd v-ok">絶賛＋自社サイト引用</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap03_ai_maru.jpg" loading="lazy" alt="AI Mode回答3"><div class="cb"><b>AIの回答（原文キャプチャ）</b>「absolutely worth visiting」。KITTE・仲通り・ブリックスクエア・エシレ・Character Streetまで詳述し、<span class="v-ok">引用元に marunouchi.com（+5）が入る</span>。引用: Tokyo Cheapo／JapanTravel／Visit Chiyoda／marunouchi.com。<a href="https://www.google.com/search?udm=50&hl=en&q=Is+Marunouchi+worth+visiting+for+shopping" target="_blank" rel="noopener">自分で試す</a></div></div></div>
+  <div class="sisa"><div class="lb">判定</div><p>非指名2クエリで丸の内<b>0/2</b>、指名では<b>高評価＋自社引用あり</b>——AIは丸の内を「語れない」のではなく、<b>地名を出さずに聞かれたとき候補に入っていない</b>。引用可能な素材（marunouchi.com等）は既にAIに認識されているので、非指名テーマの多言語コンテンツと定番ガイドへの掲載で候補入りを狙える構造。</p></div>
  </div>
-
  <div class="panel">
-  <div class="pt">検索面の実物：定番ガイドはどう扱っているか（キャプチャ） <span class="badge b-real">実測 2026-08-21</span></div>
-  <div class="capgrid">
-   <div class="capcard"><img src="cap04_jg_maru.jpg" loading="lazy" alt="japan-guide Marunouchi section"><div class="cb"><b>japan-guide.com <span class="v-ok">唯一の「買い物エリア」掲載</span></b>「Marunouchi - Upscale shopping next to Tokyo Station」の専用セクションが実在（10本中1本）。<a href="https://www.japan-guide.com/e/e3053.html" target="_blank" rel="noopener">実ページ</a>＝素材が揃えば載る証明。</div></div>
-   <div class="capcard"><img src="cap05_gotokyo_shop.jpg" loading="lazy" alt="GO TOKYO Shopping"><div class="cb"><b>GO TOKYO（都公式）Shopping特集 <span class="v-ng">丸の内なし</span></b>ヒーローは渋谷。英・泰で検索上位を独占する公式ページの本文から丸の内が脱落。<a href="https://www.gotokyo.org/en/see-and-do/shopping/index.html" target="_blank" rel="noopener">実ページ</a>。</div></div>
-   <div class="capcard"><img src="cap06_gotokyo_maru.jpg" loading="lazy" alt="GO TOKYO Marunouchi area guide"><div class="cb"><b>GO TOKYOには「東京駅&丸の内エリアガイド」<span class="v-md">自体は存在</span></b>エリアガイドはある＝<b>Shopping特集への横リンク1本の交渉で解決しうる</b>ギャップ。<a href="https://www.gotokyo.org/en/destinations/central-tokyo/tokyo-station-and-marunouchi/index.html" target="_blank" rel="noopener">実ページ</a>。</div></div>
-   <div class="capcard"><img src="cap07_jnto_cn.jpg" loading="lazy" alt="JNTO中文 東京購物指南"><div class="cb"><b>JNTO中文「东京购物指南」 <span class="v-ng">丸の内なし</span></b>表参道・高円寺などを紹介。中華圏の公式導線からも丸の内は不在（=小紅書の不可視と相似）。<a href="https://www.japan-travel.cn/story/shopping-in-tokyo/" target="_blank" rel="noopener">実ページ</a>。</div></div>
-  </div>
+  <div class="pt">検索上位の定番ガイドは丸の内をどう扱っているか（クリックで実物キャプチャ） <span class="badge b-real">実測 2026-08-21</span></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">japan-guide.com「Tokyo Shopping Guide」（英語圏の定番）</span><span class="vd v-ok">◎ 唯一の掲載</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap04_jg_maru.jpg" loading="lazy" alt="japan-guide"><div class="cb"><b>「Marunouchi - Upscale shopping next to Tokyo Station」</b>買い物エリアとして専用セクションが実在（10本中この1本だけ）。素材が揃えば載る証明。<a href="https://www.japan-guide.com/e/e3053.html" target="_blank" rel="noopener">実ページを開く</a></div></div></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">GO TOKYO（東京都公式）Shopping特集 — 英・泰で検索上位を独占</span><span class="vd v-ng">× 丸の内なし</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap05_gotokyo_shop.jpg" loading="lazy" alt="GO TOKYO Shopping"><div class="cb"><b>ヒーロー画像は渋谷。本文に丸の内の記載なし</b>——公式の買い物導線から脱落している。<a href="https://www.gotokyo.org/en/see-and-do/shopping/index.html" target="_blank" rel="noopener">実ページを開く</a></div></div></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">GO TOKYOの「東京駅&丸の内エリアガイド」— 実は存在する</span><span class="vd v-md">△ 素材はある</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap06_gotokyo_maru.jpg" loading="lazy" alt="GO TOKYO Marunouchi"><div class="cb"><b>エリアガイド自体は公式に存在</b>＝Shopping特集への横リンク1本の交渉で解決しうるギャップ。<a href="https://www.gotokyo.org/en/destinations/central-tokyo/tokyo-station-and-marunouchi/index.html" target="_blank" rel="noopener">実ページを開く</a></div></div></div>
+  <div class="qrow"><span class="tri">▶</span><span class="qq">JNTO中文「东京购物指南」— 中華圏向け公式</span><span class="vd v-ng">× 丸の内なし</span></div>
+  <div class="qdet"><div class="capcard"><img src="cap07_jnto_cn.jpg" loading="lazy" alt="JNTO中文"><div class="cb"><b>表参道・高円寺などを紹介、丸の内は不在</b>——小紅書での不可視と相似形。<a href="https://www.japan-travel.cn/story/shopping-in-tokyo/" target="_blank" rel="noopener">実ページを開く</a></div></div></div>
  </div>
-
  <div class="panel">
   <div class="pt">引用面を握るページの評価一覧（本文まで実査） <span class="badge b-real">実測 2026-08-21</span> <span class="small-note">列見出しクリックでソート</span></div>
   <div class="tsc"><table id="t_pages"></table></div>
@@ -484,7 +581,8 @@ th.sv.desc:after{content:" ↓";color:var(--c1);}
   <div class="panel"><div class="pt">検索面を支配するドメイン（106件中の出現回数） <span class="badge b-real">実測 2026-08-21</span></div><div class="ch tall"><canvas id="c_domRank"></canvas></div><div class="note">hotels.com Go Guidesは同一記事群が英・韓・仏の3言語市場で上位＝<b>1記事への掲載可否が多言語の露出を桁で左右する</b>。</div></div>
  </div>
  <div class="panel">
-  <div class="pt">クエリ×エリア出現マトリクス（上位結果タイトル/URL） <span class="badge b-real">実測 2026-08-21・106件</span></div>
+  <div class="pt">クエリ×エリア出現マトリクス <span class="qm" data-term="query">?</span> <span class="badge b-real">実測 2026-08-21・106件</span></div>
+  <div class="note" style="margin-top:0;">読み方: 各クエリ（=検索した質問文）で上位に出た記事のタイトル/URLに、そのエリア名が入っていれば「○」。<b>丸の内の○は指名クエリ2本のみ</b>で、地名を出さない質問では一度も現れない。</div>
   <div class="tsc"><table id="t_qmx"></table></div>
  </div>
  <div class="panel">
@@ -880,9 +978,10 @@ function drawFlow(){
  document.getElementById('svgFlow').innerHTML=s;
 }
 selFlow.addEventListener('change',drawFlow);
-{const top6=facNames.slice(0,6);
- let html='<tr><th>起点＼併用先</th>'+top6.map(f=>'<th style="text-align:right;">'+f.replace('の内','').slice(0,6)+'</th>').join('')+'</tr>';
- top6.forEach(a=>{html+='<tr><td>'+a.slice(0,9)+'</td>'+top6.map(b=>{
+{const top8=facNames.slice(0,8);
+ const sh=f=>f.replace('の内ビルディング','ビル').replace('ビルディング','ビル').replace('丸の内','').replace('スクエア','SQ');
+ let html='<tr><th>起点＼併用先</th>'+top8.map(f=>'<th style="text-align:right;">'+sh(f)+'</th>').join('')+'</tr>';
+ top8.forEach(a=>{html+='<tr><td>'+sh(a)+'</td>'+top8.map(b=>{
   if(a===b)return '<td style="color:#3d4f6b;text-align:right;">—</td>';
   const v=R(0.4,4.8);const al=Math.min(0.8,v/5*0.8+0.03);
   return '<td style="background:rgba(124,92,255,'+al.toFixed(2)+');">'+v.toFixed(1)+'%</td>';}).join('')+'</tr>';});
@@ -1061,8 +1160,48 @@ new Chart(c_domRank,{type:'bar',data:{labels:DOMAINS.map(d=>d[0]),datasets:[{dat
  ACTIONS.map(a=>'<tr><td data-v="'+a[0]+'" style="white-space:normal;min-width:230px;">'+a[0]+'</td><td data-v="'+a[1]+'">'+a[1]+'</td><td class="n" data-v="'+a[2]+'">'+(a[2]||'—')+'</td><td data-v="'+a[3]+'">'+a[3]+'</td><td data-v="'+a[4]+'">'+a[4]+'</td><td class="n hot" data-v="'+a[5]+'">'+a[5]+'</td></tr>').join('');
  sortable(tbl);}
 
+
+/* ================= 用語辞書ポップアップ ================= */
+const TERMS={
+ nicos:{t:'三菱UFJニコス CAFISデータとは',b:'大丸有加盟店で使われた<b>海外発行カードの決済データ</b>（CAFIS端末経由）。カードIDそのものは受け取らず、施設×国×月などに集計した統計表で受領する。本ボードの「実データ」バッジはすべてこの2026年5月サンプルが出所。',s:'出所: 三菱UFJニコス提供サンプル（2026-05・統計値）'},
+ dcc:{t:'DCC（自国通貨払い）とは',b:'海外カード客が円ではなく<b>自国通貨建てで支払う</b>サービス。現行のインバウンドKPI（44.3億円）は、このDCCとpay系の計測を前提に設定されている。ただし実測では、DCCは海外カード決済全体の<b>約9%</b>しか捕捉できない——概念図の黄色い小箱だけを見てKPIを立てていた、というのが現在地。',s:'出所: 現地実測サンプル（DCC比率約9%）'},
+ kpi156:{t:'KPI対比156%の読み方',b:'分子=ニコス実測の年換算69.0億円（カード全量）、分母=2026年度目標44.3億円。<b>目標はDCC+pay系という狭い計測を前提に設定されているため、計測範囲が違うもの同士の比較</b>になっている。達成/未達の判定より先に、目標をカード全量ベースへ引き直すことが必要（概念図参照）。',s:'計算: 5.75億円×12 ÷ 44.3億円'},
+ nenkan:{t:'年換算とは',b:'実測できた2026年5月の値を<b>単純に12倍</b>した粗い推計。季節性（3-4月の繁忙・2月の閑散など）は未調整のため、通年実測が届いたら置き換える。',s:'計算: 2026-05実測 × 12ヶ月'},
+ tanka:{t:'客単価と件単価',b:'<b>客単価</b>=取扱高÷利用人数（1人がその月に使った合計）。<b>件単価</b>=取扱高÷決済件数（1回の会計の大きさ）。ラグジュアリー枠の評価は件単価、CRMの評価は客単価が向く。',s:'出所: ニコス実測 2026-05'},
+ kubun:{t:'顧客区分とは',b:'ニコスがカードの利用パターンから判定する3区分。<b>観光客候補</b>=短期滞在／<b>中間</b>=長期滞在や繰り返し利用／<b>居住者候補</b>=国内在住とみられる海外カード保有者。居住者候補9.8%は「エリアの固定客になり得る外国人」として別扱いで見る。',s:'出所: ニコス判定ロジック（実測 2026-05）'},
+ hosoku:{t:'買物市場捕捉率とは',b:'大丸有の年換算取扱高 ÷（国別の訪日買物代 × 東京シェア48%）。<b>「その国の人が東京で使う買物のお金のうち、大丸有が取れている割合」</b>の概算。分母は観光庁2025年確報の国別買物代を使用。',s:'出所: 観光庁 2025年暦年確報 × ニコス実測'},
+ kessai:{t:'決済者率とは',b:'大丸有の月間利用人数 ÷ その国の訪日客数の月平均（JNTO 2026年1-7月）。<b>「訪日した人のうち何%が大丸有で1回でも決済したか」</b>の概算。英・SGの4%台に対し韓・台・中は1%未満——東アジアの取りこぼしが見える指標。',s:'出所: JNTO訪日外客統計 × ニコス実測'},
+ haibun:{t:'「配分ダミー」とは',b:'行合計・列合計（施設計・国計など）は<b>実測値</b>だが、クロスした<b>セルの内訳だけは比例配分＋乱数の生成値</b>。施設×国のひも付き集計をニコスから受領し次第、セルも実数に置き換わる。',s:'乱数シード20260521固定（再現可能）'},
+ cohort:{t:'コホート残存とは',b:'初めて決済した月ごとに人を束ね（=コホート）、その人たちが<b>1ヶ月後・2ヶ月後・3ヶ月後にも決済したか</b>を追う集計。訪日客中心なら急減衰が正常。中間・居住者候補でカーブが上に張り付くかが見どころ。',s:'受け皿設計（依頼中・現在はイメージ値）'},
+ aimode:{t:'Google AIモードとは',b:'Google検索の<b>AIが文章で答える回答面</b>。従来の「10本のリンク」ではなく、AIが数エリアだけ名指しで推薦するため、<b>候補に入るか入らないかが二値で決まる</b>。本ボードは2026-08-21に実際のクエリを投げ、回答の原文キャプチャと引用元を記録した。',s:'実測: 2026-08-21・3クエリ（キャプチャは各行クリック）'},
+ query:{t:'クエリとは',b:'検索窓やAIに入力する<b>質問文そのもの</b>。例:「where to shop in Tokyo」「도쿄 쇼핑 추천」。本ボードでは訪日客が出発前に使う質問を5言語で想定し、その質問への「答えの面」に丸の内が出るかを数えている。',s:'設計: 5言語×6本=30クエリ（実測は15本・106件）'},
+ shimei:{t:'指名クエリ／非指名クエリ',b:'<b>指名</b>=「丸の内 買い物」のように地名を名指しする質問。既に丸の内を知っている人しか打たない。<b>非指名</b>=「東京で買い物どこ？」のように地名を出さない質問で、<b>まだ知らない人の入口</b>。新規の訪日客を獲るには非指名の面に出る必要があるが、実測では丸の内は非指名0/13。',s:'実測: 2026-08-21'}
+};
+document.addEventListener('click',e=>{
+ const tm=document.getElementById('tmodal');
+ const q=e.target.closest('.qm');
+ if(q){const t=TERMS[q.dataset.term];if(t){document.getElementById('tmT').textContent=t.t;document.getElementById('tmB').innerHTML=t.b;document.getElementById('tmS').textContent=t.s;tm.classList.add('on');}return;}
+ if(e.target.id==='tmC'||e.target===tm){tm.classList.remove('on');}
+ const r=e.target.closest('.qrow');
+ if(r){r.classList.toggle('open');}
+});
+/* ================= KPI countUp ================= */
+function countUp(){
+ document.querySelectorAll('.cu').forEach(el=>{
+  const v=parseFloat(el.dataset.v),dec=Number(el.dataset.dec||0);
+  const fmt=x=>dec?x.toFixed(dec):Math.round(x).toLocaleString('ja-JP');
+  if(document.hidden){el.textContent=fmt(v);return;}
+  const t0=performance.now();
+  function step(t){const p=Math.min(1,(t-t0)/900);const e=1-Math.pow(1-p,3);el.textContent=fmt(v*e);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+  setTimeout(()=>el.textContent=fmt(v),1100);
+ });
+}
+countUp();
+
 /* ================= 初期描画 ================= */
 drawKuni(0);drawCross();drawFacKuni(0);drawFlow();renderPairs();
 </script>
+<div id="tmodal"><div class="box"><div class="th"><span id="tmT"></span><button class="cl" id="tmC">閉じる</button></div><div class="tx" id="tmB"></div><div class="ts" id="tmS"></div></div></div>
 </body>
 </html>
